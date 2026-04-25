@@ -14,9 +14,9 @@ body{background:var(--bg);color:#fff;font-family:Rajdhani,sans-serif;overflow-x:
 .radar-logo,.footer-radar{width:56px;height:56px;border-radius:50%;border:1px solid #00ffee88;box-shadow:0 0 16px #00ffee55;animation:radarPulse 4s infinite}
 .footer-radar{width:72px;height:72px}
 @keyframes radarPulse{50%{box-shadow:0 0 26px #00ffeeaa}}
-.callsign{font-size:30px;font-weight:700;letter-spacing:2px;color:#06161c;text-shadow:0 0 18px #00ffee;transition:text-shadow 0.3s ease,color 0.3s ease;cursor:default}
-.callsign:hover{color:#00ffee;text-shadow:0 0 40px #00ffee,0 0 80px #00ffee,0 0 120px #00ffee44}
-.subline,.Members-sub{font-size:16px;letter-spacing:4px;color:#9dff9d}
+.callsign{font-size:30px;font-weight:700;letter-spacing:2px;color:#06161c;text-shadow:0 0 18px #00ffee;padding:6px 12px;border-radius:4px;transition:background 0.3s ease,box-shadow 0.3s ease;cursor:default}
+.callsign:hover{background:rgba(0,255,238,0.15);box-shadow:0 0 30px #00ffee,0 0 60px #00ffee88,0 0 100px #00ffee44}
+.subline,.OSINT.PLATFORM-sub{font-size:16px;letter-spacing:4px;color:#00ffee}
 .header-center{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center}
 .command-btn{padding:10px 14px;border:1px solid #00ffee66;background:#081821;color:#00ffee;font-family:'Share Tech Mono';cursor:pointer}
 .command-btn.active,.command-btn:hover{background:#0c2430}
@@ -45,7 +45,7 @@ a{color:#00ffee;text-decoration:none}
 <body>
 <header id='commandHeader'>
 <div class='brand-wrap'>
-<video class='radar-logo' autoplay muted loop playsinline><source src='https://blacksurvivalgear.github.io/osint/RADAR3.mp4'></video>
+<a href='https://www.blacksurvivalgear.com/' target='_blank'><video class='radar-logo' autoplay muted loop playsinline><source src='https://blacksurvivalgear.github.io/osint/RADAR3.mp4'></video></a>
 <div><div class='callsign'>BLACK SURVIVAL GEAR</div><div class='subline'>Members</div><div class='OSINT PLATFORM-sub'>OSINT PLATFORM</div></div>
 </div>
 <div class='header-center'>
@@ -70,7 +70,7 @@ a{color:#00ffee;text-decoration:none}
 </div>
 <section class='placeholder'><div id='opsBay' class='ops-bay'></div></section>
 <footer id='commandFooter'>
-<video class='footer-radar' autoplay muted loop playsinline><source src='https://blacksurvivalgear.github.io/osint/RADAR3.mp4'></video>
+<a href='https://www.blacksurvivalgear.com/' target='_blank'><video class='footer-radar' autoplay muted loop playsinline><source src='https://blacksurvivalgear.github.io/osint/RADAR3.mp4'></video></a>
 <a href='#'>BlackSurvivalGear.com</a>
 </footer>
 <script>
