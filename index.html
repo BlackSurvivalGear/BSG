@@ -1,118 +1,52 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 <title>BSG Multidomain OSINT</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 :root{--cyan:#00ffee;--bg:#02070d;--panel:#061018}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:#fff;font-family:Rajdhani,sans-serif;overflow-x:hidden;display:flex;flex-direction:column;min-height:100vh}
-
-#commandHeader{
-position:sticky;
-top:0;
-z-index:1000;
-display:grid;
-grid-template-columns:1fr auto 1fr;
-gap:20px;
-align-items:center;
-padding:18px 24px;
-background:linear-gradient(180deg,#07141c,#050b12);
-border-bottom:2px solid #00ffee55;
-}
-
+body{background:var(--bg);color:#fff;font-family:Rajdhani,sans-serif;overflow-x:hidden}
+#commandHeader{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;padding:18px 24px;background:linear-gradient(180deg,#07141c,#050b12);border-bottom:2px solid #00ffee55}
 .brand-wrap{display:flex;align-items:center;gap:15px}
-.radar-logo{
-width:54px;height:54px;border-radius:50%;
-border:1px solid #00ffee88;
-box-shadow:0 0 16px #00ffee55;
-animation:radarPulse 4s infinite;
-}
+.radar-logo,.footer-radar{width:56px;height:56px;border-radius:50%;border:1px solid #00ffee88;box-shadow:0 0 16px #00ffee55;animation:radarPulse 4s infinite}
+.footer-radar{width:72px;height:72px}
 @keyframes radarPulse{50%{box-shadow:0 0 26px #00ffeeaa}}
-
-.callsign{font-size:28px;font-weight:700;letter-spacing:2px;text-shadow:0 0 10px #00ffeeaa}
-.subline{font-size:14px;letter-spacing:4px;color:#9dff9d}
-
-.header-center{display:flex;flex-direction:column;align-items:center;gap:8px}
-
-.command-btn{
-padding:10px 14px;
-border:1px solid #00ffee66;
-background:#081821;
-color:var(--cyan);
-font-family:'Share Tech Mono';
-cursor:pointer;
-font-size:12px;
-width:100%;
-}
-.command-btn:hover,.command-btn.active{background:#0c2430;box-shadow:0 0 14px #00ffee88}
-
-#navBtns{display:flex;flex-direction:row;gap:10px;flex-wrap:nowrap;justify-content:center;align-items:center}
-#navBtns .command-btn{width:auto;white-space:nowrap}
-.top-intel-bar{display:flex;justify-content:center;align-items:center;gap:12px;padding:10px 20px;background:#061018;border-bottom:1px solid #00ffee55;flex-wrap:wrap}
-#africaMegaMenu{display:none;background:#071923;border-bottom:2px solid #00ffee55;padding:18px}
-#africaMegaMenu.open{display:block}
-#gmtClock{font-family:'Share Tech Mono';color:var(--cyan)}
-
-.header-right{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.market-box{padding:8px;background:#071923;border:1px solid #00ffee44;text-align:center}
-.market-price{color:var(--cyan);font-family:'Share Tech Mono'}
-
-.placeholder{flex:1;display:flex;justify-content:center;align-items:center;padding:10px}
-.ops-bay{width:min(1600px,98%);height:70vh;border:1px solid #00ffee33;background:#000;overflow:hidden}
-
-#opsShell{height:100%;display:grid;grid-template-columns:260px 1fr}
-#opsShell.collapsed{grid-template-columns:60px 1fr}
-#opsMenu{background:var(--panel);padding:15px;border-right:1px solid #00ffee33;overflow-y:auto}
-#opsViewport{height:100%}
-iframe{width:100%;height:100%;border:none}
-
-.feed-panel{position:relative;background:#000}
-.feed-label{
-position:absolute;
-top:10px;
-left:10px;
-padding:6px 10px;
-background:rgba(0,0,0,.8);
-border:1px solid #00ffee66;
-color:var(--cyan);
-z-index:5;
-font-size:11px;
-}
-
-#intelDrawer{background:#061018;border-top:2px solid var(--cyan);max-height:55px;overflow:hidden;transition:.4s}
-#intelDrawer.expanded{max-height:60vh;overflow-y:auto}
-.drawer-header{padding:14px 24px;display:flex;justify-content:space-between;background:#071923;cursor:pointer}
-.drawer-header h3{color:var(--cyan)}
-.intel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;padding:20px}
-.region-block{border:1px solid #00ffee22;padding:12px}
-.region-title{color:#9dff9d;margin-bottom:10px}
-.country-btn{display:block;width:100%;background:none;border:none;color:#aaa;text-align:left;padding:6px 0;cursor:pointer;font-family:'Share Tech Mono'}
-.country-btn:hover{color:var(--cyan)}
-
-#modalOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:999}
-#newsModal{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#071923;border:1px solid var(--cyan);padding:25px;z-index:1000;min-width:360px}
-.modal-link{display:block;text-decoration:none;color:#fff;padding:12px;margin:8px 0;border:1px solid #00ffee33}
-
-#commandFooter{padding:12px;text-align:center;background:#040b10}
+.callsign{font-size:30px;font-weight:700;letter-spacing:2px;color:#06161c;text-shadow:0 0 18px #00ffee}
+.subline,.Members-sub{font-size:16px;letter-spacing:4px;color:#9dff9d}
+.header-center{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center}
+.command-btn{padding:10px 14px;border:1px solid #00ffee66;background:#081821;color:#00ffee;font-family:'Share Tech Mono';cursor:pointer}
+.command-btn.active,.command-btn:hover{background:#0c2430}
+#gmtClock{text-align:center;color:#00ffee;width:100%}
+.header-right{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.market-box{padding:10px;border:1px solid #00ffee66;text-align:center}
+.market-price{font-size:24px;color:#00ffee}
+#newsTickerWrap{display:flex;height:42px;background:#050b12;border-top:1px solid #00ffee55;border-bottom:1px solid #00ffee55;overflow:hidden}
+.channel{background:#071923;border:none;color:#7fd6df;padding:0 14px;cursor:pointer}.channel.active{background:#092631;color:#00ffee}
+.ticker-window{flex:1;overflow:hidden}.ticker-track{display:inline-flex;white-space:nowrap;padding-left:100%;animation:scroll 150s linear infinite}
+@keyframes scroll{100%{transform:translateX(-100%)}}
+.headline-link{display:inline-block;padding-right:95px;color:#d7ffff;text-decoration:none}
+.placeholder{height:calc(100vh - 126px);display:flex;justify-content:center;align-items:center}
+.ops-bay{width:min(1500px,96%);height:78vh;border:1px solid #00ffee44;background:#040b10;overflow:hidden}
+#opsShell{height:100%;display:grid;grid-template-columns:280px 1fr}
+#opsShell.collapsed{grid-template-columns:64px 1fr}
+#opsMenu{background:#061018;padding:28px;border-right:1px solid #00ffee44;overflow-y:auto}
+.drawer-toggle{width:100%;padding:10px;margin-bottom:18px;background:#081821;border:1px solid #00ffee55;color:#00ffee}
+.feed-panel{position:relative;background:#000;border:1px solid #0f2730}
+.feed-label{position:absolute;top:10px;left:10px;padding:6px 10px;background:rgba(3,22,29,.8);border:1px solid #00ffee66;color:#00ffee;z-index:2}
+iframe,.map-frame{width:100%;height:100%;border:none}
+#commandFooter{padding:28px;display:flex;flex-direction:column;align-items:center;background:#071923}
+a{color:#00ffee;text-decoration:none}
 </style>
 </head>
 <body>
-
 <header id='commandHeader'>
 <div class='brand-wrap'>
-<video class='radar-logo' autoplay muted loop playsinline>
-<source src='https://blacksurvivalgear.github.io/osint/RADAR3.mp4'>
-</video>
-<div>
-<div class='callsign'>BLACK SURVIVAL GEAR</div>
-<div class='subline'>MULTIDOMAIN OSINT PLATFORM</div>
+<video class='radar-logo' autoplay muted loop playsinline><source src='https://blacksurvivalgear.github.io/osint/RADAR3.mp4'></video>
+<div><div class='callsign'>BLACK SURVIVAL GEAR</div><div class='subline'>OSINT PLATFORM</div><div class='Members-sub'>MEMBERS</div></div>
 </div>
-</div>
-
 <div class='header-center'>
 <div id='navBtns'>
 <button id='newsBtn' class='command-btn'>LIVE NEWS</button>
@@ -123,250 +57,126 @@ font-size:11px;
 </div>
 <div id='gmtClock'></div>
 </div>
-
 <div class='header-right'>
 <div class='market-box'><div>BRENT</div><div class='market-price'>105.3</div></div>
 <div class='market-box'><div>GOLD</div><div class='market-price'>4793</div></div>
 <div class='market-box'><div>BTC</div><div class='market-price'>93000</div></div>
 </div>
 </header>
-
-<section class='placeholder'>
-<div id='opsBay' class='ops-bay'></div>
-</section>
-
-<section class='top-intel-bar'>
-<button class='command-btn' onclick="toggleAfricaMenu()">PAN AFRICA NEWS ▾</button>
-<button class='command-btn' onclick="openCountry('WestAfrica','Nigeria')">NIGERIA</button>
-<button class='command-btn' onclick="openCountry('EastAfrica','Kenya')">KENYA</button>
-<button class='command-btn' onclick="openCountry('SouthernAfrica','SouthAfrica')">SOUTH AFRICA</button>
-<button class='command-btn' onclick="openCountry('WestAfrica','AESAlliance')">AES ALLIANCE</button>
-</section>
-
-<section id='africaMegaMenu'>
-<div id='intelGrid' class='intel-grid'></div>
-</section>
-
-<div id='modalOverlay' onclick='closeModal()'></div>
-<div id='newsModal'>
-<h4 id='modalCountry'>IDENTIFIED</h4>
-<div id='modalLinks'></div>
-<button class='command-btn' onclick='closeModal()'>DISMISS</button>
+<div id='newsTickerWrap'>
+<button class='channel active'>AJ</button><button class='channel'>BBC</button><button class='channel'>SKY</button><button class='channel'>RT</button>
+<div class='ticker-window'><div id='newsTicker' class='ticker-track'>Loading Tactical Feed...</div></div>
 </div>
-
-<footer id='commandFooter'>BLACKSURVIVALGEAR.COM // SECURE_NODE_ALPHA</footer>
-
+<section class='placeholder'><div id='opsBay' class='ops-bay'></div></section>
+<footer id='commandFooter'>
+<video class='footer-radar' autoplay muted loop playsinline><source src='https://blacksurvivalgear.github.io/osint/RADAR3.mp4'></video>
+<a href='#'>BlackSurvivalGear.com</a>
+</footer>
 <script>
-function toggleAfricaMenu(){
-document.getElementById('africaMegaMenu').classList.toggle('open')
-}
+function updateClock(){gmtClock.textContent=new Date().toUTCString().replace('GMT','GMT / ZULU')}setInterval(updateClock,1000);updateClock();
+let collapsed=false,africa=false,full=false,idx=0;
+function active(id){document.querySelectorAll('.command-btn').forEach(b=>b.classList.remove('active'));document.getElementById(id).classList.add('active')}
+function toggleDrawer(){collapsed=!collapsed;document.getElementById('opsShell').classList.toggle('collapsed',collapsed)}
+function renderOps(menu,content){opsBay.innerHTML=`<div id='opsShell'><div id='opsMenu'><button class='drawer-toggle' onclick='toggleDrawer()'>☰ TACTICAL DRAWER</button>${menu}</div><div id='opsViewport' style='height:100%'>${content}</div></div>`}
 
-function updateClock(){
-gmtClock.textContent=new Date().toUTCString().replace('GMT','GMT / ZULU')
-}
-setInterval(updateClock,1000)
-updateClock()
+const globalFeeds=[['WAR ROOM','https://rumble.com/embed/v33aw1a/?pub=4jw3x3'],['AL JAZEERA','https://www.youtube.com/embed/gCNeDWCI0vo'],['DW','https://www.youtube.com/embed/W8nThq62Vb4'],['BLOOMBERG','https://www.youtube.com/embed/BOy2xDU1LC8'],['FR24','https://www.youtube.com/embed/iEpJwprxDdk'],['SKY','https://www.youtube.com/embed/YDvsBbKfLPA']];
+const africaFeeds=[['DW AFRICA','https://www.youtube.com/embed/W8nThq62Vb4'],['AFRICA LIVE','https://www.youtube.com/embed/E8PRZmDUiPw'],['AFRICA TODAY','https://www.youtube.com/embed/NQjabLGdP5g'],['AFRICA NOW','https://www.youtube.com/embed/Mv14aabg4mA'],['FR24','https://www.youtube.com/embed/iEpJwprxDdk'],['WAR ROOM','https://rumble.com/embed/v33aw1a/?pub=4jw3x3']];
 
-let collapsed=false
-let africa=false
-let full=false
-let idx=0
-
-function active(id){
-document.querySelectorAll('.command-btn').forEach(x=>x.classList.remove('active'))
-document.getElementById(id).classList.add('active')
-}
-
-function toggleDrawer(){
-collapsed=!collapsed
-opsShell.classList.toggle('collapsed',collapsed)
-}
-
-function renderOps(menu,content){
-opsBay.innerHTML=`
-<div id='opsShell'>
-<div id='opsMenu'>
-<button class='command-btn' onclick='toggleDrawer()'>☰ SYSTEM</button><br><br>
-${menu}
-</div>
-<div id='opsViewport'>${content}</div>
-</div>`
-}
-
-/* NEWS */
-const globalFeeds=[
-['WAR ROOM','https://rumble.com/embed/v33aw1a/?pub=4jw3x3'],
-['AL JAZEERA','https://www.youtube.com/embed/gCNeDWCI0vo'],
-['DW','https://www.youtube.com/embed/W8nThq62Vb4'],
-['BLOOMBERG','https://www.youtube.com/embed/BOy2xDU1LC8'],
-['FR24','https://www.youtube.com/embed/iEpJwprxDdk'],
-['SKY','https://www.youtube.com/embed/YDvsBbKfLPA']
-]
-
-const africaFeeds=[
-['DW AFRICA','https://www.youtube.com/embed/W8nThq62Vb4'],
-['AFRICA LIVE','https://www.youtube.com/embed/E8PRZmDUiPw'],
-['AFRICA TODAY','https://www.youtube.com/embed/NQjabLGdP5g'],
-['TRT AFRICA','https://www.youtube.com/embed/Mv14aabg4mA'],
-['FR24','https://www.youtube.com/embed/iEpJwprxDdk'],
-['WAR ROOM','https://rumble.com/embed/v33aw1a/?pub=4jw3x3']
-]
+const africaData={
+NorthAfrica:{Algeria:[['Algeria Press Service','https://www.aps.dz'],['El Watan','https://www.elwatan.com']],Egypt:[['Al Ahram','https://english.ahram.org.eg']],Sudan:[['Sudan Tribune','https://sudantribune.com']]},
+WestAfrica:{AESAlliance:[['Sputnik Africa','https://sputnik.africa'],['Maliweb','https://www.maliweb.net']],Nigeria:[['Premium Times','https://premiumtimesng.com'],['Channels TV','https://channelstv.com']],Ghana:[['Graphic','https://graphic.com.gh']]},
+CentralAfrica:{Cameroon:[['Cameroon Tribune','https://cameroon-tribune.cm']],DRCongo:[['Radio Okapi','https://radiookapi.net']]},
+EastAfrica:{Ethiopia:[['Addis Standard','https://addisstandard.com']],Kenya:[['Nation','https://nation.africa']]},
+SouthernAfrica:{SouthAfrica:[['SABC','https://sabcnews.com'],['News24','https://news24.com']],Zimbabwe:[['Herald','https://herald.co.zw']]}
+};
 
 function renderNews(){
-let feeds=africa?africaFeeds:globalFeeds
-let viewport=document.getElementById('newsViewport')
-if(full){
-viewport.innerHTML=`<iframe src='${feeds[idx][1]}'></iframe>`
-return
+let feeds=africaFeeds;
+if(africa===false)feeds=globalFeeds;
+let viewport=document.getElementById('newsViewport');
+if(full){viewport.innerHTML=`<iframe src='${feeds[idx][1]}'></iframe>`;return}
+let h="<div style='height:100%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:2px'>";
+feeds.forEach(f=>h+=`<div class='feed-panel'><div class='feed-label'>${f[0]}</div><iframe src='${f[1]}'></iframe></div>`);
+viewport.innerHTML=h+'</div>'}
+
+function loadPanAfricaHub(){
+active('newsBtn');
+renderOps(`
+<button class='command-btn' onclick='loadNews()'>LIVE NEWS GRID</button><br><br>
+<button class='command-btn' onclick="loadRegionFeeds('NorthAfrica')">NORTH AFRICA</button><br><br>
+<button class='command-btn' onclick="loadRegionFeeds('WestAfrica')">WEST AFRICA</button><br><br>
+<button class='command-btn' onclick="loadRegionFeeds('CentralAfrica')">CENTRAL AFRICA</button><br><br>
+<button class='command-btn' onclick="loadRegionFeeds('EastAfrica')">EAST AFRICA</button><br><br>
+<button class='command-btn' onclick="loadRegionFeeds('SouthernAfrica')">SOUTHERN AFRICA</button>
+`,`<div id='panAfricaViewport' style='height:100%'></div>`);
+loadRegionFeeds('WestAfrica');
 }
-let h="<div style='height:100%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:2px'>"
-feeds.forEach(f=>{
-h+=`<div class='feed-panel'><div class='feed-label'>${f[0]}</div><iframe src='${f[1]}'></iframe></div>`
-})
-viewport.innerHTML=h+'</div>'
+function loadRegionFeeds(region){
+const countries=africaData[region];
+let html="<div style='display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px'>";
+Object.entries(countries).forEach(([country,sources])=>{
+html+=`<div class='feed-panel'><div class='feed-label'>${country}</div><div style='padding:54px 14px'>`;
+sources.forEach(src=>html+=`<p style='margin:12px 0'><a href='${src[1]}' target='_blank'>${src[0]}</a></p>`);
+html+='</div></div>'});
+html+='</div>';
+document.getElementById('panAfricaViewport').innerHTML=html;
 }
 
 function loadNews(){
-active('newsBtn')
+active('newsBtn');
 renderOps(`
 <button class='command-btn' onclick="africa=false;full=false;renderNews()">GLOBAL NEWS</button><br><br>
 <button class='command-btn' onclick="africa=true;full=false;renderNews()">AFRICA NEWS</button><br><br>
+<button class='command-btn' onclick='loadPanAfricaHub()'>PAN AFRICA</button><br><br>
 <button class='command-btn' onclick="full=!full;idx=(idx+1)%6;renderNews()">FULL SCREEN</button>
-`,`<div id='newsViewport' style='height:100%'></div>`)
-renderNews()
+`,`<div id='newsViewport' style='height:100%'></div>`);
+renderNews();
 }
 
-/* CONFLICT */
-function setConflict(z){
-const m={
-iran:'https://iran.liveuamap.com/',
-sudan:'https://sudan.liveuamap.com/',
-nigeria:'https://nigeria.liveuamap.com/',
-sahel:'https://sahel.liveuamap.com/',
-drcongo:'https://drcongo.liveuamap.com/',
-ethiopia:'https://ethiopia.liveuamap.com/',
-somalia:'https://somalia.liveuamap.com/'
-}
-opsViewport.innerHTML=`<iframe src='${m[z]}'></iframe>`
-}
+function setConflict(z){const m={iran:'https://iran.liveuamap.com/',sudan:'https://sudan.liveuamap.com/',nigeria:'https://nigeria.liveuamap.com/',sahel:'https://sahel.liveuamap.com/',drcongo:'https://drcongo.liveuamap.com/',ethiopia:'https://ethiopia.liveuamap.com/',somalia:'https://somalia.liveuamap.com/'};document.getElementById('opsViewport').innerHTML=`<iframe class='map-frame' src='${m[z]}'></iframe>`}
+function loadConflict(){active('mapBtn');renderOps(`
+<button class='command-btn' onclick=\"setConflict('iran')\">MIDDLE EAST</button><br><br>
+<button class='command-btn' onclick=\"setConflict('sudan')\">SUDAN</button><br><br>
+<button class='command-btn' onclick=\"setConflict('nigeria')\">NIGERIA</button><br><br>
+<button class='command-btn' onclick=\"setConflict('sahel')\">SAHEL</button><br><br>
+<button class='command-btn' onclick=\"setConflict('drcongo')\">DR CONGO</button><br><br>
+<button class='command-btn' onclick=\"setConflict('ethiopia')\">ETHIOPIA</button><br><br>
+<button class='command-btn' onclick=\"setConflict('somalia')\">SOMALIA</button>
+`,`<iframe class='map-frame' src='https://iran.liveuamap.com/'></iframe>`)}
+function setMarine(z){const f={hormuz:'https://www.marinetraffic.com/en/ais/embed/zoom:6/centery:25.9/centerx:57.6/maptype:4',bab:'https://www.marinetraffic.com/en/ais/embed/zoom:6/centery:12.6/centerx:43.3/maptype:4',suez:'https://www.marinetraffic.com/en/ais/embed/zoom:7/centery:30.5/centerx:32.3/maptype:4',bosporus:'https://www.marinetraffic.com/en/ais/home/centerx:29/centery:41/zoom:8',malacca:'https://www.marinetraffic.com/en/ais/embed/zoom:5/centery:3.5/centerx:100.5/maptype:4',panama:'https://www.marinetraffic.com/en/ais/embed/zoom:8/centery:9.1/centerx:-79.7/maptype:4',gibraltar:'https://www.marinetraffic.com/en/ais/home/centerx:-5.5/centery:36/zoom:8'};document.getElementById('marineFrame').innerHTML=`<iframe class='map-frame' src='${f[z]}'></iframe>`}
+function loadMarine(){active('marineBtn');renderOps(`
+<button class='command-btn' onclick=\"setMarine('hormuz')\">HORMUZ</button><br><br>
+<button class='command-btn' onclick=\"setMarine('bab')\">BAB EL MANDEB</button><br><br>
+<button class='command-btn' onclick=\"setMarine('suez')\">SUEZ</button><br><br>
+<button class='command-btn' onclick=\"setMarine('bosporus')\">BOSPORUS</button><br><br>
+<button class='command-btn' onclick=\"setMarine('malacca')\">MALACCA</button><br><br>
+<button class='command-btn' onclick=\"setMarine('panama')\">PANAMA</button><br><br>
+<button class='command-btn' onclick=\"setMarine('gibraltar')\">GIBRALTAR</button>
+`,`<div id='marineFrame' style='height:100%'></div>`);setMarine('hormuz')}
+function setFlight(z){const m={global:'https://globe.adsbexchange.com/',africa:'https://globe.adsbexchange.com/?lat=5&lon=20&zoom=3',europe:'https://globe.adsbexchange.com/?lat=50&lon=10&zoom=4',americas:'https://globe.adsbexchange.com/?lat=25&lon=-90&zoom=3',me:'https://globe.adsbexchange.com/?lat=26&lon=45&zoom=5',asia:'https://globe.adsbexchange.com/?lat=25&lon=100&zoom=3'};document.getElementById('flightFrame').innerHTML=`<iframe class='map-frame' src='${m[z]}'></iframe>`}
+function loadFlight(){active('flightBtn');renderOps(`
+<button class='command-btn' onclick=\"setFlight('global')\">GLOBAL</button><br><br>
+<button class='command-btn' onclick=\"setFlight('africa')\">AFRICA</button><br><br>
+<button class='command-btn' onclick=\"setFlight('europe')\">EUROPE</button><br><br>
+<button class='command-btn' onclick=\"setFlight('americas')\">AMERICAS</button><br><br>
+<button class='command-btn' onclick=\"setFlight('me')\">MIDDLE EAST</button><br><br>
+<button class='command-btn' onclick=\"setFlight('asia')\">ASIA</button>
+`,`<div id='flightFrame' style='height:100%'></div>`);setFlight('global')}
+function marketView(mode){document.getElementById('marketFrame').innerHTML=`<iframe src='https://s.tradingview.com/widgetembed/?symbol=${mode==='crypto'?'BINANCE:BTCUSDT':mode==='stocks'?'NASDAQ:AAPL':'TVC:GOLD'}'></iframe>`}
+function loadMarkets(){active('marketsBtn');renderOps(`
+<button class='command-btn' onclick=\"marketView('overview')\">OVERVIEW</button><br><br>
+<button class='command-btn' onclick=\"marketView('stocks')\">STOCKS</button><br><br>
+<button class='command-btn' onclick=\"marketView('crypto')\">CRYPTO</button>
+`,`<div id='marketFrame' style='height:100%'></div>`);marketView('overview')}
 
-function loadConflict(){
-active('mapBtn')
-renderOps(`
-<button class='command-btn' onclick="setConflict('iran')">MIDDLE EAST</button><br><br>
-<button class='command-btn' onclick="setConflict('sudan')">SUDAN</button><br><br>
-<button class='command-btn' onclick="setConflict('nigeria')">NIGERIA</button><br><br>
-<button class='command-btn' onclick="setConflict('sahel')">SAHEL</button><br><br>
-<button class='command-btn' onclick="setConflict('drcongo')">DR CONGO</button><br><br>
-<button class='command-btn' onclick="setConflict('ethiopia')">ETHIOPIA</button><br><br>
-<button class='command-btn' onclick="setConflict('somalia')">SOMALIA</button>
-`,`<iframe src='https://iran.liveuamap.com/'></iframe>`)
-}
-
-/* MARINE */
-function setMarine(z){
-const f={
-hormuz:'https://www.marinetraffic.com/en/ais/embed/zoom:6/centery:25.9/centerx:57.6/maptype:4',
-bab:'https://www.marinetraffic.com/en/ais/embed/zoom:6/centery:12.6/centerx:43.3/maptype:4',
-suez:'https://www.marinetraffic.com/en/ais/embed/zoom:7/centery:30.5/centerx:32.3/maptype:4',
-bosporus:'https://www.marinetraffic.com/en/ais/home/centerx:29/centery:41/zoom:8',
-malacca:'https://www.marinetraffic.com/en/ais/embed/zoom:5/centery:3.5/centerx:100.5/maptype:4',
-panama:'https://www.marinetraffic.com/en/ais/embed/zoom:8/centery:9.1/centerx:-79.7/maptype:4',
-gibraltar:'https://www.marinetraffic.com/en/ais/home/centerx:-5.5/centery:36/zoom:8'
-}
-marineFrame.innerHTML=`<iframe src='${f[z]}'></iframe>`
-}
-
-function loadMarine(){
-active('marineBtn')
-renderOps(`
-<button class='command-btn' onclick="setMarine('hormuz')">HORMUZ</button><br><br>
-<button class='command-btn' onclick="setMarine('bab')">BAB EL MANDEB</button><br><br>
-<button class='command-btn' onclick="setMarine('suez')">SUEZ</button><br><br>
-<button class='command-btn' onclick="setMarine('bosporus')">BOSPORUS</button><br><br>
-<button class='command-btn' onclick="setMarine('malacca')">MALACCA</button><br><br>
-<button class='command-btn' onclick="setMarine('panama')">PANAMA</button><br><br>
-<button class='command-btn' onclick="setMarine('gibraltar')">GIBRALTAR</button>
-`,`<div id='marineFrame' style='height:100%'></div>`)
-setMarine('hormuz')
-}
-
-/* FLIGHT */
-function setFlight(z){
-const m={
-global:'https://globe.adsbexchange.com/',
-africa:'https://globe.adsbexchange.com/?lat=5&lon=20&zoom=3',
-europe:'https://globe.adsbexchange.com/?lat=50&lon=10&zoom=4',
-americas:'https://globe.adsbexchange.com/?lat=25&lon=-90&zoom=3',
-me:'https://globe.adsbexchange.com/?lat=26&lon=45&zoom=5',
-asia:'https://globe.adsbexchange.com/?lat=25&lon=100&zoom=3'
-}
-flightFrame.innerHTML=`<iframe src='${m[z]}'></iframe>`
-}
-
-function loadFlight(){
-active('flightBtn')
-renderOps(`
-<button class='command-btn' onclick="setFlight('global')">GLOBAL</button><br><br>
-<button class='command-btn' onclick="setFlight('africa')">AFRICA</button><br><br>
-<button class='command-btn' onclick="setFlight('europe')">EUROPE</button><br><br>
-<button class='command-btn' onclick="setFlight('americas')">AMERICAS</button><br><br>
-<button class='command-btn' onclick="setFlight('me')">MIDDLE EAST</button><br><br>
-<button class='command-btn' onclick="setFlight('asia')">ASIA</button>
-`,`<div id='flightFrame' style='height:100%'></div>`)
-setFlight('global')
-}
-
-/* MARKETS */
-function marketView(mode){
-const frame=document.getElementById('marketFrame')
-frame.innerHTML=''
-let c=document.createElement('div')
-c.className='tradingview-widget-container'
-let src='https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js'
-let settings
-if(mode==='overview'){
-settings={colorTheme:'dark',showChart:true,isTransparent:true,width:'100%',height:'100%',tabs:[{title:'Indices',symbols:[{s:'FOREXCOM:SPXUSD'},{s:'FOREXCOM:NSXUSD'}]},{title:'Commodities',symbols:[{s:'TVC:GOLD'},{s:'TVC:UKOIL'}]}]}
-}
-if(mode==='stocks'){
-src='https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js'
-settings={dataSource:'S&P500',grouping:'sector',colorTheme:'dark',width:'100%',height:'100%'}
-}
-if(mode==='crypto'){
-src='https://s3.tradingview.com/external-embedding/embed-widget-crypto-coins-heatmap.js'
-settings={dataSource:'Crypto',colorTheme:'dark',width:'100%',height:'100%'}
-}
-let s=document.createElement('script')
-s.src=src
-s.async=true
-s.innerHTML=JSON.stringify(settings)
-c.appendChild(s)
-frame.appendChild(c)
-}
-
-function loadMarkets(){
-active('marketsBtn')
-renderOps(`
-<button class='command-btn' onclick="marketView('overview')">OVERVIEW</button><br><br>
-<button class='command-btn' onclick="marketView('stocks')">STOCKS</button><br><br>
-<button class='command-btn' onclick="marketView('crypto')">CRYPTO</button>
-`,`<div id='marketFrame' style='height:100%'></div>`)
-marketView('overview')
-}
-
-newsBtn.onclick=loadNews
-mapBtn.onclick=loadConflict
-marineBtn.onclick=loadMarine
-flightBtn.onclick=loadFlight
-marketsBtn.onclick=loadMarkets
+newsBtn.onclick=loadNews;mapBtn.onclick=loadConflict;marineBtn.onclick=loadMarine;flightBtn.onclick=loadFlight;marketsBtn.onclick=loadMarkets;
+const rss=['https://www.aljazeera.com/xml/rss/all.xml','http://feeds.bbci.co.uk/news/world/rss.xml','https://feeds.skynews.com/feeds/rss/world.xml','https://www.rt.com/rss/news/'];
+const tags=['AJ','BBC','SKY','RT'];let cf=0;
+document.querySelectorAll('.channel').forEach((b,i)=>b.onclick=()=>{document.querySelectorAll('.channel').forEach(x=>x.classList.remove('active'));b.classList.add('active');cf=i;loadTicker()});
+async function loadTicker(){try{let r=await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(rss[cf]));let d=await r.json();newsTicker.innerHTML=d.items.slice(0,10).map(i=>`<a class='headline-link' href='${i.link}' target='_blank'>[${tags[cf]}] ${i.title}</a>`).join('')}catch(e){newsTicker.innerHTML='Tactical Feed Offline...'}}
+loadTicker();loadNews();
 </script>
-
-<script src='pan-africa-news.js'></script>
-<script>
-initIntel()
-loadNews()
-</script>
-
 </body>
 </html>
-```
+
+
