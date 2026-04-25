@@ -1,4 +1,4 @@
-# FULL `index.html` — ALL MODULES + ALL SUB-BUTTONS + EXTERNAL AFRICA DRAWER FILE
+# FULL `index.html` — UPDATED: PAN AFRICA MOVED TO TOP HEADER + HORIZONTAL NAV
 
 Uses your separate `pan-africa-news.js` for drawer data.
 
@@ -24,6 +24,9 @@ BSG/
 body{background:var(--bg);color:#fff;font-family:Rajdhani,sans-serif;overflow-x:hidden;display:flex;flex-direction:column;min-height:100vh}
 
 #commandHeader{
+position:sticky;
+top:0;
+z-index:1000;
 display:grid;
 grid-template-columns:1fr auto 1fr;
 gap:20px;
@@ -59,7 +62,11 @@ width:100%;
 }
 .command-btn:hover,.command-btn.active{background:#0c2430;box-shadow:0 0 14px #00ffee88}
 
-#navBtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+#navBtns{display:flex;flex-direction:row;gap:10px;flex-wrap:nowrap;justify-content:center;align-items:center}
+#navBtns .command-btn{width:auto;white-space:nowrap}
+.top-intel-bar{display:flex;justify-content:center;align-items:center;gap:12px;padding:10px 20px;background:#061018;border-bottom:1px solid #00ffee55;flex-wrap:wrap}
+#africaMegaMenu{display:none;background:#071923;border-bottom:2px solid #00ffee55;padding:18px}
+#africaMegaMenu.open{display:block}
 #gmtClock{font-family:'Share Tech Mono';color:var(--cyan)}
 
 .header-right{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
@@ -140,11 +147,15 @@ font-size:11px;
 <div id='opsBay' class='ops-bay'></div>
 </section>
 
-<section id='intelDrawer'>
-<div class='drawer-header' onclick="intelDrawer.classList.toggle('expanded')">
-<h3>◈ PAN AFRICAN NEWS</h3>
-<span>ACCESS DATA ⯊</span>
-</div>
+<section class='top-intel-bar'>
+<button class='command-btn' onclick="toggleAfricaMenu()">PAN AFRICA NEWS ▾</button>
+<button class='command-btn' onclick="openCountry('WestAfrica','Nigeria')">NIGERIA</button>
+<button class='command-btn' onclick="openCountry('EastAfrica','Kenya')">KENYA</button>
+<button class='command-btn' onclick="openCountry('SouthernAfrica','SouthAfrica')">SOUTH AFRICA</button>
+<button class='command-btn' onclick="openCountry('WestAfrica','AESAlliance')">AES ALLIANCE</button>
+</section>
+
+<section id='africaMegaMenu'>
 <div id='intelGrid' class='intel-grid'></div>
 </section>
 
@@ -158,6 +169,10 @@ font-size:11px;
 <footer id='commandFooter'>BLACKSURVIVALGEAR.COM // SECURE_NODE_ALPHA</footer>
 
 <script>
+function toggleAfricaMenu(){
+document.getElementById('africaMegaMenu').classList.toggle('open')
+}
+
 function updateClock(){
 gmtClock.textContent=new Date().toUTCString().replace('GMT','GMT / ZULU')
 }
