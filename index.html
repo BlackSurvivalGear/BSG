@@ -38,6 +38,7 @@ body{background:var(--bg);color:#fff;font-family:Rajdhani,sans-serif;overflow-x:
 .feed-panel{position:relative;background:#000;border:1px solid #0f2730}
 .feed-label{position:absolute;top:10px;left:10px;padding:6px 10px;background:rgba(3,22,29,.8);border:1px solid #00ffee66;color:#00ffee;z-index:2}
 iframe,.map-frame{width:100%;height:100%;border:none}
+#marineFrame iframe,#flightFrame iframe{filter:invert(92%) hue-rotate(180deg) grayscale(.85)}
 #commandFooter{padding:28px;display:flex;flex-direction:column;align-items:center;background:#071923}
 a{color:#00ffee;text-decoration:none}
 </style>
@@ -144,7 +145,7 @@ function loadConflict(){active('mapBtn');renderOps(`
 <button class='command-btn' onclick=\"setConflict('ethiopia')\">ETHIOPIA</button><br><br>
 <button class='command-btn' onclick=\"setConflict('somalia')\">SOMALIA</button>
 `,`<iframe class='map-frame' src='https://iran.liveuamap.com/'></iframe>`)}
-function setMarine(z){const f={hormuz:'https://www.marinetraffic.com/en/ais/embed/zoom:6/centery:25.9/centerx:57.6/maptype:1',bab:'https://www.marinetraffic.com/en/ais/embed/zoom:6/centery:12.6/centerx:43.3/maptype:1',suez:'https://www.marinetraffic.com/en/ais/embed/zoom:7/centery:30.5/centerx:32.3/maptype:1',bosporus:'https://www.marinetraffic.com/en/ais/home/centerx:29/centery:41/zoom:8/maptype:1',malacca:'https://www.marinetraffic.com/en/ais/embed/zoom:5/centery:3.5/centerx:100.5/maptype:1',panama:'https://www.marinetraffic.com/en/ais/embed/zoom:8/centery:9.1/centerx:-79.7/maptype:1',gibraltar:'https://www.marinetraffic.com/en/ais/home/centerx:-5.5/centery:36/zoom:8/maptype:1'};document.getElementById('marineFrame').innerHTML=`<iframe class='map-frame' src='${f[z]}'></iframe>`}
+function setMarine(z){const f={hormuz:'https://www.marinetraffic.com/en/ais/embed/zoom:6/centery:25.9/centerx:57.6/maptype:4',bab:'https://www.marinetraffic.com/en/ais/embed/zoom:6/centery:12.6/centerx:43.3/maptype:4',suez:'https://www.marinetraffic.com/en/ais/embed/zoom:7/centery:30.5/centerx:32.3/maptype:4',bosporus:'https://www.marinetraffic.com/en/ais/home/centerx:29/centery:41/zoom:8/maptype:4',malacca:'https://www.marinetraffic.com/en/ais/embed/zoom:5/centery:3.5/centerx:100.5/maptype:4',panama:'https://www.marinetraffic.com/en/ais/embed/zoom:8/centery:9.1/centerx:-79.7/maptype:4',gibraltar:'https://www.marinetraffic.com/en/ais/home/centerx:-5.5/centery:36/zoom:8/maptype:4'};document.getElementById('marineFrame').innerHTML=`<iframe class='map-frame' src='${f[z]}'></iframe>`}
 function loadMarine(){active('marineBtn');renderOps(`
 <button class='command-btn' onclick=\"setMarine('hormuz')\">HORMUZ</button><br><br>
 <button class='command-btn' onclick=\"setMarine('bab')\">BAB EL MANDEB</button><br><br>
@@ -154,7 +155,7 @@ function loadMarine(){active('marineBtn');renderOps(`
 <button class='command-btn' onclick=\"setMarine('panama')\">PANAMA</button><br><br>
 <button class='command-btn' onclick=\"setMarine('gibraltar')\">GIBRALTAR</button>
 `,`<div id='marineFrame' style='height:100%'></div>`);setMarine('hormuz')}
-function setFlight(z){const m={global:'https://globe.adsbexchange.com/?darkMode',africa:'https://globe.adsbexchange.com/?lat=5&lon=20&zoom=3&darkMode',europe:'https://globe.adsbexchange.com/?lat=50&lon=10&zoom=4&darkMode',americas:'https://globe.adsbexchange.com/?lat=25&lon=-90&zoom=3&darkMode',me:'https://globe.adsbexchange.com/?lat=26&lon=45&zoom=5&darkMode',asia:'https://globe.adsbexchange.com/?lat=25&lon=100&zoom=3&darkMode'};document.getElementById('flightFrame').innerHTML=`<iframe class='map-frame' src='${m[z]}'></iframe>`}
+function setFlight(z){const m={global:'https://globe.adsbexchange.com/',africa:'https://globe.adsbexchange.com/?lat=5&lon=20&zoom=3',europe:'https://globe.adsbexchange.com/?lat=50&lon=10&zoom=4',americas:'https://globe.adsbexchange.com/?lat=25&lon=-90&zoom=3',me:'https://globe.adsbexchange.com/?lat=26&lon=45&zoom=5',asia:'https://globe.adsbexchange.com/?lat=25&lon=100&zoom=3'};document.getElementById('flightFrame').innerHTML=`<iframe class='map-frame' src='${m[z]}'></iframe>`}
 function loadFlight(){active('flightBtn');renderOps(`
 <button class='command-btn' onclick=\"setFlight('global')\">GLOBAL</button><br><br>
 <button class='command-btn' onclick=\"setFlight('africa')\">AFRICA</button><br><br>
