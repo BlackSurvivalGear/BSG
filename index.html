@@ -16,7 +16,9 @@ body{background:var(--bg);color:#fff;font-family:Rajdhani,sans-serif;overflow-x:
 @keyframes radarPulse{50%{box-shadow:0 0 26px #00ffeeaa}}
 .callsign{font-size:30px;font-weight:700;letter-spacing:2px;color:#06161c;text-shadow:0 0 18px #00ffee;transition:text-shadow 0.3s ease;cursor:default}
 .callsign:hover{text-shadow:0 0 20px #00ffee,0 0 40px #00ffee,0 0 80px #00ffee,0 0 120px #00ffee88}
-.subline,.OSINT.PLATFORM-sub{font-size:16px;letter-spacing:4px;color:#00ffee}
+.subline{font-size:16px;letter-spacing:4px;color:#fff;text-shadow:0 0 10px #00ffee,0 0 20px #00ffee88;transition:font-size 0.3s ease,text-shadow 0.3s ease}
+.OSINT.PLATFORM-sub{font-size:16px;letter-spacing:4px;color:#00ffee;transition:font-size 0.3s ease,text-shadow 0.3s ease}
+.callsign:hover~.subline,.callsign:hover~.OSINT.PLATFORM-sub{font-size:22px;text-shadow:0 0 14px #00ffee,0 0 28px #00ffee,0 0 56px #00ffee88}
 .header-center{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center}
 .command-btn{padding:10px 14px;border:1px solid #00ffee66;background:#081821;color:#00ffee;font-family:'Share Tech Mono';cursor:pointer}
 .command-btn.active,.command-btn:hover{background:#0c2430}
