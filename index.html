@@ -108,7 +108,7 @@ renderOps(`
 <button class='command-btn' onclick="loadRegionFeeds('CentralAfrica')">CENTRAL AFRICA</button><br><br>
 <button class='command-btn' onclick="loadRegionFeeds('EastAfrica')">EAST AFRICA</button><br><br>
 <button class='command-btn' onclick="loadRegionFeeds('SouthernAfrica')">SOUTHERN AFRICA</button>
-`,`<div id='panAfricaViewport' style='height:100%'></div>`);
+`,`<div id='panAfricaViewport' style='height:100%;overflow-y:auto'></div>`);
 loadRegionFeeds('WestAfrica');
 }
 function loadRegionFeeds(region){
