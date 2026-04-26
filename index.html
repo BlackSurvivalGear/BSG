@@ -23,8 +23,8 @@ body{background:var(--bg);color:#fff;font-family:Rajdhani,sans-serif;overflow-x:
 .command-btn{padding:10px 14px;border:1px solid #00ffee66;background:#081821;color:#00ffee;font-family:'Share Tech Mono';cursor:pointer}
 .command-btn.active,.command-btn:hover{background:#0c2430}
 #gmtClock{text-align:center;color:#00ffee;width:100%}
-.header-right{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.market-box{padding:10px;border:1px solid #00ffee66;text-align:center}
+.header-right{display:flex;align-items:center;gap:6px;justify-content:flex-end}
+.market-box{padding:4px 8px;text-align:center}
 .market-price{font-size:24px;color:#00ffee}
 #newsTickerWrap{display:flex;height:42px;background:#050b12;border-top:1px solid #00ffee55;border-bottom:1px solid #00ffee55;overflow:hidden}
 .channel{background:#071923;border:none;color:#7fd6df;padding:0 14px;cursor:pointer}.channel.active{background:#092631;color:#00ffee}
@@ -63,9 +63,10 @@ a{color:#00ffee;text-decoration:none}
 <div id='gmtClock'></div>
 </div>
 <div class='header-right'>
-<div class='market-box'><div>BRENT</div><div class='market-price'>105.3</div></div>
-<div class='market-box'><div>GOLD</div><div class='market-price'>4793</div></div>
-<div class='market-box'><div>BTC</div><div class='market-price'>93000</div></div>
+<div class='market-box'><div>BRENT</div><div class='market-price' id='priceBrent'>--</div></div>
+<div class='market-box'><div>GOLD</div><div class='market-price' id='priceGold'>--</div></div>
+<div class='market-box'><div>SILVER</div><div class='market-price' id='priceSilver'>--</div></div>
+<div class='market-box'><div>BTC</div><div class='market-price' id='priceBtc'>--</div></div>
 </div>
 </header>
 <div id='newsTickerWrap'>
@@ -186,10 +187,13 @@ document.querySelectorAll('.channel').forEach((b,i)=>b.onclick=()=>{document.que
 async function loadTicker(){try{let r=await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(rss[cf]));let d=await r.json();newsTicker.innerHTML=d.items.slice(0,10).map(i=>`<a class='headline-link' href='${i.link}' target='_blank'>[${tags[cf]}] ${i.title}</a>`).join('')}catch(e){newsTicker.innerHTML='Tactical Feed Offline...'}}
 loadTicker();loadNews();
 async function fetchPrices(){
-const mp=document.querySelectorAll('.market-price');
-try{const r=await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT');const d=await r.json();mp[2].textContent=Math.round(parseFloat(d.price)).toLocaleString()}catch(e){}
-try{const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=pax-gold&vs_currencies=usd');const d=await r.json();mp[1].textContent=Math.round(d['pax-gold'].usd).toLocaleString()}catch(e){}
-try{const r=await fetch('https://api.allorigins.win/get?url='+encodeURIComponent('https://query1.finance.yahoo.com/v8/finance/chart/BZ=F?interval=1d&range=1d'));const w=await r.json();const d=JSON.parse(w.contents);mp[0].textContent=d.chart.result[0].meta.regularMarketPrice.toFixed(1)}catch(e){}
+let tvOk=false;
+try{const r=await fetch('https://scanner.tradingview.com/global/scan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({symbols:{tickers:['TVC:GOLD','TVC:SILVER','NYMEX:BB1!']},columns:['close']})});const d=await r.json();d.data.forEach(item=>{if(item.s==='TVC:GOLD')document.getElementById('priceGold').textContent=Math.round(item.d[0]).toLocaleString();if(item.s==='TVC:SILVER')document.getElementById('priceSilver').textContent=item.d[0].toFixed(2);if(item.s.includes('BB1'))document.getElementById('priceBrent').textContent=item.d[0].toFixed(1)});tvOk=true}catch(e){}
+if(!tvOk){
+try{const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=pax-gold&vs_currencies=usd');const d=await r.json();document.getElementById('priceGold').textContent=Math.round(d['pax-gold'].usd).toLocaleString()}catch(e){}
+try{const r=await fetch('https://api.allorigins.win/get?url='+encodeURIComponent('https://query1.finance.yahoo.com/v8/finance/chart/SI=F?interval=1d&range=1d'));const w=await r.json();const d=JSON.parse(w.contents);document.getElementById('priceSilver').textContent=d.chart.result[0].meta.regularMarketPrice.toFixed(2)}catch(e){}
+try{const r=await fetch('https://api.allorigins.win/get?url='+encodeURIComponent('https://query1.finance.yahoo.com/v8/finance/chart/BZ=F?interval=1d&range=1d'));const w=await r.json();const d=JSON.parse(w.contents);document.getElementById('priceBrent').textContent=d.chart.result[0].meta.regularMarketPrice.toFixed(1)}catch(e){}}
+try{const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');const d=await r.json();document.getElementById('priceBtc').textContent=Math.round(d.bitcoin.usd).toLocaleString()}catch(e){}
 }
 fetchPrices();setInterval(fetchPrices,60000);
 </script>
