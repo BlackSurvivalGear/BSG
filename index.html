@@ -14,7 +14,7 @@ body{background:var(--bg);color:#fff;font-family:Rajdhani,sans-serif;overflow-x:
 .radar-logo,.footer-radar{width:72px;height:72px;border-radius:50%;border:1px solid #00ffee88;box-shadow:0 0 16px #00ffee55;animation:radarPulse 4s infinite;transition:box-shadow 0.3s ease}
 @keyframes radarPulse{50%{box-shadow:0 0 26px #00ffeeaa}}
 .brand-wrap:hover .radar-logo{box-shadow:0 0 30px #00ffee,0 0 60px #00ffee,0 0 100px #00ffee88;animation:none}
-.callsign{font-size:30px;font-weight:700;letter-spacing:2px;color:#06161c;text-shadow:0 0 18px #00ffee;transition:text-shadow 0.3s ease;cursor:default}
+.callsign{font-size:30px;font-weight:700;letter-spacing:2px;color:#06161c;text-shadow:0 0 27px #00ffee,0 0 50px #00ffee88;transition:text-shadow 0.3s ease;cursor:default}
 .brand-wrap:hover .callsign{text-shadow:0 0 30px #00ffee,0 0 60px #00ffee,0 0 100px #00ffee,0 0 140px #00ffee,0 0 200px #00ffee,0 0 280px #00ffeedd,0 0 380px #00ffeecc,0 0 500px #00ffeeaa}
 .subline{font-size:16px;letter-spacing:4px;color:#fff;text-shadow:0 0 10px #00ffee,0 0 20px #00ffee88;transition:font-size 0.3s ease,text-shadow 0.3s ease}
 .OSINT.PLATFORM-sub{font-size:16px;letter-spacing:4px;color:#00ffee;transition:font-size 0.3s ease,text-shadow 0.3s ease}
@@ -25,7 +25,29 @@ body{background:var(--bg);color:#fff;font-family:Rajdhani,sans-serif;overflow-x:
 .command-btn.active{background:#0c2430;box-shadow:0 0 14px #00ffee77,0 0 28px #00ffee44,0 0 42px #00ffee22;border-color:#00ffeedd;text-shadow:0 0 6px #00ffee}
 .drawer-toggle:hover{box-shadow:0 0 18px #00ffee88,0 0 36px #00ffee44;text-shadow:0 0 8px #00ffee;transform:translateY(-1px)}
 .channel:hover{background:#0c2430!important;box-shadow:0 0 12px #00ffee66;text-shadow:0 0 8px #00ffee;color:#00ffee}
-#gmtClock{text-align:center;color:#00ffee;width:100%}
+#gmtClock{text-align:center;color:#00ffee;width:100%;cursor:pointer;user-select:none}
+#gmtClock:hover{text-shadow:0 0 8px #00ffee}
+#africaTimePanel{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);z-index:10000;width:min(960px,92vw);max-height:80vh;overflow-y:auto;border-radius:12px;box-shadow:0 8px 40px rgba(0,255,238,0.15),0 0 1px #00ffee44}
+#africaTimePanel.open{display:block}
+#africaTimeWidget{font-family:Rajdhani,sans-serif;background:#061018;color:#f1f5f9;border-radius:12px;padding:16px;box-sizing:border-box;border:1px solid #00ffee44}
+#africaTimeWidget h2{text-align:center;color:#00ffee;margin-bottom:10px;margin-top:0;font-family:'Share Tech Mono',monospace;letter-spacing:2px;text-shadow:0 0 10px #00ffee88}
+#africaTimeWidget input,#africaTimeWidget select{width:100%;padding:8px;margin-bottom:10px;border-radius:8px;border:1px solid #00ffee44;background:#081821;color:#00ffee;box-sizing:border-box;font-family:'Share Tech Mono',monospace}
+.atw-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.atw-card{background:#081821;border:1px solid #00ffee33;border-radius:10px;padding:12px;transition:0.3s;cursor:default}
+.atw-card:hover{border-color:#00ffee;box-shadow:0 0 15px rgba(0,255,238,0.3)}
+.atw-card.highlight{border-color:#00ffee;box-shadow:0 0 25px rgba(0,255,238,0.9);transform:scale(1.05)}
+.atw-flag{font-size:20px;margin-right:8px}
+.atw-country{font-weight:bold;margin-bottom:4px;display:flex;align-items:center}
+.atw-city{font-size:14px;margin-bottom:8px;color:#7fd6df}
+.atw-time{font-family:'Share Tech Mono',monospace;font-size:20px;color:#00ffee;font-weight:bold;text-shadow:0 0 6px #00ffee88}
+.atw-date{color:#7fd6df;font-size:13px;margin-top:4px}
+.atw-toggle-container{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}
+.atw-small-button{background:#081821;border:1px solid #00ffee66;color:#00ffee;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:bold;flex-grow:1;font-family:'Share Tech Mono',monospace;transition:background 0.15s,box-shadow 0.15s,text-shadow 0.15s}
+.atw-small-button:hover{background:#0c2430;box-shadow:0 0 18px #00ffee88;text-shadow:0 0 8px #00ffee}
+.atw-set-btn{background:none;border:1px solid #00ffee55;color:#00ffee;padding:4px 10px;border-radius:4px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:11px;margin-top:6px;transition:background 0.15s,box-shadow 0.15s}
+.atw-set-btn:hover{background:#0c2430;box-shadow:0 0 12px #00ffee66}
+.atw-set-btn.active{background:#00ffee;color:#061018;font-weight:bold}
+#atwSearchBox{flex-grow:3}
 .header-right{display:flex;align-items:center;gap:6px;justify-content:flex-end}
 .market-box{padding:4px 8px;text-align:center}
 .market-price{font-size:24px;color:#00ffee}
@@ -54,6 +76,8 @@ body{background:var(--bg);color:#fff;font-family:Rajdhani,sans-serif;overflow-x:
 .panel-trigger{width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:#081821;border:none;border-bottom:1px solid #00ffee44;color:#00ffee;cursor:pointer;font-size:20px;font-family:'Share Tech Mono'}
 .panel-trigger:hover{background:#0c2430;text-shadow:0 0 8px #00ffee}
 #opsShell.fullscreen #opsMenu{display:none}
+#opsShell.fullscreen #opsViewport{margin-left:0}
+#opsViewport{margin-left:48px}
 .feed-panel{position:relative;background:#000;border:1px solid #0f2730}
 .feed-label{position:absolute;top:10px;left:10px;padding:6px 10px;background:rgba(3,22,29,.8);border:1px solid #00ffee66;color:#00ffee;z-index:2}
 iframe,.map-frame{width:100%;height:100%;border:none}
@@ -84,15 +108,34 @@ a{color:#00ffee;text-decoration:none}
 <a href='https://www.blacksurvivalgear.com/' target='_blank'><video class='radar-logo' autoplay muted loop playsinline><source src='https://blacksurvivalgear.github.io/osint/RADAR3.mp4'></video></a>
 <div><div class='callsign'>BLACK SURVIVAL GEAR</div><div class='subline'>Members</div><div class='OSINT PLATFORM-sub'>OSINT PLATFORM</div></div>
 </div>
-<div class='header-center'>
+<div class='header-center' style='position:relative'>
 <div id='navBtns'>
+<button id='headlinesBtn' class='command-btn'>HEADLINES</button>
 <button id='newsBtn' class='command-btn'>LIVE NEWS</button>
 <button id='mapBtn' class='command-btn'>CONFLICT MAP</button>
 <button id='marineBtn' class='command-btn'>MARINE WATCH</button>
 <button id='flightBtn' class='command-btn'>FLIGHT WATCH</button>
 <button id='marketsBtn' class='command-btn'>MARKETS</button>
 </div>
-<div id='gmtClock'></div>
+<div id='gmtClock' onclick='toggleAfricaTime()'></div>
+<div id='gmtClockFlag' style='text-align:center;font-size:28px;line-height:1;display:none;cursor:pointer' onclick='openCountryView()'></div>
+<div id='africaTimePanel' onmouseenter='clearAfricaTimeHide()' onmouseleave='scheduleAfricaTimeHide()'>
+<div id='africaTimeWidget'>
+<h2>African Time</h2>
+<div class='atw-toggle-container'>
+<input id='atwSearchBox' type='text' placeholder='Search country or capital...' autocomplete='off' />
+<select id='atwHourFormat' style='width:auto'>
+<option value='auto'>Auto Format</option>
+<option value='12'>12-hour</option>
+<option value='24'>24-hour</option>
+</select>
+<button class='atw-small-button' id='atwToggleShow'>Show All Countries</button>
+<button class='atw-small-button' id='atwResetGmt' onclick="setHeaderTime(null,'','')">RESET TO GMT</button>
+</div>
+<select id='atwCountrySelect'><option value=''>Jump to country...</option></select>
+<div class='atw-grid' id='atwCityGrid'></div>
+</div>
+</div>
 </div>
 <div class='header-right'>
 <div class='market-box'><div>BRENT</div><div class='market-price' id='priceBrent'>--</div></div>
@@ -114,7 +157,153 @@ a{color:#00ffee;text-decoration:none}
 </footer>
 <script>
 setTimeout(()=>{let s=document.getElementById('splashScreen');s.classList.add('fade-out');setTimeout(()=>s.remove(),500)},3000);
-function updateClock(){gmtClock.textContent=new Date().toUTCString().replace('GMT','GMT / ZULU')}setInterval(updateClock,1000);updateClock();
+let headerTz=null,headerTzLabel='',headerTzIso='';
+function updateClock(){const now=new Date();const flagEl=document.getElementById('gmtClockFlag');if(headerTz){const time=new Intl.DateTimeFormat('en-GB',{timeZone:headerTz,weekday:'short',day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(now);gmtClock.textContent=time+' | '+headerTzLabel;if(flagEl){flagEl.innerHTML=`<img src='https://flagcdn.com/w80/${headerTzIso}.png' alt='${headerTzLabel.replace(/'/g,"&#39;")}' style='width:36px;height:auto;border-radius:3px'>`;flagEl.style.display='block'}}else{gmtClock.textContent=now.toUTCString().replace('GMT','GMT / ZULU');if(flagEl){flagEl.innerHTML='';flagEl.style.display='none'}}}setInterval(updateClock,1000);updateClock();
+function setHeaderTime(tz,label,iso){headerTz=tz;headerTzLabel=label;headerTzIso=iso||'';updateClock();atwRender();atwUpdateTimes()}
+
+let africaTimePanelOpen=false,africaTimeHideTimer=null;
+function toggleAfricaTime(){const p=document.getElementById('africaTimePanel');if(africaTimePanelOpen){p.classList.remove('open');africaTimePanelOpen=false}else{p.classList.add('open');africaTimePanelOpen=true;atwRender();atwUpdateTimes()}}
+function scheduleAfricaTimeHide(){africaTimeHideTimer=setTimeout(()=>{document.getElementById('africaTimePanel').classList.remove('open');africaTimePanelOpen=false},600)}
+function clearAfricaTimeHide(){if(africaTimeHideTimer){clearTimeout(africaTimeHideTimer);africaTimeHideTimer=null}}
+function openCountryView(){if(!headerTzLabel)return;const p=document.getElementById('africaTimePanel');if(!africaTimePanelOpen){p.classList.add('open');africaTimePanelOpen=true}atwViewCountry(headerTzLabel,headerTzIso)}
+const atwAllCities=[
+{iso:"dz",name:"Algeria",city:"Algiers",tz:"Africa/Algiers"},
+{iso:"ao",name:"Angola",city:"Luanda",tz:"Africa/Luanda"},
+{iso:"bj",name:"Benin",city:"Porto-Novo",tz:"Africa/Porto-Novo"},
+{iso:"bw",name:"Botswana",city:"Gaborone",tz:"Africa/Gaborone"},
+{iso:"bf",name:"Burkina Faso",city:"Ouagadougou",tz:"Africa/Ouagadougou"},
+{iso:"bi",name:"Burundi",city:"Gitega",tz:"Africa/Bujumbura"},
+{iso:"cm",name:"Cameroon",city:"Yaound\u00e9",tz:"Africa/Douala"},
+{iso:"cv",name:"Cape Verde",city:"Praia",tz:"Atlantic/Cape_Verde"},
+{iso:"cf",name:"Central African Republic",city:"Bangui",tz:"Africa/Bangui"},
+{iso:"td",name:"Chad",city:"N'Djamena",tz:"Africa/Ndjamena"},
+{iso:"km",name:"Comoros",city:"Moroni",tz:"Indian/Comoro"},
+{iso:"cg",name:"Congo (Brazzaville)",city:"Brazzaville",tz:"Africa/Brazzaville"},
+{iso:"cd",name:"Congo (Kinshasa)",city:"Kinshasa",tz:"Africa/Kinshasa"},
+{iso:"ci",name:"C\u00f4te d'Ivoire",city:"Yamoussoukro",tz:"Africa/Abidjan"},
+{iso:"dj",name:"Djibouti",city:"Djibouti",tz:"Africa/Djibouti"},
+{iso:"eg",name:"Egypt",city:"Cairo",tz:"Africa/Cairo"},
+{iso:"gq",name:"Equatorial Guinea",city:"Malabo",tz:"Africa/Malabo"},
+{iso:"er",name:"Eritrea",city:"Asmara",tz:"Africa/Asmara"},
+{iso:"sz",name:"Eswatini",city:"Mbabane",tz:"Africa/Mbabane"},
+{iso:"et",name:"Ethiopia",city:"Addis Ababa",tz:"Africa/Addis_Ababa"},
+{iso:"ga",name:"Gabon",city:"Libreville",tz:"Africa/Libreville"},
+{iso:"gm",name:"Gambia",city:"Banjul",tz:"Africa/Banjul"},
+{iso:"gh",name:"Ghana",city:"Accra",tz:"Africa/Accra"},
+{iso:"gn",name:"Guinea",city:"Conakry",tz:"Africa/Conakry"},
+{iso:"gw",name:"Guinea-Bissau",city:"Bissau",tz:"Africa/Bissau"},
+{iso:"ke",name:"Kenya",city:"Nairobi",tz:"Africa/Nairobi"},
+{iso:"ls",name:"Lesotho",city:"Maseru",tz:"Africa/Maseru"},
+{iso:"lr",name:"Liberia",city:"Monrovia",tz:"Africa/Monrovia"},
+{iso:"ly",name:"Libya",city:"Tripoli",tz:"Africa/Tripoli"},
+{iso:"mg",name:"Madagascar",city:"Antananarivo",tz:"Indian/Antananarivo"},
+{iso:"mw",name:"Malawi",city:"Lilongwe",tz:"Africa/Blantyre"},
+{iso:"ml",name:"Mali",city:"Bamako",tz:"Africa/Bamako"},
+{iso:"mr",name:"Mauritania",city:"Nouakchott",tz:"Africa/Nouakchott"},
+{iso:"mu",name:"Mauritius",city:"Port Louis",tz:"Indian/Mauritius"},
+{iso:"ma",name:"Morocco",city:"Rabat",tz:"Africa/Casablanca"},
+{iso:"mz",name:"Mozambique",city:"Maputo",tz:"Africa/Maputo"},
+{iso:"na",name:"Namibia",city:"Windhoek",tz:"Africa/Windhoek"},
+{iso:"ne",name:"Niger",city:"Niamey",tz:"Africa/Niamey"},
+{iso:"ng",name:"Nigeria",city:"Abuja",tz:"Africa/Lagos"},
+{iso:"rw",name:"Rwanda",city:"Kigali",tz:"Africa/Kigali"},
+{iso:"st",name:"S\u00e3o Tom\u00e9 and Pr\u00edncipe",city:"S\u00e3o Tom\u00e9",tz:"Africa/Sao_Tome"},
+{iso:"sn",name:"Senegal",city:"Dakar",tz:"Africa/Dakar"},
+{iso:"sc",name:"Seychelles",city:"Victoria",tz:"Indian/Mahe"},
+{iso:"sl",name:"Sierra Leone",city:"Freetown",tz:"Africa/Freetown"},
+{iso:"so",name:"Somalia",city:"Mogadishu",tz:"Africa/Mogadishu"},
+{iso:"za",name:"South Africa",city:"Pretoria",tz:"Africa/Johannesburg"},
+{iso:"ss",name:"South Sudan",city:"Juba",tz:"Africa/Juba"},
+{iso:"sd",name:"Sudan",city:"Khartoum",tz:"Africa/Khartoum"},
+{iso:"tz",name:"Tanzania",city:"Dodoma",tz:"Africa/Dar_es_Salaam"},
+{iso:"tg",name:"Togo",city:"Lom\u00e9",tz:"Africa/Lome"},
+{iso:"tn",name:"Tunisia",city:"Tunis",tz:"Africa/Tunis"},
+{iso:"ug",name:"Uganda",city:"Kampala",tz:"Africa/Kampala"},
+{iso:"zm",name:"Zambia",city:"Lusaka",tz:"Africa/Lusaka"},
+{iso:"zw",name:"Zimbabwe",city:"Harare",tz:"Africa/Harare"}
+];
+function atwFlagImg(iso,size){return `<img src='https://flagcdn.com/w40/${iso}.png' alt='' style='width:${size||20}px;height:auto;vertical-align:middle;border-radius:2px'>`}
+let atwShowAll=false;const atwTopCount=8;
+let atwGrid=document.getElementById('atwCityGrid');
+let atwSearchBox=document.getElementById('atwSearchBox');
+let atwSelect=document.getElementById('atwCountrySelect');
+let atwToggleBtn=document.getElementById('atwToggleShow');
+let atwHourFormat=document.getElementById('atwHourFormat');
+const atwOriginalHTML=document.getElementById('africaTimeWidget').innerHTML;
+function atwGetFiltered(){const q=atwSearchBox.value.toLowerCase();return atwAllCities.filter(c=>c.name.toLowerCase().includes(q)||c.city.toLowerCase().includes(q))}
+function atwRender(){
+const filtered=atwGetFiltered();
+const list=atwShowAll?filtered:filtered.slice(0,atwTopCount);
+atwGrid.innerHTML='';
+list.forEach((c,i)=>{const card=document.createElement('div');card.className='atw-card';card.id='atw-card-'+i;const isActive=headerTz===c.tz;card.innerHTML=`<div class='atw-country'><span class='atw-flag'>${atwFlagImg(c.iso)}</span>${c.name}</div><div class='atw-city'>${c.city}</div><div class='atw-time' id='atw-time-${i}'>--:--:--</div><div class='atw-date' id='atw-date-${i}'></div><div style='display:flex;gap:6px;margin-top:6px'><button class="atw-set-btn${isActive?' active':''}" data-tz="${c.tz}" data-iso="${c.iso}">${isActive?'RESET':'SET'}</button><button class="atw-set-btn" onclick="atwViewCountry('${c.name.replace(/'/g,"\\'")}','${c.iso}')">VIEW</button></div>`;card.querySelector('.atw-set-btn').onclick=function(){if(isActive){setHeaderTime(null,'','')}else{setHeaderTime(c.tz,c.name,c.iso)}};atwGrid.appendChild(card)});
+atwSelect.innerHTML='<option value="">Jump to country...</option>'+filtered.map((c,i)=>`<option value="${i}">${c.name}</option>`).join('')}
+function atwUpdateTimes(){
+if(!africaTimePanelOpen)return;
+const now=new Date();const fv=atwHourFormat.value;const h12=fv==='auto'?undefined:(fv==='12');
+const filtered=atwGetFiltered();const list=atwShowAll?filtered:filtered.slice(0,atwTopCount);
+list.forEach((c,i)=>{const te=document.getElementById('atw-time-'+i);const de=document.getElementById('atw-date-'+i);if(te&&de){try{te.textContent=new Intl.DateTimeFormat('en-GB',{timeZone:c.tz,hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:h12}).format(now);de.textContent=new Intl.DateTimeFormat('en-GB',{timeZone:c.tz,weekday:'short',month:'short',day:'numeric'}).format(now)}catch(e){te.textContent='Error'}}})}
+setInterval(atwUpdateTimes,1000);
+atwSearchBox.addEventListener('input',()=>{atwRender();atwUpdateTimes()});
+atwToggleBtn.addEventListener('click',()=>{atwShowAll=!atwShowAll;atwToggleBtn.textContent=atwShowAll?'Collapse List':'Show All Countries';atwRender();atwUpdateTimes()});
+atwSelect.addEventListener('change',()=>{const idx=atwSelect.value;if(idx!==''){let card=document.getElementById('atw-card-'+idx);if(!card){atwShowAll=true;atwToggleBtn.textContent='Collapse List';atwRender();atwUpdateTimes();card=document.getElementById('atw-card-'+idx)}if(card){card.classList.add('highlight');card.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>card.classList.remove('highlight'),2000)}}});
+atwHourFormat.addEventListener('change',atwUpdateTimes);
+document.addEventListener('click',function(e){const panel=document.getElementById('africaTimePanel');const clock=document.getElementById('gmtClock');const flag=document.getElementById('gmtClockFlag');if(africaTimePanelOpen&&document.contains(e.target)&&!panel.contains(e.target)&&!clock.contains(e.target)&&!(flag&&flag.contains(e.target))){panel.classList.remove('open');africaTimePanelOpen=false}});
+function atwRestoreWidget(){
+const w=document.getElementById('africaTimeWidget');
+w.innerHTML=atwOriginalHTML;
+atwGrid=document.getElementById('atwCityGrid');
+atwSearchBox=document.getElementById('atwSearchBox');
+atwSelect=document.getElementById('atwCountrySelect');
+atwToggleBtn=document.getElementById('atwToggleShow');
+atwHourFormat=document.getElementById('atwHourFormat');
+atwSearchBox.addEventListener('input',()=>{atwRender();atwUpdateTimes()});
+atwToggleBtn.addEventListener('click',()=>{atwShowAll=!atwShowAll;atwToggleBtn.textContent=atwShowAll?'Collapse List':'Show All Countries';atwRender();atwUpdateTimes()});
+atwSelect.addEventListener('change',()=>{const idx=atwSelect.value;if(idx!==''){let card=document.getElementById('atw-card-'+idx);if(!card){atwShowAll=true;atwToggleBtn.textContent='Collapse List';atwRender();atwUpdateTimes();card=document.getElementById('atw-card-'+idx)}if(card){card.classList.add('highlight');card.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>card.classList.remove('highlight'),2000)}}});
+atwHourFormat.addEventListener('change',atwUpdateTimes);
+atwRender();atwUpdateTimes()}
+async function atwViewCountry(name,iso){
+const w=document.getElementById('africaTimeWidget');
+w.innerHTML=`<div style='text-align:center;padding:40px;color:#00ffee;font-family:Share Tech Mono,monospace'>Loading ${name}...</div>`;
+try{
+const r=await fetch('https://restcountries.com/v3.1/name/'+encodeURIComponent(name)+'?fullText=true');
+const d=await r.json();
+if(!d||!d.length)throw new Error('Not found');
+const c=d[0];
+const flag=c.flags?c.flags.png:'';
+const region=c.region||'N/A';
+const subregion=c.subregion||'N/A';
+const capital=c.capital?c.capital[0]:'N/A';
+const code=(c.idd&&c.idd.root?c.idd.root:'')+(c.idd&&c.idd.suffixes?c.idd.suffixes[0]:'');
+const pop=c.population?c.population.toLocaleString():'N/A';
+const area=c.area?c.area.toLocaleString()+' km²':'N/A';
+const curr=c.currencies?Object.values(c.currencies)[0]:{};
+const currName=curr.name||'N/A';
+const currTicker=c.currencies?Object.keys(c.currencies)[0]:'N/A';
+const lang=c.languages?Object.values(c.languages).join(', '):'N/A';
+const coords=c.latlng||[];
+const gmap=coords.length?`https://www.google.com/maps/search/?q=${coords[0]},${coords[1]}`:`https://www.google.com/maps/search/?q=${capital}`;
+const passIdx=`https://www.passportindex.org/passport/${name.toLowerCase().replace(/ /g,'-')}/`;
+let exRate='N/A';
+try{const er=await fetch('https://api.exchangerate-api.com/v4/latest/USD');const ed=await er.json();if(ed.rates&&ed.rates[currTicker])exRate=ed.rates[currTicker].toFixed(2)}catch(e){}
+const mapEmbed=coords.length?`<iframe src='https://maps.google.com/maps?q=${coords[0]},${coords[1]}&z=5&output=embed' style='width:100%;height:250px;border:none;border-radius:8px;margin-top:12px'></iframe>`:'';
+w.innerHTML=`<div style='padding:12px'>
+<button class='atw-small-button' onclick='atwRestoreWidget()' style='margin-bottom:16px'>⬅ BACK</button>
+<div style='display:flex;align-items:center;gap:12px;margin-bottom:16px'><img src='${flag}' style='width:60px;border-radius:4px'><div><h2 style='margin:0;color:#00ffee;font-family:Share Tech Mono,monospace'>${name}</h2><div style='color:#7fd6df;font-size:13px'>${region} — ${subregion}</div></div></div>
+<div style='display:grid;grid-template-columns:1fr 1fr;gap:8px;font-family:Rajdhani,sans-serif;font-size:14px'>
+<div><span style='color:#7fd6df'>Capital:</span> ${capital}</div>
+<div><span style='color:#7fd6df'>Calling Code:</span> ${code}</div>
+<div><span style='color:#7fd6df'>Language:</span> ${lang}</div>
+<div><span style='color:#7fd6df'>Population:</span> ${pop}</div>
+<div><span style='color:#7fd6df'>Area:</span> ${area}</div>
+<div><span style='color:#7fd6df'>Currency:</span> ${currName} (${currTicker})</div>
+<div><span style='color:#7fd6df'>Exchange Rate (USD):</span> ${exRate}</div>
+<div><a href='${gmap}' target='_blank' style='color:#00ffee;text-decoration:none'>📍 Google Maps</a></div>
+<div><a href='https://www.visaopenness.org/' target='_blank' style='color:#00ffee;text-decoration:none'>🛂 Visa Openness Index</a></div>
+<div><a href='${passIdx}' target='_blank' style='color:#00ffee;text-decoration:none'>🛃 Passport Index</a></div>
+</div>
+${mapEmbed}
+</div>`;
+}catch(e){w.innerHTML=`<div style='padding:20px'><button class='atw-small-button' onclick='atwRestoreWidget()'>⬅ BACK</button><div style='text-align:center;color:#ff4444;padding:20px'>Failed to load country data.</div></div>`}}
 function esc(s){let d=document.createElement('div');d.textContent=s;return d.innerHTML}
 function safeHref(u){let s=String(u).trim();if(!(s.startsWith('https://')||s.startsWith('http://')))return'#';return esc(s).replace(/'/g,'&#39;')}
 let full=false,idx=0;
@@ -234,7 +423,7 @@ function loadConflict(){active('mapBtn');renderOps(`
 <button class='command-btn' onclick=\"setConflict('drcongo')\">DR CONGO</button><br><br>
 <button class='command-btn' onclick=\"setConflict('ethiopia')\">ETHIOPIA</button><br><br>
 <button class='command-btn' onclick=\"setConflict('somalia')\">SOMALIA</button>
-`,`<iframe class='map-frame' src='https://iran.liveuamap.com/'></iframe>`)}
+`,`<iframe class='map-frame' src='https://drcongo.liveuamap.com/'></iframe>`)}
 function setMarine(z){const f={hormuz:'https://www.marinetraffic.com/en/ais/embed/zoom:6/centery:25.9/centerx:57.6/maptype:4',bab:'https://www.marinetraffic.com/en/ais/embed/zoom:6/centery:12.6/centerx:43.3/maptype:4',suez:'https://www.marinetraffic.com/en/ais/embed/zoom:7/centery:30.5/centerx:32.3/maptype:4',bosporus:'https://www.marinetraffic.com/en/ais/embed/zoom:8/centery:41/centerx:29/maptype:4',malacca:'https://www.marinetraffic.com/en/ais/embed/zoom:5/centery:3.5/centerx:100.5/maptype:4',panama:'https://www.marinetraffic.com/en/ais/embed/zoom:8/centery:9.1/centerx:-79.7/maptype:4',gibraltar:'https://www.marinetraffic.com/en/ais/embed/zoom:8/centery:36/centerx:-5.5/maptype:4'};document.getElementById('marineFrame').innerHTML=`<iframe class='map-frame' src='${f[z]}'></iframe>`}
 function loadMarine(){active('marineBtn');renderOps(`
 <button class='command-btn' onclick=\"setMarine('hormuz')\">HORMUZ</button><br><br>
@@ -255,7 +444,7 @@ function loadFlight(){active('flightBtn');renderOps(`
 <button class='command-btn' onclick=\"setFlight('asia')\">ASIA</button>
 `,`<div id='flightFrame' style='height:100%'></div>`);setFlight('global')}
 const tvWidgets={
-overview:{src:'https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js',cfg:{"colorTheme":"dark","dateRange":"12M","locale":"en","largeChartUrl":"","isTransparent":false,"showFloatingTooltip":false,"plotLineColorGrowing":"rgba(41,98,255,1)","plotLineColorFalling":"rgba(41,98,255,1)","gridLineColor":"rgba(240,243,250,0)","scaleFontColor":"#DBDBDB","belowLineFillColorGrowing":"rgba(41,98,255,0.12)","belowLineFillColorFalling":"rgba(41,98,255,0.12)","belowLineFillColorGrowingBottom":"rgba(41,98,255,0)","belowLineFillColorFallingBottom":"rgba(41,98,255,0)","symbolActiveColor":"rgba(41,98,255,0.12)","tabs":[{"title":"Indices","symbols":[{"s":"FOREXCOM:SPXUSD","d":"S&P 500 Index"},{"s":"FOREXCOM:NSXUSD","d":"US 100 Cash CFD"},{"s":"FOREXCOM:DJI","d":"Dow Jones Industrial Average Index"},{"s":"INDEX:NKY","d":"Japan 225"},{"s":"INDEX:DEU40","d":"DAX Index"},{"s":"FOREXCOM:UKXGBP","d":"FTSE 100 Index"}],"originalTitle":"Indices"},{"title":"Futures","symbols":[{"s":"BMFBOVESPA:ISP1!","d":"S&P 500"},{"s":"BMFBOVESPA:EUR1!","d":"Euro"},{"s":"CMCMARKETS:GOLD","d":"Gold"},{"s":"PYTH:WTI3!","d":"WTI Crude Oil"},{"s":"BMFBOVESPA:CCM1!","d":"Corn"}],"originalTitle":"Futures"},{"title":"Bonds","symbols":[{"s":"EUREX:FGBL1!","d":"Euro Bund"},{"s":"EUREX:FBTP1!","d":"Euro BTP"},{"s":"EUREX:FGBM1!","d":"Euro BOBL"}],"originalTitle":"Bonds"},{"title":"Forex","symbols":[{"s":"FX:EURUSD","d":"EUR to USD"},{"s":"FX:GBPUSD","d":"GBP to USD"},{"s":"FX:USDJPY","d":"USD to JPY"},{"s":"FX:USDCHF","d":"USD to CHF"},{"s":"FX:AUDUSD","d":"AUD to USD"},{"s":"FX:USDCAD","d":"USD to CAD"},{"s":"FX_IDC:GBPNGN","d":"GBP TO NGN"}],"originalTitle":"Forex"}],"support_host":"https://www.tradingview.com","backgroundColor":"#0f0f0f","width":"100%","height":"100%","showSymbolLogo":true,"showChart":true}},
+overview:{src:'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js',cfg:{"allow_symbol_change":true,"calendar":false,"details":false,"hide_side_toolbar":false,"hide_top_toolbar":false,"hide_legend":false,"hide_volume":false,"hotlist":false,"interval":"D","locale":"en","save_image":true,"style":"1","symbol":"BINANCE:BTCUSD","theme":"dark","timezone":"Europe/London","backgroundColor":"#0F0F0F","gridColor":"rgba(242, 242, 242, 0.06)","watchlist":["BINANCE:ETHUSD","BINANCE:SOLUSDT","BINANCE:AVAXUSDT","VELOCITY:BRENT","TVC:GOLD","TVC:SILVER"],"withdateranges":true,"compareSymbols":[],"studies":["STD;Divergence%1Indicator"],"autosize":true}},
 stocks:{src:'https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js',cfg:{"dataSource":"SPX500","blockSize":"market_cap_basic","blockColor":"change","grouping":"sector","locale":"en","symbolUrl":"","colorTheme":"dark","exchanges":[],"hasTopBar":false,"isDataSetEnabled":false,"isZoomEnabled":true,"hasSymbolTooltip":true,"isMonoSize":false,"width":"100%","height":"100%"}},
 crypto:{src:'https://s3.tradingview.com/external-embedding/embed-widget-crypto-coins-heatmap.js',cfg:{"dataSource":"Crypto","blockSize":"market_cap_calc","blockColor":"24h_close_change|5","locale":"en","symbolUrl":"","colorTheme":"dark","hasTopBar":false,"isDataSetEnabled":false,"isZoomEnabled":true,"hasSymbolTooltip":true,"isMonoSize":false,"width":"100%","height":"100%"}},
 charts:{src:'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js',cfg:{"allow_symbol_change":true,"calendar":false,"details":false,"hide_side_toolbar":false,"hide_top_toolbar":false,"hide_legend":false,"hide_volume":false,"hotlist":false,"interval":"D","locale":"en","save_image":true,"style":"1","symbol":"BINANCE:BTCUSD","theme":"dark","timezone":"Europe/London","backgroundColor":"#0F0F0F","gridColor":"rgba(242, 242, 242, 0.06)","watchlist":["BINANCE:ETHUSD","BINANCE:SOLUSDT","BINANCE:AVAXUSDT","VELOCITY:BRENT","TVC:GOLD","TVC:SILVER"],"withdateranges":true,"compareSymbols":[],"studies":["STD;Divergence%1Indicator"],"autosize":true}}
@@ -265,10 +454,57 @@ function loadMarkets(){active('marketsBtn');renderOps(`
 <button class='command-btn' onclick=\"marketView('overview')\">OVERVIEW</button><br><br>
 <button class='command-btn' onclick=\"marketView('stocks')\">STOCKS</button><br><br>
 <button class='command-btn' onclick=\"marketView('crypto')\">CRYPTO</button><br><br>
-<button class='command-btn' onclick=\"marketView('charts')\">CHARTS</button>
+<button class='command-btn' onclick='loadAfricanExchange()'>AFRICAN FX RATES</button>
 `,`<div id='marketFrame' style='height:100%'></div>`);marketView('overview')}
+function loadAfricanExchange(){
+const f=document.getElementById('marketFrame');
+f.innerHTML=`<div style='height:100%;overflow-y:auto;padding:20px;background:#061018;font-family:Rajdhani,sans-serif;display:flex;align-items:flex-start;justify-content:center'>
+<div style='display:flex;gap:20px;width:100%;max-width:1200px;flex-wrap:wrap;justify-content:center'>
+<div style='flex:1;min-width:300px;max-width:450px'>
+<h2 style='text-align:center;color:#00ffee;font-family:Share Tech Mono,monospace;letter-spacing:2px;text-shadow:0 0 10px #00ffee88;margin-bottom:16px'>AFRICAN CURRENCY CONVERTER</h2>
+<input type='number' id='exchAmount' placeholder='Enter amount' style='width:100%;padding:10px;margin:8px 0;font-size:16px;border:1px solid #00ffee44;border-radius:5px;background:#081821;color:#00ffee;font-family:Share Tech Mono,monospace'>
+<select id='exchFrom' style='width:100%;padding:10px;margin:8px 0;font-size:14px;border:1px solid #00ffee44;border-radius:5px;background:#081821;color:#00ffee;font-family:Share Tech Mono,monospace'></select>
+<select id='exchTo' style='width:100%;padding:10px;margin:8px 0;font-size:14px;border:1px solid #00ffee44;border-radius:5px;background:#081821;color:#00ffee;font-family:Share Tech Mono,monospace'></select>
+<button onclick='exchConvert()' style='width:100%;padding:10px;margin:8px 0;background:#081821;border:1px solid #00ffee66;color:#00ffee;font-weight:bold;cursor:pointer;font-family:Share Tech Mono,monospace;font-size:16px;border-radius:5px;transition:background 0.15s,box-shadow 0.15s'>CONVERT</button>
+<div id='exchResult' style='font-size:18px;font-weight:bold;text-align:center;margin-top:16px;color:#00ffee;text-shadow:0 0 8px #00ffee88'></div>
+<div id='exchError' style='color:#ff4444;text-align:center;margin-top:8px'></div>
+</div>
+<div style='flex:1;min-width:250px;max-width:350px'>
+<h2 style='color:#00ffee;font-family:Share Tech Mono,monospace;letter-spacing:2px;text-shadow:0 0 10px #00ffee88;margin-bottom:16px;text-align:center'>NGN EXCHANGE RATES</h2>
+<table style='width:100%;border-collapse:collapse'>
+<thead><tr><th style='border:1px solid #00ffee33;padding:10px;background:#081821;color:#00ffee;font-family:Share Tech Mono,monospace'>Currency</th><th style='border:1px solid #00ffee33;padding:10px;background:#081821;color:#00ffee;font-family:Share Tech Mono,monospace'>NGN Rate</th></tr></thead>
+<tbody id='exchTableBody'>
+<tr><td style='border:1px solid #00ffee22;padding:10px;background:#0a1520;color:#7fd6df;text-align:center'>GBP</td><td style='border:1px solid #00ffee22;padding:10px;background:#0a1520;color:#00ffee;text-align:center;font-family:Share Tech Mono,monospace' id='rate-gbp'>-</td></tr>
+<tr><td style='border:1px solid #00ffee22;padding:10px;background:#0a1520;color:#7fd6df;text-align:center'>USD</td><td style='border:1px solid #00ffee22;padding:10px;background:#0a1520;color:#00ffee;text-align:center;font-family:Share Tech Mono,monospace' id='rate-usd'>-</td></tr>
+<tr><td style='border:1px solid #00ffee22;padding:10px;background:#0a1520;color:#7fd6df;text-align:center'>CAD</td><td style='border:1px solid #00ffee22;padding:10px;background:#0a1520;color:#00ffee;text-align:center;font-family:Share Tech Mono,monospace' id='rate-cad'>-</td></tr>
+<tr><td style='border:1px solid #00ffee22;padding:10px;background:#0a1520;color:#7fd6df;text-align:center'>EUR</td><td style='border:1px solid #00ffee22;padding:10px;background:#0a1520;color:#00ffee;text-align:center;font-family:Share Tech Mono,monospace' id='rate-eur'>-</td></tr>
+<tr><td style='border:1px solid #00ffee22;padding:10px;background:#0a1520;color:#7fd6df;text-align:center'>RUB</td><td style='border:1px solid #00ffee22;padding:10px;background:#0a1520;color:#00ffee;text-align:center;font-family:Share Tech Mono,monospace' id='rate-rub'>-</td></tr>
+<tr><td style='border:1px solid #00ffee22;padding:10px;background:#0a1520;color:#7fd6df;text-align:center'>CNY</td><td style='border:1px solid #00ffee22;padding:10px;background:#0a1520;color:#00ffee;text-align:center;font-family:Share Tech Mono,monospace' id='rate-cny'>-</td></tr>
+<tr><td style='border:1px solid #00ffee22;padding:10px;background:#0a1520;color:#7fd6df;text-align:center'>ZAR</td><td style='border:1px solid #00ffee22;padding:10px;background:#0a1520;color:#00ffee;text-align:center;font-family:Share Tech Mono,monospace' id='rate-zar'>-</td></tr>
+</tbody></table>
+</div>
+</div>
+</div>`;
+exchPopulate();exchUpdateTable()}
+const exchFixedCurrencies=[{code:'USD',country:'United States Dollar'},{code:'GBP',country:'United Kingdom Pound'},{code:'EUR',country:'Euro'},{code:'CAD',country:'Canadian Dollar'},{code:'RUB',country:'Russian Ruble'},{code:'CNY',country:'Chinese Yuan'}];
+const exchAfricanCurrencies=[{code:'NGN',country:'Nigeria'},{code:'XOF',country:'Benin (XOF)'},{code:'XOF',country:'Burkina Faso (XOF)'},{code:'XOF',country:'Guinea-Bissau (XOF)'},{code:'XOF',country:"Ivory Coast (XOF)"},{code:'XOF',country:'Mali (XOF)'},{code:'XOF',country:'Niger (XOF)'},{code:'XOF',country:'Senegal (XOF)'},{code:'XOF',country:'Togo (XOF)'},{code:'XAF',country:'Cameroon (XAF)'},{code:'XAF',country:'Central African Republic (XAF)'},{code:'XAF',country:'Chad (XAF)'},{code:'XAF',country:'Republic of the Congo (XAF)'},{code:'XAF',country:'Equatorial Guinea (XAF)'},{code:'XAF',country:'Gabon (XAF)'},{code:'KES',country:'Kenya (Shilling)'},{code:'GHS',country:'Ghana (Cedi)'},{code:'EGP',country:'Egypt (Pound)'},{code:'MAD',country:'Morocco (Dirham)'},{code:'DZD',country:'Algeria (Dinar)'},{code:'TND',country:'Tunisia (Dinar)'},{code:'SLL',country:'Sierra Leone (Leone)'},{code:'LRD',country:'Liberia (Dollar)'},{code:'ETB',country:'Ethiopia (Birr)'},{code:'TZS',country:'Tanzania (Shilling)'},{code:'UGX',country:'Uganda (Shilling)'},{code:'RWF',country:'Rwanda (Franc)'},{code:'BIF',country:'Burundi (Franc)'},{code:'MWK',country:'Malawi (Kwacha)'},{code:'MZN',country:'Mozambique (Metical)'},{code:'SZL',country:'Eswatini (Lilangeni)'},{code:'NAD',country:'Namibia (Dollar)'},{code:'BWP',country:'Botswana (Pula)'},{code:'ZMW',country:'Zambia (Kwacha)'},{code:'CDF',country:'DR Congo (Franc)'},{code:'SCR',country:'Seychelles (Rupee)'},{code:'MUR',country:'Mauritius (Rupee)'},{code:'SOS',country:'Somalia (Shilling)'},{code:'DJF',country:'Djibouti (Franc)'},{code:'ERN',country:'Eritrea (Nakfa)'},{code:'LSL',country:'Lesotho (Loti)'},{code:'AOA',country:'Angola (Kwanza)'},{code:'GMD',country:'Gambia (Dalasi)'},{code:'STD',country:'Sao Tome and Principe (Dobra)'},{code:'LYD',country:'Libya (Dinar)'},{code:'ZAR',country:'South Africa (Rand)'}].sort((a,b)=>a.country.localeCompare(b.country));
+function exchPopulate(){const all=[...exchFixedCurrencies,...exchAfricanCurrencies];const opts=all.map(c=>`<option value="${c.code}">${c.code} - ${c.country}</option>`).join('');const f=document.getElementById('exchFrom');const t=document.getElementById('exchTo');if(f&&t){f.innerHTML=opts;t.innerHTML=opts;f.value='USD';t.value='NGN'}}
+async function exchFetchRates(base){const r=await fetch('https://api.exchangerate-api.com/v4/latest/'+base);const d=await r.json();return d.rates}
+async function exchUpdateTable(){try{const rates=await exchFetchRates('NGN');const pairs={gbp:'GBP',usd:'USD',cad:'CAD',eur:'EUR',rub:'RUB',cny:'CNY',zar:'ZAR'};for(const[id,code]of Object.entries(pairs)){const el=document.getElementById('rate-'+id);if(el){const rate=rates[code];el.textContent=rate?(1/rate).toFixed(2):'0.00'}}}catch(e){}}
+async function exchConvert(){const amount=parseFloat(document.getElementById('exchAmount').value);const from=document.getElementById('exchFrom').value;const to=document.getElementById('exchTo').value;const res=document.getElementById('exchResult');const err=document.getElementById('exchError');if(isNaN(amount)||amount<=0){err.textContent='Please enter a valid amount.';res.textContent='';return}err.textContent='';res.textContent='';try{const rates=await exchFetchRates(from);const rate=rates[to];if(rate){res.textContent=amount+' '+from+' = '+(amount*rate).toFixed(2)+' '+to}else{res.textContent='Conversion not available.'}}catch(e){res.textContent='';err.textContent='Failed to fetch rates.'}}
 
-newsBtn.onclick=loadNews;mapBtn.onclick=loadConflict;marineBtn.onclick=loadMarine;flightBtn.onclick=loadFlight;marketsBtn.onclick=loadMarkets;
+newsBtn.onclick=loadNews;mapBtn.onclick=loadConflict;marineBtn.onclick=loadMarine;flightBtn.onclick=loadFlight;marketsBtn.onclick=loadMarkets;headlinesBtn.onclick=loadHeadlines;
+function loadHeadlines(){active('headlinesBtn');renderOps(`
+<button class='command-btn' onclick='loadHeadlines()'>REFRESH</button>
+`,`<div id='headlinesFrame' style='height:100%;overflow-y:auto;padding:20px;background:#061018'></div>`);fetchAllHeadlines()}
+async function fetchAllHeadlines(){
+const frame=document.getElementById('headlinesFrame');
+frame.innerHTML='<div style="text-align:center;color:#00ffee;font-family:Share Tech Mono,monospace;padding:40px">Loading headlines...</div>';
+let allItems=[];
+for(let i=0;i<rss.length;i++){try{let r=await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(rss[i]));let d=await r.json();d.items.slice(0,10).forEach(item=>{const img=item.thumbnail||item.enclosure&&item.enclosure.link||'';allItems.push({title:item.title,link:item.link,pubDate:item.pubDate,source:tags[i],img:img})})}catch(e){}}
+allItems.sort((a,b)=>new Date(b.pubDate)-new Date(a.pubDate));
+if(!allItems.length){frame.innerHTML='<div style="text-align:center;color:#ff4444;padding:40px">No headlines available.</div>';return}
+frame.innerHTML='<h2 style="text-align:center;color:#00ffee;font-family:Share Tech Mono,monospace;letter-spacing:2px;text-shadow:0 0 10px #00ffee88;margin-bottom:20px">HEADLINES</h2><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px">'+allItems.map(i=>`<a href='${safeHref(i.link)}' target='_blank' style='text-decoration:none;display:block'><div style='background:#081821;border:1px solid #00ffee33;border-radius:8px;overflow:hidden;transition:border-color 0.15s,box-shadow 0.15s,transform 0.15s;height:100%'onmouseenter="this.style.borderColor='#00ffee';this.style.boxShadow='0 0 12px #00ffee44';this.style.transform='translateY(-2px)'"onmouseleave="this.style.borderColor='#00ffee33';this.style.boxShadow='none';this.style.transform='none'">${i.img?`<img src='${esc(i.img).replace(/'/g,"&#39;")}' style='width:100%;height:140px;object-fit:cover;display:block;background-color:#0a1520' onerror="this.style.display='none'">`:''}<div style='padding:12px'><div style='color:#00ffee;font-family:Share Tech Mono,monospace;font-size:11px;margin-bottom:6px'>[${esc(i.source)}]</div><div style='color:#f1f5f9;font-family:Rajdhani,sans-serif;font-size:14px;line-height:1.3'>${esc(i.title)}</div><div style='color:#7fd6df;font-size:11px;margin-top:8px;font-family:Share Tech Mono,monospace'>${i.pubDate?new Date(i.pubDate).toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):''}</div></div></div></a>`).join('')+'</div>'}
 const rss=[
 'https://www.aljazeera.com/xml/rss/all.xml',
 'https://news.google.com/rss/search?q=site:apnews.com&hl=en-US&gl=US&ceid=US:en',
