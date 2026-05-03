@@ -128,7 +128,7 @@ a{color:#00ffee;text-decoration:none}
 <button id='marineBtn' class='command-btn'>MARINE WATCH</button>
 <button id='flightBtn' class='command-btn'>FLIGHT WATCH</button>
 <button id='marketsBtn' class='command-btn'>MARKETS</button>
-<button id='radioBtn' class='command-btn'>GLOBAL RADIO</button>
+<button id='radioBtn' class='command-btn'>RADIO</button>
 </div>
 <div id='gmtClock' onclick='toggleAfricaTime()'></div>
 <div id='gmtClockFlag' style='text-align:center;font-size:28px;line-height:1;display:none;cursor:pointer' onclick='openCountryView()'></div>
@@ -340,18 +340,25 @@ ${newsHtml}
 ${panHtml}
 </div>`;
 }
-function renderFullPagePanel(name,iso){
+async function renderCountryHeadlines(name,iso){
 const w=document.getElementById('africaTimeWidget');
 const flag=`https://flagcdn.com/w80/${iso}.png`;
+const cMap={'Algeria':'Algeria','Angola':'Angola','Benin':'Benin','Botswana':'Botswana','Burkina Faso':'BurkinaFaso','Burundi':'Burundi','Cameroon':'Cameroon','Cape Verde':'CapeVerde','Central African Republic':'CentralAfricanRepublic','Chad':'Chad','Congo (Brazzaville)':'Congo','Congo (Kinshasa)':'DRCongo',"C\u00f4te d'Ivoire":'IvoryCoast','Djibouti':'Djibouti','Egypt':'Egypt','Equatorial Guinea':'EquatorialGuinea','Eritrea':'Eritrea','Eswatini':'Eswatini','Ethiopia':'Ethiopia','Gabon':'Gabon','Gambia':'Gambia','Ghana':'Ghana','Guinea':'Guinea','Guinea-Bissau':'GuineaBissau','Kenya':'Kenya','Lesotho':'Lesotho','Liberia':'Liberia','Libya':'Libya','Madagascar':'Madagascar','Malawi':'Malawi','Mali':'Mali','Mauritania':'Mauritania','Morocco':'Morocco','Mozambique':'Mozambique','Namibia':'Namibia','Niger':'Niger','Nigeria':'Nigeria','Rwanda':'Rwanda',"S\u00e3o Tom\u00e9 and Pr\u00edncipe":'SaoTome','Senegal':'Senegal','Sierra Leone':'SierraLeone','Somalia':'Somalia','South Africa':'SouthAfrica','South Sudan':'SouthSudan','Sudan':'Sudan','Tanzania':'Tanzania','Togo':'Togo','Tunisia':'Tunisia','Uganda':'Uganda','Zambia':'Zambia','Zimbabwe':'Zimbabwe'};
+const dataKey=cMap[name]||'';
+let newsSources=[];
+if(dataKey){for(const reg of Object.values(africaData)){if(reg[dataKey]){newsSources=reg[dataKey];break}}}
 w.innerHTML=`<div style='padding:12px'>
 <button class='atw-small-button' onclick="atwViewCountry('${name.replace(/'/g,"\\'")}','${iso}')" style='margin-bottom:16px'>⬅ BACK</button>
-<div style='display:flex;align-items:center;gap:12px;margin-bottom:16px'><img src='${flag}' style='width:60px;border-radius:4px'><div><h2 style='margin:0;color:#00ffee;font-family:Share Tech Mono,monospace'>${name} — FULL PAGE</h2><div style='color:#7fd6df;font-size:13px'>Country Intelligence Dashboard</div></div></div>
-<div style='text-align:center;padding:40px;color:#7fd6df;font-family:Share Tech Mono,monospace;border:1px dashed #00ffee44;border-radius:8px'>
-<div style='font-size:48px;margin-bottom:16px'>🏗️</div>
-<div style='font-size:16px;margin-bottom:8px'>FULL PAGE PANEL</div>
-<div style='font-size:13px;color:#00ffee88'>Coming soon — comprehensive ${name} intelligence view</div>
-</div>
+<div style='display:flex;align-items:center;gap:12px;margin-bottom:16px'><img src='${flag}' style='width:60px;border-radius:4px'><div><h2 style='margin:0;color:#00ffee;font-family:Share Tech Mono,monospace'>${name} — HEADLINES</h2><div style='color:#7fd6df;font-size:13px'>Current news from country sources</div></div></div>
+<div id='countryHlGrid' style='text-align:center;color:#00ffee;font-family:Share Tech Mono,monospace;padding:20px'>Loading headlines...</div>
 </div>`;
+let allItems=[];
+for(const src of newsSources){try{const r=await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(src[1]));const d=await r.json();if(d.status==='ok'&&d.items){d.items.slice(0,6).forEach(item=>{allItems.push({title:item.title,link:item.link,pubDate:item.pubDate,source:src[0]})})}}catch(e){}}
+const grid=document.getElementById('countryHlGrid');
+if(!grid)return;
+if(!allItems.length){grid.innerHTML='<div style="color:#7fd6df;padding:20px">No headlines available for '+name+'. Sources may not provide RSS feeds.</div>';return}
+allItems.sort((a,b)=>new Date(b.pubDate)-new Date(a.pubDate));
+grid.innerHTML=allItems.map(it=>`<a href='${it.link}' target='_blank' style='display:block;text-align:left;padding:12px;margin-bottom:8px;background:#081821;border:1px solid #00ffee33;border-radius:8px;color:#d7ffff;text-decoration:none;font-family:Rajdhani,sans-serif;transition:border-color 0.2s,box-shadow 0.2s' onmouseover="this.style.borderColor='#00ffee';this.style.boxShadow='0 0 12px #00ffee44'" onmouseout="this.style.borderColor='#00ffee33';this.style.boxShadow='none'"><div style='font-size:15px;margin-bottom:4px'>${it.title.replace(/</g,'&lt;')}</div><div style='font-size:11px;color:#7fd6df;font-family:Share Tech Mono,monospace'>${it.source} · ${new Date(it.pubDate).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</div></a>`).join('');
 }
 const liveuamapUrls={
 'Algeria':'https://algeria.liveuamap.com/',
@@ -444,7 +451,7 @@ if(newsSources.length){newsLinksHtml='<div style="margin-top:12px"><div style="c
 w.innerHTML=`<div style='padding:12px'>
 <button class='atw-small-button' onclick='atwRestoreWidget()' style='margin-bottom:16px'>⬅ BACK</button>
 <div style='display:flex;align-items:center;gap:12px;margin-bottom:12px'><img src='${flag}' style='width:60px;border-radius:4px'><div><h2 style='margin:0;color:#00ffee;font-family:Share Tech Mono,monospace'>${name}</h2><div style='color:#7fd6df;font-size:13px'>${region} — ${subregion}</div></div></div>
-<div style='display:flex;justify-content:center;gap:10px;margin-bottom:16px'><button class='atw-small-button' onclick="renderBugoutPanel('${name.replace(/'/g,"\\'")}','${iso}')" style='background:#0c2430;border-color:#ff8800;color:#ff8800;text-shadow:0 0 6px #ff880088'>🚁 BUGOUT</button><button class='atw-small-button' onclick="renderFullPagePanel('${name.replace(/'/g,"\\'")}','${iso}')" style='background:#0c2430'>📄 FULL PAGE</button></div>
+<div style='display:flex;justify-content:center;gap:10px;margin-bottom:16px'><button class='atw-small-button' onclick="renderBugoutPanel('${name.replace(/'/g,"\\'")}','${iso}')" style='background:#0c2430;border-color:#ff8800;color:#ff8800;text-shadow:0 0 6px #ff880088'>🚁 BUGOUT</button><button class='atw-small-button' onclick="renderCountryHeadlines('${name.replace(/'/g,"\\'")}','${iso}')" style='background:#0c2430'>📰 COUNTRY HEADLINES</button></div>
 <div style='display:grid;grid-template-columns:1fr 1fr;gap:8px;font-family:Rajdhani,sans-serif;font-size:14px'>
 <div><span style='color:#7fd6df'>Capital:</span> ${capital}</div>
 <div><span style='color:#7fd6df'>Population:</span> ${pop}</div>
@@ -470,7 +477,7 @@ let full=false,idx=0;
 function active(id){document.querySelectorAll('.command-btn').forEach(b=>b.classList.remove('active'));document.getElementById(id).classList.add('active')}
 function renderOps(menu,content){opsBay.style.cssText='';full=false;opsBay.innerHTML=`<div id='opsShell'><div id='opsMenu'><button class='panel-trigger' onclick="document.getElementById('opsMenu').classList.toggle('open')" title='COMMAND PANEL'>☰</button><div class='menu-content'>${menu}</div></div><div id='opsViewport' style='height:100%;overflow-y:auto;min-height:0'>${content}</div></div>`}
 
-const globalFeeds=[['WAR ROOM','https://rumble.com/embed/v33aw1a/?pub=4jw3x3'],['AL JAZEERA','https://www.youtube.com/embed/gCNeDWCI0vo'],['AFRICA','https://www.youtube.com/embed/W8nThq62Vb4'],['BLOOMBERG','https://www.youtube.com/embed/iEpJwprxDdk'],['DW','https://www.youtube.com/embed/LuKwFajn37U'],['SKY','https://www.youtube.com/embed/YDvsBbKfLPA']];
+const globalFeeds=[['RT','https://rumble.com/embed/v33aw1a/?pub=4jw3x3'],['AL JAZEERA','https://www.youtube.com/embed/gCNeDWCI0vo'],['AFRICA','https://www.youtube.com/embed/W8nThq62Vb4'],['BLOOMBERG','https://www.youtube.com/embed/iEpJwprxDdk'],['DW','https://www.youtube.com/embed/LuKwFajn37U'],['SKY','https://www.youtube.com/embed/YDvsBbKfLPA']];
 
 
 const africanChannels=[['DW Africa','https://www.youtube.com/embed/W8nThq62Vb4'],['Africa Live','https://www.youtube.com/embed/E8PRZmDUiPw'],['Africa Today','https://www.youtube.com/embed/NQjabLGdP5g'],['Africa Now','https://www.youtube.com/embed/Mv14aabg4mA'],['Africanews','https://www.youtube.com/embed/NJ1GmKo9zIg']];
