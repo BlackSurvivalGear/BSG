@@ -308,7 +308,7 @@ if(!d){w.innerHTML=`<div style='padding:12px'><button class='atw-small-button' o
 const flag=`https://flagcdn.com/w80/${iso}.png`;
 let fxHtml='';
 if(d.fx&&d.currency){
-try{const r=await fetch('https://api.exchangerate-api.com/v4/latest/'+d.currency);const ed=await r.json();if(ed.rates){fxHtml=d.fx.map(c=>{const rate=ed.rates[c];return rate?`<div style='display:inline-block;padding:6px 12px;background:#081821;border:1px solid #ff880044;border-radius:6px;font-family:Share Tech Mono,monospace;font-size:12px;color:#ff8800'>${c}/${d.currency}: ${rate.toFixed(2)}</div>`:''}).join('')}}catch(e){fxHtml='<span style="color:#7fd6df;font-size:12px">FX data unavailable</span>'}
+try{const r=await fetch('https://api.exchangerate-api.com/v4/latest/'+d.currency);const ed=await r.json();if(ed.rates){fxHtml=d.fx.map(c=>{const rate=ed.rates[c];return rate?`<div style='display:inline-block;padding:6px 12px;background:#081821;border:1px solid #ff880044;border-radius:6px;font-family:Share Tech Mono,monospace;font-size:12px;color:#ff8800'>${c}/${d.currency}: ${(1/rate).toFixed(2)}</div>`:''}).join('')}}catch(e){fxHtml='<span style="color:#7fd6df;font-size:12px">FX data unavailable</span>'}
 }
 let travelHtml=d.travel.map(t=>bugoutLink(t)).join('');
 let airHtml='';
