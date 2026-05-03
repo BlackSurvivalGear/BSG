@@ -347,7 +347,7 @@ const cMap={'Algeria':'Algeria','Angola':'Angola','Benin':'Benin','Botswana':'Bo
 const dataKey=cMap[name]||'';
 let newsSources=[];
 if(dataKey){for(const reg of Object.values(africaData)){if(reg[dataKey]){newsSources=reg[dataKey];break}}}
-const linksHtml=newsSources.length?newsSources.map((s,i)=>`<button onclick="document.getElementById('chFrame').src='${safeHref(s[1])}'" style='padding:8px 14px;background:${i===0?"#0c2430":"#081821"};border:1px solid ${i===0?"#00ffee":"#00ffee44"};border-radius:6px;color:#00ffee;font-family:Share Tech Mono,monospace;font-size:13px;cursor:pointer;transition:all 0.15s;${i===0?"box-shadow:0 0 8px #00ffee44":""}'onmouseover="this.style.background='#0c2430';this.style.boxShadow='0 0 12px #00ffee66'"onmouseout="this.style.background='${i===0?"#0c2430":"#081821"}';this.style.boxShadow='${i===0?"0 0 8px #00ffee44":"none"}'">${esc(s[0])}</button>`).join(''):'<div style="color:#7fd6df;padding:10px">No news sources available for this country.</div>';
+const linksHtml=newsSources.length?newsSources.map((s,i)=>`<button class='ch-src-btn' data-url='${safeHref(s[1])}' style='padding:8px 14px;background:${i===0?"#0c2430":"#081821"};border:1px solid ${i===0?"#00ffee":"#00ffee44"};border-radius:6px;color:#00ffee;font-family:Share Tech Mono,monospace;font-size:13px;cursor:pointer;transition:all 0.15s;${i===0?"box-shadow:0 0 8px #00ffee44":""}'onmouseover="this.style.background='#0c2430';this.style.boxShadow='0 0 12px #00ffee66'"onmouseout="this.style.background='${i===0?"#0c2430":"#081821"}';this.style.boxShadow='${i===0?"0 0 8px #00ffee44":"none"}'">${esc(s[0])}</button>`).join(''):'<div style="color:#7fd6df;padding:10px">No news sources available for this country.</div>';
 const firstUrl=newsSources.length?safeHref(newsSources[0][1]):'about:blank';
 w.innerHTML=`<div style='padding:12px'>
 <button class='atw-small-button' onclick="atwViewCountry('${name.replace(/'/g,"\\'")}','${iso}')" style='margin-bottom:16px'>⬅ BACK</button>
@@ -355,6 +355,7 @@ w.innerHTML=`<div style='padding:12px'>
 <div style='display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px'>${linksHtml}</div>
 <iframe id='chFrame' src='${firstUrl}' style='width:100%;height:450px;border:1px solid #00ffee33;border-radius:8px;background:#081821' sandbox='allow-scripts allow-same-origin allow-popups'></iframe>
 </div>`;
+w.querySelectorAll('.ch-src-btn').forEach(btn=>{btn.addEventListener('click',function(){const f=document.getElementById('chFrame');if(f)f.src=this.dataset.url})});
 }
 const liveuamapUrls={
 'Algeria':'https://algeria.liveuamap.com/',
