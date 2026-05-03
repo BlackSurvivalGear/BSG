@@ -45,7 +45,7 @@ body{background:var(--bg);color:#fff;font-family:Rajdhani,sans-serif;overflow-x:
 .atw-set-btn:hover{background:#0c2430;box-shadow:0 0 12px #00ffee66}
 .atw-set-btn.active{background:#00ffee;color:#061018;font-weight:bold}
 #atwSearchBox{flex-grow:3}
-.header-right{display:flex;flex-direction:column;align-items:center;gap:6px;justify-content:flex-end}
+.header-right{display:flex;flex-direction:column;align-items:center;gap:6px;justify-content:flex-end;position:relative}
 .header-right .price-row{display:flex;align-items:center;gap:6px}
 .market-box{padding:4px 8px;text-align:center}
 .market-price{font-size:24px;color:#00ffee}
@@ -83,7 +83,7 @@ iframe,.map-frame{width:100%;height:100%;border:none}
 #flightFrame iframe{filter:invert(92%) hue-rotate(180deg) grayscale(.9) brightness(.6) contrast(1.2)}
 #commandFooter{padding:28px;display:flex;flex-direction:column;align-items:center;background:linear-gradient(180deg,#050b12,#07141c);border-top:2px solid #00ffee55;position:relative}
 .version{position:absolute;right:20px;bottom:12px;font-size:11px;color:#00ffee55;font-family:'Share Tech Mono'}
-#donatePanel{display:none;margin-top:20px;width:min(420px,92vw);background:#061018;border:1px solid #00ffee44;border-radius:12px;padding:20px;box-sizing:border-box;text-align:center}
+#donatePanel{display:none;position:absolute;top:100%;right:0;z-index:10000;margin-top:8px;width:min(420px,92vw);background:#061018;border:1px solid #00ffee44;border-radius:12px;padding:20px;box-sizing:border-box;text-align:center;box-shadow:0 8px 40px rgba(0,255,238,0.15),0 0 1px #00ffee44}
 #donatePanel.open{display:block}
 .donate-toggle{display:flex;gap:0;margin-bottom:16px;border-radius:8px;overflow:hidden;border:1px solid #00ffee66}
 .donate-toggle button{flex:1;padding:10px 0;background:#081821;color:#00ffee;border:none;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:14px;font-weight:700;letter-spacing:2px;transition:background 0.2s,box-shadow 0.2s,text-shadow 0.2s}
@@ -152,6 +152,18 @@ a{color:#00ffee;text-decoration:none}
 </div>
 <div class='header-right'>
 <button class='donate-btn' onclick='toggleDonatePanel()'>SUPPORT</button>
+<div id='donatePanel'>
+<h2 style='color:#00ffee;font-family:Share Tech Mono,monospace;letter-spacing:2px;text-shadow:0 0 10px #00ffee88;margin-bottom:14px'>SUPPORT BSG</h2>
+<div class='donate-toggle'>
+<button id='donateBtcBtn' class='active' onclick='switchDonateNetwork("btc")'>BTC</button>
+<button id='donateUsdtBtn' onclick='switchDonateNetwork("usdt")'>USDT (TRON)</button>
+</div>
+<div class='donate-qr'><img id='donateQrImg' src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bc1quy9rhgtc4jg2auyjpj0tns0fk3s7h7ktzr62p6' alt='QR Code' /></div>
+<div class='donate-addr-wrap'>
+<span class='donate-addr' id='donateAddr'>bc1quy9rhgtc4jg2auyjpj0tns0fk3s7h7ktzr62p6</span>
+<button class='donate-copy-btn' id='donateCopyBtn' onclick='copyDonateAddr()'>COPY</button>
+</div>
+</div>
 <div class='price-row'>
 <div class='market-box'><div>BRENT</div><div class='market-price' id='priceBrent'>--</div></div>
 <div class='market-box'><div>GOLD</div><div class='market-price' id='priceGold'>--</div></div>
@@ -169,18 +181,6 @@ a{color:#00ffee;text-decoration:none}
 <footer id='commandFooter'>
 <a href='https://www.blacksurvivalgear.com/' target='_blank'><video class='footer-radar' autoplay muted loop playsinline><source src='https://blacksurvivalgear.github.io/osint/RADAR3.mp4'></video></a>
 <a href='#'>BlackSurvivalGear.com</a>
-<div id='donatePanel'>
-<h2 style='color:#00ffee;font-family:Share Tech Mono,monospace;letter-spacing:2px;text-shadow:0 0 10px #00ffee88;margin-bottom:14px'>SUPPORT BSG</h2>
-<div class='donate-toggle'>
-<button id='donateBtcBtn' class='active' onclick='switchDonateNetwork("btc")'>BTC</button>
-<button id='donateUsdtBtn' onclick='switchDonateNetwork("usdt")'>USDT (TRON)</button>
-</div>
-<div class='donate-qr'><img id='donateQrImg' src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bc1quy9rhgtc4jg2auyjpj0tns0fk3s7h7ktzr62p6' alt='QR Code' /></div>
-<div class='donate-addr-wrap'>
-<span class='donate-addr' id='donateAddr'>bc1quy9rhgtc4jg2auyjpj0tns0fk3s7h7ktzr62p6</span>
-<button class='donate-copy-btn' id='donateCopyBtn' onclick='copyDonateAddr()'>COPY</button>
-</div>
-</div>
 <span class='version'>v1.0.0</span>
 </footer>
 <script>
