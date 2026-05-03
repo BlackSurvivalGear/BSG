@@ -358,7 +358,7 @@ for(let i=0;i<feeds.length;i++){try{const r=await fetch('https://api.rss2json.co
 const grid=document.getElementById('countryHlGrid');
 if(!grid)return;
 if(!allItems.length){grid.innerHTML='<div style="color:#7fd6df;padding:20px">No headlines available. RSS sources may be temporarily unavailable.</div>';return}
-const nameRe=new RegExp('\\b'+name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b','i');
+const nameRe=new RegExp('(?<![\\w])'+name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?![\\w])','i');
 let filtered=allItems.filter(it=>nameRe.test(it.title));
 let isFallback=false;
 if(!filtered.length){filtered=allItems;isFallback=true}
