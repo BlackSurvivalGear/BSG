@@ -45,7 +45,7 @@ body{background:var(--bg);color:#fff;font-family:Rajdhani,sans-serif;overflow-x:
 .atw-set-btn:hover{background:#0c2430;box-shadow:0 0 12px #00ffee66}
 .atw-set-btn.active{background:#00ffee;color:#061018;font-weight:bold}
 #atwSearchBox{flex-grow:3}
-.header-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;justify-content:flex-start;position:relative}
+.header-right{display:flex;flex-direction:column;align-items:center;gap:6px;justify-content:flex-end;position:relative}
 .header-right .price-row{display:flex;align-items:center;gap:6px}
 .market-box{padding:4px 8px;text-align:center}
 .market-price{font-size:24px;color:#00ffee}
@@ -95,7 +95,7 @@ iframe,.map-frame{width:100%;height:100%;border:none}
 .donate-addr{flex:1;font-family:'Share Tech Mono',monospace;font-size:12px;color:#00ffee;word-break:break-all;text-align:left;user-select:all}
 .donate-copy-btn{background:none;border:1px solid #00ffee55;color:#00ffee;padding:6px 12px;border-radius:6px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:1px;transition:background 0.15s,box-shadow 0.15s;white-space:nowrap}
 .donate-copy-btn:hover{background:#0c2430;box-shadow:0 0 12px #00ffee66}
-.donate-btn{padding:10px 20px;border:1px solid #00ffee66;background:#081821;color:#00ffee;font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:2px;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s,background 0.15s,text-shadow 0.15s;border-radius:6px;position:absolute;top:0;right:0;z-index:100}
+.donate-btn{padding:10px 20px;border:1px solid #00ffee66;background:#081821;color:#00ffee;font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:2px;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s,background 0.15s,text-shadow 0.15s;border-radius:6px;margin-top:12px}
 .donate-btn:hover{background:#0c2430;transform:translateY(-2px);box-shadow:0 0 18px #00ffee88,0 0 36px #00ffee44;text-shadow:0 0 8px #00ffee;border-color:#00ffeebb}
 a{color:#00ffee;text-decoration:none}
 #splashScreen{position:fixed;top:0;left:0;width:100vw;height:100vh;background:#02070d;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:99999;transition:opacity 0.5s ease}
@@ -128,7 +128,7 @@ a{color:#00ffee;text-decoration:none}
 <button id='marineBtn' class='command-btn'>MARINE WATCH</button>
 <button id='flightBtn' class='command-btn'>FLIGHT WATCH</button>
 <button id='marketsBtn' class='command-btn'>MARKETS</button>
-<a href='https://radio.garden/listen/legacy-90-1-fm/ZZSjC3SX' target='_blank' style='text-decoration:none'><button class='command-btn'>GLOBAL RADIO</button></a>
+<button id='radioBtn' class='command-btn'>GLOBAL RADIO</button>
 </div>
 <div id='gmtClock' onclick='toggleAfricaTime()'></div>
 <div id='gmtClockFlag' style='text-align:center;font-size:28px;line-height:1;display:none;cursor:pointer' onclick='openCountryView()'></div>
@@ -654,7 +654,8 @@ async function exchFetchRates(base){const r=await fetch('https://api.exchangerat
 async function exchUpdateTable(){try{const rates=await exchFetchRates('NGN');const pairs={gbp:'GBP',usd:'USD',cad:'CAD',eur:'EUR',rub:'RUB',cny:'CNY',zar:'ZAR'};for(const[id,code]of Object.entries(pairs)){const el=document.getElementById('rate-'+id);if(el){const rate=rates[code];el.textContent=rate?(1/rate).toFixed(2):'0.00'}}}catch(e){}}
 async function exchConvert(){const amount=parseFloat(document.getElementById('exchAmount').value);const from=document.getElementById('exchFrom').value;const to=document.getElementById('exchTo').value;const res=document.getElementById('exchResult');const err=document.getElementById('exchError');if(isNaN(amount)||amount<=0){err.textContent='Please enter a valid amount.';res.textContent='';return}err.textContent='';res.textContent='';try{const rates=await exchFetchRates(from);const rate=rates[to];if(rate){res.textContent=amount+' '+from+' = '+(amount*rate).toFixed(2)+' '+to}else{res.textContent='Conversion not available.'}}catch(e){res.textContent='';err.textContent='Failed to fetch rates.'}}
 
-newsBtn.onclick=loadNews;mapBtn.onclick=loadConflict;marineBtn.onclick=loadMarine;flightBtn.onclick=loadFlight;marketsBtn.onclick=loadMarkets;headlinesBtn.onclick=loadHeadlines;
+newsBtn.onclick=loadNews;mapBtn.onclick=loadConflict;marineBtn.onclick=loadMarine;flightBtn.onclick=loadFlight;marketsBtn.onclick=loadMarkets;headlinesBtn.onclick=loadHeadlines;radioBtn.onclick=loadRadio;
+function loadRadio(){active('radioBtn');renderOps(`<button class='command-btn' onclick='loadRadio()'>REFRESH</button>`,`<iframe src='https://radio.garden/listen/legacy-90-1-fm/ZZSjC3SX' style='width:100%;height:100%;border:none'></iframe>`)}
 let headlineMode='global';
 function loadHeadlines(mode){if(mode)headlineMode=mode;active('headlinesBtn');renderOps(`
 <button class='command-btn' onclick='loadHeadlines()'>REFRESH</button>
@@ -718,7 +719,7 @@ track.innerHTML=newHtml+(existing?existing:'');
 banner.classList.add('active')}
 }
 checkBreaking();setInterval(checkBreaking,120000);
-loadTicker();loadNews();
+loadTicker();loadHeadlines();
 async function fetchPrices(){
 let gotGold=false,gotSilver=false,gotBrent=false;
 try{const r=await fetch('https://scanner.tradingview.com/global/scan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({symbols:{tickers:['TVC:GOLD','TVC:SILVER','NYMEX:BB1!']},columns:['close']})});const d=await r.json();d.data.forEach(item=>{if(item.s==='TVC:GOLD'){document.getElementById('priceGold').textContent=Math.round(item.d[0]).toLocaleString();gotGold=true}if(item.s==='TVC:SILVER'){document.getElementById('priceSilver').textContent=item.d[0].toFixed(2);gotSilver=true}if(item.s.includes('BB1')){document.getElementById('priceBrent').textContent=item.d[0].toFixed(1);gotBrent=true}})}catch(e){}
