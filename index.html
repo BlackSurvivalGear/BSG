@@ -172,7 +172,7 @@ a{color:#00ffee;text-decoration:none}
 <button id='donateBtcBtn' class='active' onclick='switchDonateNetwork("btc")'>BTC</button>
 <button id='donateUsdtBtn' onclick='switchDonateNetwork("usdt")'>USDT (TRON)</button>
 </div>
-<div class='donate-qr'><img id='donateQrImg' src='BSG QR CODE.png' alt='QR Code' /></div>
+<div class='donate-qr'><img id='donateQrImg' src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bc1quy9rhgtc4jg2auyjpj0tns0fk3s7h7ktzr62p6' alt='QR Code' /></div>
 <div class='donate-addr-wrap'>
 <span class='donate-addr' id='donateAddr'>bc1quy9rhgtc4jg2auyjpj0tns0fk3s7h7ktzr62p6</span>
 <button class='donate-copy-btn' id='donateCopyBtn' onclick='copyDonateAddr()'>COPY</button>
@@ -260,7 +260,7 @@ function atwRender(){
 const filtered=atwGetFiltered();
 const list=atwShowAll?filtered:filtered.slice(0,atwTopCount);
 atwGrid.innerHTML='';
-list.forEach((c,i)=>{const card=document.createElement('div');card.className='atw-card';card.id='atw-card-'+i;const isActive=headerTz===c.tz;card.innerHTML=`<div class='atw-country'><span class='atw-flag'>${atwFlagImg(c.iso)}</span>${c.name}</div><div class='atw-city'>${c.city}</div><div class='atw-time' id='atw-time-${i}'>--:--</div><div class='atw-date' id='atw-date-${i}'></div><div style='display:flex;gap:6px;margin-top:6px'><button class="atw-set-btn${isActive?' active':''}" data-tz="${c.tz}" data-iso="${c.iso}">${isActive?'RESET':'SET'}</button><button class="atw-set-btn" onclick="atwViewCountry('${c.name.replace(/'/g,"\\'")}','${c.iso}')">VIEW</button></div>`;card.querySelector('.atw-set-btn').onclick=function(){if(isActive){setHeaderTime(null,'','')}else{setHeaderTime(c.tz,c.name,c.iso);atwViewCountry(c.name,c.iso)}};atwGrid.appendChild(card)});
+list.forEach((c,i)=>{const card=document.createElement('div');card.className='atw-card';card.id='atw-card-'+i;const isActive=headerTz===c.tz;card.innerHTML=`<div class='atw-country'><span class='atw-flag'>${atwFlagImg(c.iso)}</span>${c.name}</div><div class='atw-city'>${c.city}</div><div class='atw-time' id='atw-time-${i}'>--:--</div><div class='atw-date' id='atw-date-${i}'></div><div style='display:flex;gap:6px;margin-top:6px'><button class="atw-set-btn${isActive?' active':''}" data-tz="${c.tz}" data-iso="${c.iso}">${isActive?'RESET':'SET'}</button><button class="atw-set-btn" onclick="atwViewCountry('${c.name.replace(/'/g,"\\'")}','${c.iso}')">VIEW</button></div>`;card.querySelector('.atw-set-btn').onclick=function(){if(isActive){setHeaderTime(null,'','')}else{setHeaderTime(c.tz,c.name,c.iso)}};atwGrid.appendChild(card)});
 atwSelect.innerHTML='<option value="">Jump to country...</option>'+filtered.map((c,i)=>`<option value="${i}">${c.name}</option>`).join('')}
 function atwUpdateTimes(){
 if(!africaTimePanelOpen)return;
