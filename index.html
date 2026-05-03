@@ -45,7 +45,8 @@ body{background:var(--bg);color:#fff;font-family:Rajdhani,sans-serif;overflow-x:
 .atw-set-btn:hover{background:#0c2430;box-shadow:0 0 12px #00ffee66}
 .atw-set-btn.active{background:#00ffee;color:#061018;font-weight:bold}
 #atwSearchBox{flex-grow:3}
-.header-right{display:flex;align-items:center;gap:6px;justify-content:flex-end}
+.header-right{display:flex;flex-direction:column;align-items:center;gap:6px;justify-content:flex-end}
+.header-right .price-row{display:flex;align-items:center;gap:6px}
 .market-box{padding:4px 8px;text-align:center}
 .market-price{font-size:24px;color:#00ffee}
 #breakingBanner{background:#0a0000;border-bottom:1px solid #ff2200aa;padding:0;overflow:hidden;display:none}
@@ -116,7 +117,7 @@ a{color:#00ffee;text-decoration:none}
 </div>
 <header id='commandHeader'>
 <div class='brand-wrap'>
-<a href='https://www.blacksurvivalgear.com/' target='_blank'><video class='radar-logo' autoplay muted loop playsinline><source src='https://blacksurvivalgear.github.io/osint/RADAR3.mp4'></video></a>
+<a href='https://www.blacksurvivalgear.com/' target='_blank'><video class='radar-logo' autoplay muted loop playsinline onmouseover='toggleDonatePanel()' style='cursor:pointer'><source src='https://blacksurvivalgear.github.io/osint/RADAR3.mp4'></video></a>
 <div><div class='callsign'>BLACK SURVIVAL GEAR</div><div class='subline'>Members</div><div class='OSINT PLATFORM-sub'>OSINT PLATFORM</div></div>
 </div>
 <div class='header-center' style='position:relative'>
@@ -150,10 +151,13 @@ a{color:#00ffee;text-decoration:none}
 </div>
 </div>
 <div class='header-right'>
+<button class='donate-btn' onclick='toggleDonatePanel()'>SUPPORT</button>
+<div class='price-row'>
 <div class='market-box'><div>BRENT</div><div class='market-price' id='priceBrent'>--</div></div>
 <div class='market-box'><div>GOLD</div><div class='market-price' id='priceGold'>--</div></div>
 <div class='market-box'><div>SILVER</div><div class='market-price' id='priceSilver'>--</div></div>
 <div class='market-box'><div>BTC</div><div class='market-price' id='priceBtc'>--</div></div>
+</div>
 </div>
 </header>
 <div id='breakingBanner'><div class='breaking-inner'><span class='breaking-tag'>BREAKING</span><div class='breaking-scroll'><div id='breakingTrack' class='breaking-track'></div></div></div></div>
