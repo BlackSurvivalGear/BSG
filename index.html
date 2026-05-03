@@ -353,12 +353,16 @@ w.innerHTML=`<div style='padding:12px'>
 <div id='countryHlGrid' style='text-align:center;color:#00ffee;font-family:Share Tech Mono,monospace;padding:20px'>Loading headlines...</div>
 </div>`;
 let allItems=[];
-for(const src of newsSources){try{const r=await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(src[1]));const d=await r.json();if(d.status==='ok'&&d.items){d.items.slice(0,6).forEach(item=>{allItems.push({title:item.title,link:item.link,pubDate:item.pubDate,source:src[0]})})}}catch(e){}}
+const feeds=typeof africaRssFeeds!=='undefined'?africaRssFeeds:[];
+for(let i=0;i<feeds.length;i++){try{const r=await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(feeds[i].url));const d=await r.json();if(d.status==='ok'&&d.items){d.items.slice(0,8).forEach(item=>{allItems.push({title:item.title,link:item.link,pubDate:item.pubDate,source:feeds[i].tag})})}}catch(e){}}
 const grid=document.getElementById('countryHlGrid');
 if(!grid)return;
-if(!allItems.length){grid.innerHTML='<div style="color:#7fd6df;padding:20px">No headlines available for '+name+'. Sources may not provide RSS feeds.</div>';return}
-allItems.sort((a,b)=>new Date(b.pubDate)-new Date(a.pubDate));
-grid.innerHTML=allItems.map(it=>`<a href='${safeHref(it.link)}' target='_blank' style='display:block;text-align:left;padding:12px;margin-bottom:8px;background:#081821;border:1px solid #00ffee33;border-radius:8px;color:#d7ffff;text-decoration:none;font-family:Rajdhani,sans-serif;transition:border-color 0.2s,box-shadow 0.2s' onmouseover="this.style.borderColor='#00ffee';this.style.boxShadow='0 0 12px #00ffee44'" onmouseout="this.style.borderColor='#00ffee33';this.style.boxShadow='none'"><div style='font-size:15px;margin-bottom:4px'>${esc(it.title)}</div><div style='font-size:11px;color:#7fd6df;font-family:Share Tech Mono,monospace'>${esc(it.source)} · ${new Date(it.pubDate).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</div></a>`).join('');
+const nameLower=name.toLowerCase();
+let filtered=allItems.filter(it=>it.title.toLowerCase().includes(nameLower));
+if(!filtered.length)filtered=allItems;
+filtered.sort((a,b)=>new Date(b.pubDate)-new Date(a.pubDate));
+const label=filtered.length===allItems.length?'Showing all Africa headlines (no '+name+'-specific results found):':'';
+grid.innerHTML=(label?'<div style="color:#7fd6df;font-size:12px;margin-bottom:12px;font-family:Share Tech Mono,monospace">'+label+'</div>':'')+filtered.map(it=>`<a href='${safeHref(it.link)}' target='_blank' style='display:block;text-align:left;padding:12px;margin-bottom:8px;background:#081821;border:1px solid #00ffee33;border-radius:8px;color:#d7ffff;text-decoration:none;font-family:Rajdhani,sans-serif;transition:border-color 0.2s,box-shadow 0.2s' onmouseover="this.style.borderColor='#00ffee';this.style.boxShadow='0 0 12px #00ffee44'" onmouseout="this.style.borderColor='#00ffee33';this.style.boxShadow='none'"><div style='font-size:15px;margin-bottom:4px'>${esc(it.title)}</div><div style='font-size:11px;color:#7fd6df;font-family:Share Tech Mono,monospace'>${esc(it.source)} · ${new Date(it.pubDate).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</div></a>`).join('');
 }
 const liveuamapUrls={
 'Algeria':'https://algeria.liveuamap.com/',
