@@ -678,7 +678,7 @@ const aiTools=[
 {name:'Phind',url:'https://www.phind.com',icon:'⌕'},
 {name:'Wolfram Alpha',url:'https://www.wolframalpha.com',icon:'★'}
 ];
-function loadAILaunchpad(){active('aiLaunchpadBtn');renderOps(`<button class='command-btn' onclick='loadAILaunchpad()'>REFRESH</button>`,`<div style='height:100%;overflow-y:auto;background:#061018'><h2 style='text-align:center;color:#00ffee;font-family:Share Tech Mono,monospace;letter-spacing:4px;padding:24px 0 8px;margin:0;text-shadow:0 0 12px #00ffee88'>AI LAUNCHPAD</h2><div class='ai-grid'>${aiTools.map(t=>"<a class='ai-tile' href='"+esc(t.url)+"' target='_blank' rel='noopener'><span class='ai-tile-icon'>"+t.icon+"</span>"+esc(t.name)+"</a>").join('')}</div></div>`)}
+function loadAILaunchpad(){active('aiLaunchpadBtn');renderOps(`<button class='command-btn' onclick='loadAILaunchpad()'>REFRESH</button>`,`<div style='height:100%;overflow-y:auto;background:#061018'><h2 style='text-align:center;color:#00ffee;font-family:Share Tech Mono,monospace;letter-spacing:4px;padding:24px 0 8px;margin:0;text-shadow:0 0 12px #00ffee88'>AI LAUNCHPAD</h2><div class='ai-grid'>${aiTools.map(t=>"<a class='ai-tile' href='"+safeHref(t.url)+"' target='_blank' rel='noopener'><span class='ai-tile-icon'>"+t.icon+"</span>"+esc(t.name)+"</a>").join('')}</div></div>`)}
 function loadRadio(){active('radioBtn');renderOps(`<button class='command-btn' onclick='loadRadio()'>REFRESH</button>`,`<iframe src='https://radio.garden/listen/legacy-90-1-fm/ZZSjC3SX' style='width:100%;height:100%;border:none'></iframe>`)}
 let headlineMode='global';
 function loadHeadlines(mode){if(mode)headlineMode=mode;active('headlinesBtn');renderOps(`
