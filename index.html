@@ -54,13 +54,13 @@ body{background:var(--bg);color:#fff;font-family:Rajdhani,sans-serif;overflow-x:
 .breaking-inner{display:flex;align-items:center;height:32px}
 .breaking-tag{background:#ff2200;color:#fff;font-family:'Share Tech Mono';font-size:12px;font-weight:700;padding:0 12px;height:100%;display:flex;align-items:center;letter-spacing:1px;animation:breakingPulse 1.5s infinite}
 @keyframes breakingPulse{50%{background:#cc0000}}
-.breaking-scroll{flex:1;overflow:hidden;display:flex;align-items:center}.breaking-track{display:inline-flex;align-items:center;white-space:nowrap;padding-left:100%;animation:scroll 120s linear infinite}
+.breaking-scroll{flex:1;overflow:hidden;display:flex;align-items:center}.breaking-track{display:inline-flex;align-items:center;white-space:nowrap;padding-left:100%;animation:scroll 120s linear infinite}.breaking-scroll:hover .breaking-track{animation-play-state:paused}
 .breaking-link{display:inline-block;padding-right:60px;color:#ff8866;text-decoration:none;font-size:13px;font-family:'Share Tech Mono'}
 .breaking-link:hover{color:#ffaa88}
 #newsTickerWrap{display:flex;flex-direction:column;background:#050b12;border-top:1px solid #00ffee55;border-bottom:1px solid #00ffee55;overflow:hidden}
 .channel{background:#071923;border:none;color:#7fd6df;padding:0 14px;cursor:pointer;font-family:'Share Tech Mono';font-size:12px;white-space:nowrap;transition:background 0.15s,color 0.15s,text-shadow 0.15s,box-shadow 0.15s}.channel.active{background:#0c2430;color:#00ffee;font-weight:700;text-shadow:0 0 8px #00ffee;box-shadow:inset 0 -2px 0 #00ffee}
 .channel-wrap{display:flex;overflow-x:auto;flex-shrink:0}
-.ticker-window{flex:1;overflow:hidden;display:flex;align-items:center}.ticker-track{display:inline-flex;align-items:center;white-space:nowrap;padding-left:100%;animation:scroll 150s linear infinite;font-size:18px}
+.ticker-window{flex:1;overflow:hidden;display:flex;align-items:center}.ticker-track{display:inline-flex;align-items:center;white-space:nowrap;padding-left:100%;animation:scroll 150s linear infinite;font-size:18px}.ticker-window:hover .ticker-track{animation-play-state:paused}
 @keyframes scroll{100%{transform:translateX(-100%)}}
 .headline-link{display:inline-block;padding-right:95px;color:#d7ffff;text-decoration:none;font-size:18px;line-height:42px}
 .placeholder{height:calc(100vh - 126px);display:flex;justify-content:center;align-items:center}
