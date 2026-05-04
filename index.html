@@ -162,11 +162,20 @@ a{color:#00ffee;text-decoration:none}
 <div class='donate-toggle'>
 <button id='donateBtcBtn' class='active' onclick='switchDonateNetwork("btc")'>BTC</button>
 <button id='donateUsdtBtn' onclick='switchDonateNetwork("usdt")'>USDT (TRON)</button>
+<button id='donatePaypalBtn' onclick='switchDonateNetwork("paypal")'>PAYPAL</button>
 </div>
+<div id='donateCryptoSection'>
 <div class='donate-qr'><img id='donateQrImg' src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bc1quy9rhgtc4jg2auyjpj0tns0fk3s7h7ktzr62p6' alt='QR Code' /></div>
 <div class='donate-addr-wrap'>
 <span class='donate-addr' id='donateAddr'>bc1quy9rhgtc4jg2auyjpj0tns0fk3s7h7ktzr62p6</span>
 <button class='donate-copy-btn' id='donateCopyBtn' onclick='copyDonateAddr()'>COPY</button>
+</div>
+</div>
+<div id='donatePaypalSection' style='display:none'>
+<div style='margin:24px 0'>
+<a href='https://www.paypal.com/ncp/payment/F4PK3TX397MLL' target='_blank' rel='noopener noreferrer' class='donate-btn' style='display:inline-block;text-decoration:none;padding:14px 32px;font-size:15px'>DONATE VIA PAYPAL</a>
+</div>
+<p style='color:#7fd6df;font-size:12px;font-family:Share Tech Mono,monospace;margin-top:8px'>You will be redirected to PayPal to complete your donation.</p>
 </div>
 </div>
 <div class='price-row'>
@@ -756,10 +765,10 @@ try{const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitco
 }
 fetchPrices();setInterval(fetchPrices,60000);
 
-const donateWallets={btc:{addr:'bc1quy9rhgtc4jg2auyjpj0tns0fk3s7h7ktzr62p6',qr:'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bc1quy9rhgtc4jg2auyjpj0tns0fk3s7h7ktzr62p6'},usdt:{addr:'TJXpvDnuTtx2Zth2YBNgHZnkbymJTnrgzx',qr:'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TJXpvDnuTtx2Zth2YBNgHZnkbymJTnrgzx'}};
+const donateWallets={btc:{addr:'bc1quy9rhgtc4jg2auyjpj0tns0fk3s7h7ktzr62p6',qr:'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bc1quy9rhgtc4jg2auyjpj0tns0fk3s7h7ktzr62p6'},usdt:{addr:'TJXpvDnuTtx2Zth2YBNgHZnkbymJTnrgzx',qr:'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=TJXpvDnuTtx2Zth2YBNgHZnkbymJTnrgzx'},paypal:{url:'https://www.paypal.com/ncp/payment/F4PK3TX397MLL'}};
 let donateNetwork='btc';
 function toggleDonatePanel(){document.getElementById('donatePanel').classList.toggle('open')}
-function switchDonateNetwork(net){donateNetwork=net;const w=donateWallets[net];document.getElementById('donateAddr').textContent=w.addr;document.getElementById('donateQrImg').src=w.qr;document.getElementById('donateBtcBtn').classList.toggle('active',net==='btc');document.getElementById('donateUsdtBtn').classList.toggle('active',net==='usdt');document.getElementById('donateCopyBtn').textContent='COPY'}
+function switchDonateNetwork(net){donateNetwork=net;const w=donateWallets[net];document.getElementById('donateBtcBtn').classList.toggle('active',net==='btc');document.getElementById('donateUsdtBtn').classList.toggle('active',net==='usdt');document.getElementById('donatePaypalBtn').classList.toggle('active',net==='paypal');if(net==='paypal'){document.getElementById('donateCryptoSection').style.display='none';document.getElementById('donatePaypalSection').style.display='block'}else{document.getElementById('donateCryptoSection').style.display='block';document.getElementById('donatePaypalSection').style.display='none';document.getElementById('donateAddr').textContent=w.addr;document.getElementById('donateQrImg').src=w.qr;document.getElementById('donateCopyBtn').textContent='COPY'}}
 function copyDonateAddr(){const addr=donateWallets[donateNetwork].addr;navigator.clipboard.writeText(addr).then(()=>{const btn=document.getElementById('donateCopyBtn');btn.textContent='COPIED';setTimeout(()=>{btn.textContent='COPY'},2000)}).catch(()=>{const t=document.createElement('textarea');t.value=addr;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);const btn=document.getElementById('donateCopyBtn');btn.textContent='COPIED';setTimeout(()=>{btn.textContent='COPY'},2000)})}
 document.addEventListener('click',function(e){const panel=document.getElementById('donatePanel');const btn=document.querySelector('.donate-btn');if(panel.classList.contains('open')&&!panel.contains(e.target)&&!btn.contains(e.target)){panel.classList.remove('open')}});
 </script>
