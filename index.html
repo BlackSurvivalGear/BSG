@@ -103,6 +103,7 @@ a{color:#00ffee;text-decoration:none}
 #splashScreen video{width:140px;height:140px;border-radius:50%;border:1px solid #00ffee88;box-shadow:0 0 30px #00ffee,0 0 60px #00ffee55;animation:radarPulse 2s infinite}
 #splashScreen .splash-title{margin-top:20px;font-size:28px;font-weight:700;letter-spacing:3px;color:#06161c;text-shadow:0 0 30px #00ffee,0 0 60px #00ffee,0 0 100px #00ffee88}
 #splashScreen .splash-sub{font-size:13px;letter-spacing:6px;color:#00ffee;margin-top:6px;font-family:'Share Tech Mono'}
+.ai-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;padding:28px}.ai-tile{display:flex;align-items:center;gap:14px;padding:18px 20px;background:#081821;border:1px solid #00ffee33;border-radius:8px;color:#d7ffff;text-decoration:none;font-family:'Share Tech Mono',monospace;font-size:14px;letter-spacing:1px;transition:border-color 0.2s,box-shadow 0.2s,background 0.2s,transform 0.15s}.ai-tile:hover{border-color:#00ffee;box-shadow:0 0 18px #00ffee44,0 0 36px #00ffee22;background:#0c2430;transform:translateY(-2px);color:#00ffee;text-shadow:0 0 6px #00ffee88}.ai-tile-icon{font-size:26px;flex-shrink:0;width:36px;text-align:center}
 .loader-wrap{margin-top:32px;width:260px;height:3px;background:#0a1a22;border-radius:2px;overflow:hidden}
 .loader-bar{width:0;height:100%;background:linear-gradient(90deg,#00ffee,#00ffeedd);border-radius:2px;animation:loadBar 3s ease-in-out forwards}
 @keyframes loadBar{0%{width:0}100%{width:100%}}
@@ -129,6 +130,7 @@ a{color:#00ffee;text-decoration:none}
 <button id='flightBtn' class='command-btn'>FLIGHT WATCH</button>
 <button id='marketsBtn' class='command-btn'>MARKETS</button>
 <button id='radioBtn' class='command-btn'>RADIO</button>
+<button id='aiLaunchpadBtn' class='command-btn'>AI LAUNCHPAD</button>
 </div>
 <div id='gmtClock' onclick='toggleAfricaTime()'></div>
 <div id='gmtClockFlag' style='text-align:center;font-size:28px;line-height:1;display:none;cursor:pointer' onclick='openCountryView()'></div>
@@ -657,7 +659,25 @@ async function exchFetchRates(base){const r=await fetch('https://api.exchangerat
 async function exchUpdateTable(){try{const rates=await exchFetchRates('NGN');const pairs={gbp:'GBP',usd:'USD',cad:'CAD',eur:'EUR',rub:'RUB',cny:'CNY',zar:'ZAR'};for(const[id,code]of Object.entries(pairs)){const el=document.getElementById('rate-'+id);if(el){const rate=rates[code];el.textContent=rate?(1/rate).toFixed(2):'0.00'}}}catch(e){}}
 async function exchConvert(){const amount=parseFloat(document.getElementById('exchAmount').value);const from=document.getElementById('exchFrom').value;const to=document.getElementById('exchTo').value;const res=document.getElementById('exchResult');const err=document.getElementById('exchError');if(isNaN(amount)||amount<=0){err.textContent='Please enter a valid amount.';res.textContent='';return}err.textContent='';res.textContent='';try{const rates=await exchFetchRates(from);const rate=rates[to];if(rate){res.textContent=amount+' '+from+' = '+(amount*rate).toFixed(2)+' '+to}else{res.textContent='Conversion not available.'}}catch(e){res.textContent='';err.textContent='Failed to fetch rates.'}}
 
-newsBtn.onclick=loadNews;mapBtn.onclick=loadConflict;marineBtn.onclick=loadMarine;flightBtn.onclick=loadFlight;marketsBtn.onclick=loadMarkets;headlinesBtn.onclick=loadHeadlines;radioBtn.onclick=loadRadio;
+newsBtn.onclick=loadNews;mapBtn.onclick=loadConflict;marineBtn.onclick=loadMarine;flightBtn.onclick=loadFlight;marketsBtn.onclick=loadMarkets;headlinesBtn.onclick=loadHeadlines;radioBtn.onclick=loadRadio;aiLaunchpadBtn.onclick=loadAILaunchpad;
+const aiTools=[
+{name:'ChatGPT',url:'https://chat.openai.com',icon:'⚡'},
+{name:'Claude',url:'https://claude.ai',icon:'🧠'},
+{name:'Gemini',url:'https://gemini.google.com',icon:'◆'},
+{name:'Grok',url:'https://grok.com',icon:'✖'},
+{name:'Perplexity',url:'https://www.perplexity.ai',icon:'🔍'},
+{name:'DeepSeek',url:'https://chat.deepseek.com',icon:'⬡'},
+{name:'You.com',url:'https://you.com',icon:'▶'},
+{name:'Poe',url:'https://poe.com',icon:'⬢'},
+{name:'Hugging Face',url:'https://huggingface.co',icon:'🤗'},
+{name:'Google Lens',url:'https://lens.google.com',icon:'◎'},
+{name:'Copilot',url:'https://copilot.microsoft.com',icon:'⊞'},
+{name:'Meta AI',url:'https://www.meta.ai',icon:'∞'},
+{name:'Mistral',url:'https://chat.mistral.ai',icon:'▲'},
+{name:'Phind',url:'https://www.phind.com',icon:'⌕'},
+{name:'Wolfram Alpha',url:'https://www.wolframalpha.com',icon:'★'}
+];
+function loadAILaunchpad(){active('aiLaunchpadBtn');renderOps(`<button class='command-btn' onclick='loadAILaunchpad()'>REFRESH</button>`,`<div style='height:100%;overflow-y:auto;background:#061018'><h2 style='text-align:center;color:#00ffee;font-family:Share Tech Mono,monospace;letter-spacing:4px;padding:24px 0 8px;margin:0;text-shadow:0 0 12px #00ffee88'>AI LAUNCHPAD</h2><div class='ai-grid'>${aiTools.map(t=>"<a class='ai-tile' href='"+esc(t.url)+"' target='_blank' rel='noopener'><span class='ai-tile-icon'>"+t.icon+"</span>"+esc(t.name)+"</a>").join('')}</div></div>`)}
 function loadRadio(){active('radioBtn');renderOps(`<button class='command-btn' onclick='loadRadio()'>REFRESH</button>`,`<iframe src='https://radio.garden/listen/legacy-90-1-fm/ZZSjC3SX' style='width:100%;height:100%;border:none'></iframe>`)}
 let headlineMode='global';
 function loadHeadlines(mode){if(mode)headlineMode=mode;active('headlinesBtn');renderOps(`
