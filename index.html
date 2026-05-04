@@ -104,7 +104,7 @@ a{color:#00ffee;text-decoration:none}
 #splashScreen video{width:140px;height:140px;border-radius:50%;border:1px solid #00ffee88;box-shadow:0 0 30px #00ffee,0 0 60px #00ffee55;animation:radarPulse 2s infinite}
 #splashScreen .splash-title{margin-top:20px;font-size:28px;font-weight:700;letter-spacing:3px;color:#06161c;text-shadow:0 0 30px #00ffee,0 0 60px #00ffee,0 0 100px #00ffee88}
 #splashScreen .splash-sub{font-size:13px;letter-spacing:6px;color:#00ffee;margin-top:6px;font-family:'Share Tech Mono'}
-.ai-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;padding:28px}.ai-tile{display:flex;align-items:center;gap:14px;padding:18px 20px;background:#081821;border:1px solid #00ffee33;border-radius:8px;color:#d7ffff;text-decoration:none;font-family:'Share Tech Mono',monospace;font-size:14px;letter-spacing:1px;transition:border-color 0.2s,box-shadow 0.2s,background 0.2s,transform 0.15s}.ai-tile:hover{border-color:#00ffee;box-shadow:0 0 18px #00ffee44,0 0 36px #00ffee22;background:#0c2430;transform:translateY(-2px);color:#00ffee;text-shadow:0 0 6px #00ffee88}.ai-tile-icon{font-size:26px;flex-shrink:0;width:36px;text-align:center}
+.ai-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;padding:0 28px 28px}.ai-tile{display:flex;align-items:center;gap:14px;padding:16px 18px;background:#081821;border:1px solid #00ffee33;border-radius:8px;color:#d7ffff;text-decoration:none;font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:1px;transition:border-color 0.2s,box-shadow 0.2s,background 0.2s,transform 0.15s}.ai-tile:hover{border-color:#00ffee;box-shadow:0 0 18px #00ffee44,0 0 36px #00ffee22;background:#0c2430;transform:translateY(-2px);color:#00ffee;text-shadow:0 0 6px #00ffee88}.ai-tile-icon{font-size:22px;flex-shrink:0;width:30px;text-align:center}.ai-section-hdr{color:#00ffee;font-family:'Share Tech Mono',monospace;font-size:14px;letter-spacing:3px;padding:20px 28px 6px;margin:0;border-bottom:1px solid #00ffee22;text-shadow:0 0 8px #00ffee66}
 .loader-wrap{margin-top:32px;width:260px;height:3px;background:#0a1a22;border-radius:2px;overflow:hidden}
 .loader-bar{width:0;height:100%;background:linear-gradient(90deg,#00ffee,#00ffeedd);border-radius:2px;animation:loadBar 3s ease-in-out forwards}
 @keyframes loadBar{0%{width:0}100%{width:100%}}
@@ -661,24 +661,21 @@ async function exchUpdateTable(){try{const rates=await exchFetchRates('NGN');con
 async function exchConvert(){const amount=parseFloat(document.getElementById('exchAmount').value);const from=document.getElementById('exchFrom').value;const to=document.getElementById('exchTo').value;const res=document.getElementById('exchResult');const err=document.getElementById('exchError');if(isNaN(amount)||amount<=0){err.textContent='Please enter a valid amount.';res.textContent='';return}err.textContent='';res.textContent='';try{const rates=await exchFetchRates(from);const rate=rates[to];if(rate){res.textContent=amount+' '+from+' = '+(amount*rate).toFixed(2)+' '+to}else{res.textContent='Conversion not available.'}}catch(e){res.textContent='';err.textContent='Failed to fetch rates.'}}
 
 newsBtn.onclick=loadNews;mapBtn.onclick=loadConflict;marineBtn.onclick=loadMarine;flightBtn.onclick=loadFlight;marketsBtn.onclick=loadMarkets;headlinesBtn.onclick=loadHeadlines;radioBtn.onclick=loadRadio;aiLaunchpadBtn.onclick=loadAILaunchpad;
-const aiTools=[
-{name:'ChatGPT',url:'https://chat.openai.com',icon:'⚡'},
-{name:'Claude',url:'https://claude.ai',icon:'🧠'},
-{name:'Gemini',url:'https://gemini.google.com',icon:'◆'},
-{name:'Grok',url:'https://grok.com',icon:'✖'},
-{name:'Perplexity',url:'https://www.perplexity.ai',icon:'🔍'},
-{name:'DeepSeek',url:'https://chat.deepseek.com',icon:'⬡'},
-{name:'You.com',url:'https://you.com',icon:'▶'},
-{name:'Poe',url:'https://poe.com',icon:'⬢'},
-{name:'Hugging Face',url:'https://huggingface.co',icon:'🤗'},
-{name:'Google Lens',url:'https://lens.google.com',icon:'◎'},
-{name:'Copilot',url:'https://copilot.microsoft.com',icon:'⊞'},
-{name:'Meta AI',url:'https://www.meta.ai',icon:'∞'},
-{name:'Mistral',url:'https://chat.mistral.ai',icon:'▲'},
-{name:'Phind',url:'https://www.phind.com',icon:'⌕'},
-{name:'Wolfram Alpha',url:'https://www.wolframalpha.com',icon:'★'}
+const aiCategories=[
+{title:'GENERAL / MULTI-PURPOSE AI',icon:'🧠',tools:[
+{name:'OpenAI (ChatGPT)',url:'https://chat.openai.com'},{name:'Anthropic (Claude)',url:'https://claude.ai'},{name:'Google (Gemini)',url:'https://gemini.google.com'},{name:'DeepSeek',url:'https://chat.deepseek.com'},{name:'xAI (Grok)',url:'https://grok.com'},{name:'Mistral AI',url:'https://chat.mistral.ai'},{name:'Meta AI',url:'https://www.meta.ai'},{name:'Cohere',url:'https://cohere.com'},{name:'Inflection AI (Pi)',url:'https://pi.ai'},{name:'Alibaba (Qwen)',url:'https://qwenlm.ai'}]},
+{title:'AI SEARCH / OSINT RESEARCH',icon:'🔎',tools:[
+{name:'Perplexity AI',url:'https://www.perplexity.ai'},{name:'You.com',url:'https://you.com'},{name:'Google (Gemini Search)',url:'https://gemini.google.com'},{name:'Microsoft (Copilot)',url:'https://copilot.microsoft.com'},{name:'Brave Search AI',url:'https://search.brave.com'},{name:'Andi Search',url:'https://andisearch.com'},{name:'Phind',url:'https://www.phind.com'},{name:'Kagi Assistant',url:'https://kagi.com'},{name:'Exa',url:'https://exa.ai'},{name:'Elicit',url:'https://elicit.com'}]},
+{title:'IMAGE / VISUAL / GEOINT AI',icon:'🖼️',tools:[
+{name:'Google Lens',url:'https://lens.google.com'},{name:'OpenAI (DALL·E)',url:'https://labs.openai.com'},{name:'Stability AI',url:'https://stability.ai'},{name:'Midjourney',url:'https://www.midjourney.com'},{name:'Hugging Face',url:'https://huggingface.co'},{name:'Runway',url:'https://runwayml.com'},{name:'Planet Labs',url:'https://www.planet.com'},{name:'Maxar Technologies',url:'https://www.maxar.com'},{name:'BlackSky',url:'https://www.blacksky.com'},{name:'Clearview AI',url:'https://www.clearview.ai'}]},
+{title:'AUDIO / SPEECH / COMMS INTEL',icon:'🎧',tools:[
+{name:'OpenAI (Whisper)',url:'https://openai.com/research/whisper'},{name:'AssemblyAI',url:'https://www.assemblyai.com'},{name:'Deepgram',url:'https://deepgram.com'},{name:'Rev',url:'https://www.rev.com'},{name:'Speechmatics',url:'https://www.speechmatics.com'},{name:'Sonix',url:'https://sonix.ai'},{name:'Otter.ai',url:'https://otter.ai'},{name:'Descript',url:'https://www.descript.com'},{name:'ElevenLabs',url:'https://elevenlabs.io'},{name:'Resemble AI',url:'https://www.resemble.ai'}]},
+{title:'AUTOMATION / AGENTS / WORKFLOWS',icon:'⚙️',tools:[
+{name:'Zapier',url:'https://zapier.com'},{name:'Make',url:'https://www.make.com'},{name:'LangChain',url:'https://www.langchain.com'},{name:'LlamaIndex',url:'https://www.llamaindex.ai'},{name:'AutoGPT',url:'https://autogpt.net'},{name:'AgentGPT',url:'https://agentgpt.reworkd.ai'},{name:'CrewAI',url:'https://www.crewai.com'},{name:'Flowise',url:'https://flowiseai.com'},{name:'Dust',url:'https://dust.tt'},{name:'Relevance AI',url:'https://relevanceai.com'}]},
+{title:'CODING / DEV / OSINT BUILD TOOLS',icon:'💻',tools:[
+{name:'GitHub Copilot',url:'https://github.com/features/copilot'},{name:'OpenAI (Codex)',url:'https://openai.com/api'},{name:'Anthropic (Claude Code)',url:'https://claude.ai'},{name:'Cursor',url:'https://cursor.sh'},{name:'Replit',url:'https://replit.com'},{name:'Phind',url:'https://www.phind.com'},{name:'Codeium',url:'https://codeium.com'},{name:'Tabnine',url:'https://www.tabnine.com'},{name:'Sourcegraph (Cody)',url:'https://sourcegraph.com/cody'},{name:'Amazon CodeWhisperer',url:'https://aws.amazon.com/codewhisperer'}]}
 ];
-function loadAILaunchpad(){active('aiLaunchpadBtn');renderOps(`<button class='command-btn' onclick='loadAILaunchpad()'>REFRESH</button>`,`<div style='height:100%;overflow-y:auto;background:#061018'><h2 style='text-align:center;color:#00ffee;font-family:Share Tech Mono,monospace;letter-spacing:4px;padding:24px 0 8px;margin:0;text-shadow:0 0 12px #00ffee88'>AI LAUNCHPAD</h2><div class='ai-grid'>${aiTools.map(t=>"<a class='ai-tile' href='"+safeHref(t.url)+"' target='_blank' rel='noopener'><span class='ai-tile-icon'>"+t.icon+"</span>"+esc(t.name)+"</a>").join('')}</div></div>`)}
+function loadAILaunchpad(){active('aiLaunchpadBtn');renderOps(`<button class='command-btn' onclick='loadAILaunchpad()'>REFRESH</button>`,`<div style='height:100%;overflow-y:auto;background:#061018'><h2 style='text-align:center;color:#00ffee;font-family:Share Tech Mono,monospace;letter-spacing:4px;padding:24px 0 8px;margin:0;text-shadow:0 0 12px #00ffee88'>AI LAUNCHPAD</h2>${aiCategories.map(c=>"<h3 class='ai-section-hdr'>"+c.icon+" "+esc(c.title)+"</h3><div class='ai-grid'>"+c.tools.map(t=>"<a class='ai-tile' href='"+safeHref(t.url)+"' target='_blank' rel='noopener'>"+esc(t.name)+"</a>").join('')+"</div>").join('')}</div>`)}
 function loadRadio(){active('radioBtn');renderOps(`<button class='command-btn' onclick='loadRadio()'>REFRESH</button>`,`<iframe src='https://radio.garden/listen/legacy-90-1-fm/ZZSjC3SX' style='width:100%;height:100%;border:none'></iframe>`)}
 let headlineMode='global';
 function loadHeadlines(mode){if(mode)headlineMode=mode;active('headlinesBtn');renderOps(`
