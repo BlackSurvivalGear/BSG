@@ -934,7 +934,7 @@ const bsgDisputedTerritories=[
 {name:'Taiwan Strait',lat:24.0,lng:119.5,radius:100000,info:'Taiwan — PRC claims sovereignty'},
 {name:'South China Sea',lat:12.0,lng:114.0,radius:250000,info:'South China Sea — Multiple overlapping claims'}
 ];
-function loadBsgMap(){active('bsgMapBtn');renderOps(`
+function loadBsgMap(){bsgRegionIdx=0;active('bsgMapBtn');renderOps(`
 <button class='command-btn' onclick='loadBsgMap()'>REFRESH</button><br><br>
 <button class='command-btn' onclick='cycleBsgRegion()' id='bsgRegionBtn'>REGION: AFRICA</button><br><br>
 <button class='command-btn' onclick='toggleBsgTiles()' id='bsgTileToggleBtn'>GOOGLE MAP</button>
