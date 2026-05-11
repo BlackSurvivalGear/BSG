@@ -695,20 +695,99 @@ const bsgConflictZones=[
 {name:'Mozambique',lat:-14.0,lng:40.0,radius:80000,color:'#ff9900',info:'Cabo Delgado — Islamist insurgency'}
 ];
 const bsgMilitaryBases=[
-{name:'Camp Lemonnier',lat:11.55,lng:43.15,info:'US — Djibouti (AFRICOM hub)'},
-{name:'Tartus Naval Base',lat:34.89,lng:35.89,info:'Russia — Syria (Mediterranean port)'},
-{name:'Hmeimim Air Base',lat:35.41,lng:35.95,info:'Russia — Syria (Air operations)'},
-{name:'Diego Garcia',lat:-7.32,lng:72.42,info:'US/UK — Indian Ocean (Strategic bomber base)'},
-{name:'Al Udeid',lat:25.12,lng:51.31,info:'US — Qatar (CENTCOM air ops)'},
-{name:'Ramstein',lat:49.44,lng:7.60,info:'US — Germany (EUCOM/AFRICOM HQ)'},
-{name:'Incirlik',lat:37.0,lng:35.43,info:'US/NATO — Turkey (Air base)'},
-{name:'Djibouti (China)',lat:11.59,lng:43.14,info:'China — Djibouti (PLA Support Base)'},
-{name:'Sevastopol',lat:44.62,lng:33.53,info:'Russia — Crimea (Black Sea Fleet)'},
-{name:'Agadez',lat:16.97,lng:7.99,info:'US — Niger (Drone base, status uncertain)'},
-{name:'Libreville',lat:0.45,lng:9.41,info:'France — Gabon (Forward base)'},
-{name:'Djibouti (France)',lat:11.60,lng:43.16,info:'France — Djibouti (FFDj)'},
-{name:'Berbera',lat:10.44,lng:45.04,info:'UAE — Somaliland (Naval/air facility)'},
-{name:'Assab',lat:13.07,lng:42.74,info:'UAE — Eritrea (Military port)'}
+// US — Africa
+{name:'Camp Lemonnier',lat:11.55,lng:43.15,info:'US — Djibouti (AFRICOM hub, ~4000 personnel)',co:'US'},
+{name:'Agadez (Air Base 201)',lat:16.97,lng:7.99,info:'US — Niger (Drone base, MQ-9 ops)',co:'US'},
+{name:'Manda Bay',lat:-2.27,lng:40.95,info:'US — Kenya (Camp Simba, ISR & CT ops)',co:'US'},
+{name:'Entebbe',lat:0.04,lng:32.44,info:'US — Uganda (SOF forward base)',co:'US'},
+{name:'Ouagadougou',lat:12.35,lng:-1.51,info:'US — Burkina Faso (ISR, status uncertain)',co:'US'},
+{name:'Arlit',lat:18.74,lng:7.39,info:'US — Niger (ISR site)',co:'US'},
+{name:'Garoua',lat:9.34,lng:13.38,info:'US — Cameroon (ISR & drone ops)',co:'US'},
+{name:'Nzara',lat:4.65,lng:28.53,info:'US — South Sudan (SOF forward site)',co:'US'},
+// US — Middle East & Central Asia
+{name:'Al Udeid',lat:25.12,lng:51.31,info:'US — Qatar (CENTCOM air ops HQ)',co:'US'},
+{name:'Al Dhafra',lat:24.25,lng:54.55,info:'US — UAE (Air base, F-35 & tanker ops)',co:'US'},
+{name:'Camp Arifjan',lat:29.16,lng:48.10,info:'US — Kuwait (Army logistics hub)',co:'US'},
+{name:'Ali Al Salem',lat:29.35,lng:47.52,info:'US — Kuwait (Air base)',co:'US'},
+{name:'Al Minhad',lat:25.03,lng:55.37,info:'US — UAE (Coalition air support)',co:'US'},
+{name:'Incirlik',lat:37.0,lng:35.43,info:'US — Turkey (Air base, NATO)',co:'US'},
+{name:'Bahrain (NSA)',lat:26.23,lng:50.60,info:'US — Bahrain (5th Fleet HQ)',co:'US'},
+// US — Europe
+{name:'Ramstein',lat:49.44,lng:7.60,info:'US — Germany (EUCOM/AFRICOM HQ)',co:'US'},
+{name:'Landstuhl',lat:49.41,lng:7.57,info:'US — Germany (Medical center)',co:'US'},
+{name:'Spangdahlem',lat:49.97,lng:6.70,info:'US — Germany (Air base)',co:'US'},
+{name:'Grafenwöhr',lat:49.69,lng:11.93,info:'US — Germany (Army training area)',co:'US'},
+{name:'Aviano',lat:46.03,lng:12.60,info:'US — Italy (Air base)',co:'US'},
+{name:'Naval Station Naples',lat:40.82,lng:14.28,info:'US — Italy (6th Fleet)',co:'US'},
+{name:'NAS Sigonella',lat:37.40,lng:14.92,info:'US — Sicily (ISR & logistics hub)',co:'US'},
+{name:'Rota',lat:36.64,lng:-6.35,info:'US — Spain (Naval station, BMD)',co:'US'},
+{name:'Morón',lat:37.17,lng:-5.62,info:'US — Spain (AFRICOM crisis response)',co:'US'},
+{name:'Lajes Field',lat:38.76,lng:-27.09,info:'US — Azores/Portugal (Air base)',co:'US'},
+{name:'RAF Lakenheath',lat:52.41,lng:0.56,info:'US — UK (F-35 wing)',co:'US'},
+{name:'RAF Mildenhall',lat:52.36,lng:0.49,info:'US — UK (Tanker & SOF)',co:'US'},
+{name:'Souda Bay',lat:35.49,lng:24.12,info:'US — Crete/Greece (Naval support)',co:'US'},
+{name:'Deveselu',lat:44.05,lng:24.28,info:'US — Romania (Aegis Ashore BMD)',co:'US'},
+{name:'Redzikowo',lat:54.48,lng:17.10,info:'US — Poland (Aegis Ashore BMD)',co:'US'},
+{name:'Keflavik',lat:63.98,lng:-22.61,info:'US — Iceland (P-8 & NATO ASW)',co:'US'},
+// US — Asia-Pacific
+{name:'Diego Garcia',lat:-7.32,lng:72.42,info:'US/UK — Indian Ocean (Bomber & sub base)',co:'US'},
+{name:'Camp Humphreys',lat:36.96,lng:127.03,info:'US — South Korea (USFK HQ)',co:'US'},
+{name:'Kadena',lat:26.35,lng:127.77,info:'US — Okinawa/Japan (Air base)',co:'US'},
+{name:'Yokosuka',lat:35.28,lng:139.67,info:'US — Japan (7th Fleet HQ)',co:'US'},
+{name:'Guam (Andersen)',lat:13.58,lng:144.92,info:'US — Guam (Bomber & tanker base)',co:'US'},
+{name:'Camp Smith',lat:21.39,lng:-157.92,info:'US — Hawaii (INDOPACOM HQ)',co:'US'},
+{name:'Clark (EDCA)',lat:15.19,lng:120.56,info:'US — Philippines (Rotational EDCA site)',co:'US'},
+{name:'Darwin',lat:-12.47,lng:130.84,info:'US — Australia (USMC rotation)',co:'US'},
+// US — Americas
+{name:'Guantánamo Bay',lat:19.90,lng:-75.10,info:'US — Cuba (Naval station)',co:'US'},
+{name:'Soto Cano',lat:14.38,lng:-87.62,info:'US — Honduras (JTF-Bravo)',co:'US'},
+// UK — Africa & Middle East
+{name:'BFC Kenya (BATUK)',lat:-0.04,lng:37.07,info:'UK — Kenya (Training & SOF)',co:'UK'},
+{name:'Minhad (UK)',lat:25.03,lng:55.36,info:'UK — UAE (Logistics hub)',co:'UK'},
+{name:'Duqm',lat:19.66,lng:57.71,info:'UK — Oman (Naval logistics)',co:'UK'},
+{name:'Bahrain (UK NSF)',lat:26.22,lng:50.61,info:'UK — Bahrain (Naval support)',co:'UK'},
+{name:'Akrotiri',lat:34.59,lng:32.99,info:'UK — Cyprus (Sovereign base, air ops)',co:'UK'},
+{name:'Dhekelia',lat:34.98,lng:33.72,info:'UK — Cyprus (Sovereign base, SIGINT)',co:'UK'},
+// UK — Europe & Atlantic
+{name:'HMNB Portsmouth',lat:50.80,lng:-1.11,info:'UK — England (Home Fleet)',co:'UK'},
+{name:'HMNB Devonport',lat:50.38,lng:-4.18,info:'UK — England (Submarine base)',co:'UK'},
+{name:'HMNB Clyde',lat:56.07,lng:-4.82,info:'UK — Scotland (Trident submarine base)',co:'UK'},
+{name:'RAF Brize Norton',lat:51.75,lng:-1.58,info:'UK — England (Transport hub)',co:'UK'},
+{name:'RAF Coningsby',lat:53.09,lng:-0.17,info:'UK — England (Typhoon QRA)',co:'UK'},
+{name:'RAF Lossiemouth',lat:57.71,lng:-3.34,info:'UK — Scotland (Typhoon & P-8)',co:'UK'},
+{name:'RAF Waddington',lat:53.17,lng:-0.52,info:'UK — England (ISR & Reaper HQ)',co:'UK'},
+{name:'Gibraltar',lat:36.14,lng:-5.35,info:'UK — Gibraltar (Naval base, Med access)',co:'UK'},
+{name:'Mount Pleasant',lat:-51.82,lng:-59.00,info:'UK — Falkland Islands (Typhoon det)',co:'UK'},
+{name:'Ascension Island',lat:-7.97,lng:-14.39,info:'UK — South Atlantic (Air staging)',co:'UK'},
+// UK — Asia-Pacific
+{name:'Diego Garcia (UK)',lat:-7.31,lng:72.41,info:'UK — Indian Ocean (Joint UK/US)',co:'UK'},
+{name:'Sembawang',lat:1.46,lng:103.82,info:'UK — Singapore (Naval logistics)',co:'UK'},
+{name:'BFC Brunei',lat:4.93,lng:114.95,info:'UK — Brunei (Gurkha garrison)',co:'UK'},
+// France — Africa
+{name:'Djibouti (FFDj)',lat:11.60,lng:43.16,info:'FR — Djibouti (1,500 troops, air & naval)',co:'FR'},
+{name:'N\'Djamena',lat:12.13,lng:15.03,info:'FR — Chad (Op Barkhane successor)',co:'FR'},
+{name:'Abidjan (FFCI)',lat:5.26,lng:-3.93,info:'FR — Côte d\\'Ivoire (950 troops)',co:'FR'},
+{name:'Libreville',lat:0.45,lng:9.41,info:'FR — Gabon (EFG, 350 troops)',co:'FR'},
+{name:'Dakar',lat:14.74,lng:-17.49,info:'FR — Senegal (EFS, 350 troops)',co:'FR'},
+{name:'Port-Bouët (Abidjan)',lat:5.25,lng:-3.93,info:'FR — Côte d\\'Ivoire (Air detachment)',co:'FR'},
+{name:'Niamey (former)',lat:13.51,lng:2.11,info:'FR — Niger (Withdrew 2023, formerly 1,500)',co:'FR'},
+{name:'Bamako (former)',lat:12.63,lng:-8.03,info:'FR — Mali (Withdrew 2022, formerly Barkhane)',co:'FR'},
+{name:'Ouagadougou (former)',lat:12.37,lng:-1.52,info:'FR — Burkina Faso (Withdrew 2023)',co:'FR'},
+{name:'La Réunion',lat:-21.34,lng:55.48,info:'FR — Réunion (FAZSOI, Indian Ocean garrison)',co:'FR'},
+{name:'Mayotte',lat:-12.78,lng:45.23,info:'FR — Mayotte (DLEM, Foreign Legion)',co:'FR'},
+// France — Europe & Med
+{name:'Toulon',lat:43.12,lng:5.93,info:'FR — France (Mediterranean Fleet HQ)',co:'FR'},
+{name:'Istres',lat:43.52,lng:4.93,info:'FR — France (Nuclear strike, strategic tankers)',co:'FR'},
+{name:'Saint-Dizier',lat:48.63,lng:4.90,info:'FR — France (Rafale nuclear squadron)',co:'FR'},
+{name:'Corsica (Solenzara)',lat:41.93,lng:9.40,info:'FR — Corsica (Air base, Med ops)',co:'FR'},
+// France — Middle East
+{name:'Al Dhafra (FR)',lat:24.24,lng:54.54,info:'FR — UAE (Rafale detachment)',co:'FR'},
+{name:'Abu Dhabi (Naval)',lat:24.45,lng:54.40,info:'FR — UAE (Naval base)',co:'FR'},
+// France — Americas & Pacific
+{name:'Kourou',lat:5.17,lng:-52.68,info:'FR — French Guiana (Space center & garrison)',co:'FR'},
+{name:'Fort-de-France',lat:14.60,lng:-61.07,info:'FR — Martinique (Caribbean garrison)',co:'FR'},
+{name:'Nouméa',lat:-22.27,lng:166.44,info:'FR — New Caledonia (Pacific garrison)',co:'FR'},
+{name:'Papeete',lat:-17.53,lng:-149.57,info:'FR — French Polynesia (Pacific forces)',co:'FR'}
 ];
 const bsgShippingRoutes=[
 {name:'Suez Canal',points:[[31.27,32.31],[30.45,32.35],[29.95,32.56]],info:'Suez Canal — ~12% of global trade'},
@@ -743,14 +822,19 @@ const bsgDisputedTerritories=[
 ];
 function loadBsgMap(){active('bsgMapBtn');renderOps(`
 <button class='command-btn' onclick='loadBsgMap()'>REFRESH</button><br><br>
-<button class='command-btn' onclick='bsgMapInstance&&bsgMapInstance.setView([5,20],3)'>AFRICA</button><br><br>
+<button class='command-btn' onclick='bsgMapInstance&&bsgMapInstance.setView([5,20],4)'>AFRICA</button><br><br>
 <button class='command-btn' onclick='bsgMapInstance&&bsgMapInstance.setView([20,0],2)'>GLOBAL</button><br><br>
-<button class='command-btn' onclick='bsgMapInstance&&bsgMapInstance.setView([10,45],4)'>EAST AFRICA</button><br><br>
-<button class='command-btn' onclick='bsgMapInstance&&bsgMapInstance.setView([12,5],4)'>WEST AFRICA</button><br><br>
-<button class='command-btn' onclick='bsgMapInstance&&bsgMapInstance.setView([33,44],5)'>MIDDLE EAST</button>
-`,`<div id='bsgMapContainer' style='height:100%;width:100%;position:relative'><div id='bsgLayerPanel' style='position:absolute;top:10px;right:10px;z-index:1000;background:rgba(6,16,24,0.92);border:1px solid #00ffee44;border-radius:6px;padding:10px 14px;font-family:Share Tech Mono,monospace;min-width:200px'><div style='color:#00ffee;font-size:11px;letter-spacing:2px;margin-bottom:8px;text-shadow:0 0 6px #00ffee66'>LAYERS</div><label style='display:flex;align-items:center;gap:8px;cursor:pointer;color:#d7ffff;font-size:12px;padding:4px 0'><input type='checkbox' checked onchange='toggleBsgLayer("conflict")' style='accent-color:#ff4444'><span style='color:#ff4444'>⬤</span> Conflict Zones</label><label style='display:flex;align-items:center;gap:8px;cursor:pointer;color:#d7ffff;font-size:12px;padding:4px 0'><input type='checkbox' onchange='toggleBsgLayer("bases")' style='accent-color:#4488ff'><span style='color:#4488ff'>⬤</span> Military Bases</label><label style='display:flex;align-items:center;gap:8px;cursor:pointer;color:#d7ffff;font-size:12px;padding:4px 0'><input type='checkbox' onchange='toggleBsgLayer("shipping")' style='accent-color:#44ddff'><span style='color:#44ddff'>⬤</span> Shipping Routes</label><label style='display:flex;align-items:center;gap:8px;cursor:pointer;color:#d7ffff;font-size:12px;padding:4px 0'><input type='checkbox' onchange='toggleBsgLayer("oil")' style='accent-color:#ffaa00'><span style='color:#ffaa00'>⬤</span> Oil & Gas</label><label style='display:flex;align-items:center;gap:8px;cursor:pointer;color:#d7ffff;font-size:12px;padding:4px 0'><input type='checkbox' onchange='toggleBsgLayer("disputed")' style='accent-color:#cc44ff'><span style='color:#cc44ff'>⬤</span> Disputed Territories</label></div></div>`);setTimeout(()=>{if(bsgMapInstance){bsgMapInstance.remove();bsgMapInstance=null}bsgMapInstance=L.map('bsgMapContainer',{zoomControl:true,attributionControl:false}).setView([5,20],3);L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:19}).addTo(bsgMapInstance);L.control.attribution({prefix:false,position:'bottomright'}).addAttribution('BSG OSINT').addTo(bsgMapInstance);initBsgLayers()},100)}
-function initBsgLayers(){bsgConflictLayer=L.layerGroup();bsgConflictZones.forEach(z=>{L.circle([z.lat,z.lng],{radius:z.radius,color:z.color,fillColor:z.color,fillOpacity:0.15,weight:1.5,opacity:0.7}).bindPopup(`<div style='font-family:Share Tech Mono,monospace;font-size:12px'><strong style='color:#ff4444'>${z.name}</strong><br>${z.info}</div>`).addTo(bsgConflictLayer)});bsgConflictLayer.addTo(bsgMapInstance);bsgConflictVisible=true;bsgBasesLayer=L.layerGroup();bsgMilitaryBases.forEach(b=>{L.circleMarker([b.lat,b.lng],{radius:6,color:'#4488ff',fillColor:'#4488ff',fillOpacity:0.8,weight:1.5}).bindPopup(`<div style='font-family:Share Tech Mono,monospace;font-size:12px'><strong style='color:#4488ff'>${b.name}</strong><br>${b.info}</div>`).addTo(bsgBasesLayer)});bsgBasesVisible=false;bsgShippingLayer=L.layerGroup();bsgShippingRoutes.forEach(r=>{L.polyline(r.points,{color:'#44ddff',weight:2.5,opacity:0.6,dashArray:'8,6'}).bindPopup(`<div style='font-family:Share Tech Mono,monospace;font-size:12px'><strong style='color:#44ddff'>${r.name}</strong><br>${r.info}</div>`).addTo(bsgShippingLayer)});bsgShippingVisible=false;bsgOilLayer=L.layerGroup();bsgOilGas.forEach(o=>{L.circleMarker([o.lat,o.lng],{radius:5,color:'#ffaa00',fillColor:'#ffaa00',fillOpacity:0.8,weight:1.5}).bindPopup(`<div style='font-family:Share Tech Mono,monospace;font-size:12px'><strong style='color:#ffaa00'>${o.name}</strong><br>${o.info}</div>`).addTo(bsgOilLayer)});bsgOilVisible=false;bsgDisputedLayer=L.layerGroup();bsgDisputedTerritories.forEach(d=>{L.circle([d.lat,d.lng],{radius:d.radius,color:'#cc44ff',fillColor:'#cc44ff',fillOpacity:0.1,weight:1.5,opacity:0.5,dashArray:'6,4'}).bindPopup(`<div style='font-family:Share Tech Mono,monospace;font-size:12px'><strong style='color:#cc44ff'>${d.name}</strong><br>${d.info}</div>`).addTo(bsgDisputedLayer)});bsgDisputedVisible=false}
-function toggleBsgLayer(id){const m={conflict:{layer:'bsgConflictLayer',vis:'bsgConflictVisible'},bases:{layer:'bsgBasesLayer',vis:'bsgBasesVisible'},shipping:{layer:'bsgShippingLayer',vis:'bsgShippingVisible'},oil:{layer:'bsgOilLayer',vis:'bsgOilVisible'},disputed:{layer:'bsgDisputedLayer',vis:'bsgDisputedVisible'}};const cfg=m[id];if(!cfg)return;const lyr=window[cfg.layer];if(window[cfg.vis]){bsgMapInstance.removeLayer(lyr);window[cfg.vis]=false}else{lyr.addTo(bsgMapInstance);window[cfg.vis]=true}}
+<button class='command-btn' onclick='bsgMapInstance&&bsgMapInstance.setView([2,38],5)'>EAST AFRICA</button><br><br>
+<button class='command-btn' onclick='bsgMapInstance&&bsgMapInstance.setView([10,-2],5)'>WEST AFRICA</button><br><br>
+<button class='command-btn' onclick='bsgMapInstance&&bsgMapInstance.setView([-5,28],5)'>CENTRAL AFRICA</button><br><br>
+<button class='command-btn' onclick='bsgMapInstance&&bsgMapInstance.setView([32,10],5)'>NORTH AFRICA</button><br><br>
+<button class='command-btn' onclick='bsgMapInstance&&bsgMapInstance.setView([-25,28],5)'>SOUTHERN AFRICA</button><br><br>
+<button class='command-btn' onclick='bsgMapInstance&&bsgMapInstance.setView([15,2],5)'>SAHEL</button><br><br>
+<button class='command-btn' onclick='bsgMapInstance&&bsgMapInstance.setView([12,44],5)'>HORN OF AFRICA</button><br><br>
+<button class='command-btn' onclick='bsgMapInstance&&bsgMapInstance.setView([30,44],5)'>MIDDLE EAST</button>
+`,`<div id='bsgMapContainer' style='height:100%;width:100%;position:relative'><div id='bsgLayerPanel' style='position:absolute;top:10px;right:10px;z-index:1000;background:rgba(6,16,24,0.92);border:1px solid #00ffee44;border-radius:6px;padding:10px 14px;font-family:Share Tech Mono,monospace;min-width:200px'><div style='color:#00ffee;font-size:11px;letter-spacing:2px;margin-bottom:8px;text-shadow:0 0 6px #00ffee66'>LAYERS</div><label style='display:flex;align-items:center;gap:8px;cursor:pointer;color:#d7ffff;font-size:12px;padding:4px 0'><input type='checkbox' checked onchange='toggleBsgLayer("conflict")' style='accent-color:#ff4444'><span style='color:#ff4444'>⬤</span> Conflict Zones</label><label style='display:flex;align-items:center;gap:8px;cursor:pointer;color:#d7ffff;font-size:12px;padding:4px 0'><input type='checkbox' onchange='toggleBsgLayer("bases")' style='accent-color:#4488ff'><span style='color:#4488ff'>⬤</span> Military Bases</label><div id='baseLegend' style='display:none;margin-left:24px;font-size:10px;padding:2px 0 4px'><span style='color:#4488ff'>● US</span> <span style='color:#44cc44'>● UK</span> <span style='color:#ffffff'>● FR</span></div><label style='display:flex;align-items:center;gap:8px;cursor:pointer;color:#d7ffff;font-size:12px;padding:4px 0'><input type='checkbox' onchange='toggleBsgLayer("shipping")' style='accent-color:#44ddff'><span style='color:#44ddff'>⬤</span> Shipping Routes</label><label style='display:flex;align-items:center;gap:8px;cursor:pointer;color:#d7ffff;font-size:12px;padding:4px 0'><input type='checkbox' onchange='toggleBsgLayer("oil")' style='accent-color:#ffaa00'><span style='color:#ffaa00'>⬤</span> Oil & Gas</label><label style='display:flex;align-items:center;gap:8px;cursor:pointer;color:#d7ffff;font-size:12px;padding:4px 0'><input type='checkbox' onchange='toggleBsgLayer("disputed")' style='accent-color:#cc44ff'><span style='color:#cc44ff'>⬤</span> Disputed Territories</label></div></div>`);setTimeout(()=>{if(bsgMapInstance){bsgMapInstance.remove();bsgMapInstance=null}bsgMapInstance=L.map('bsgMapContainer',{zoomControl:true,attributionControl:false}).setView([5,20],3);L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:19}).addTo(bsgMapInstance);L.control.attribution({prefix:false,position:'bottomright'}).addAttribution('BSG OSINT').addTo(bsgMapInstance);initBsgLayers()},100)}
+function initBsgLayers(){bsgConflictLayer=L.layerGroup();bsgConflictZones.forEach(z=>{L.circle([z.lat,z.lng],{radius:z.radius,color:z.color,fillColor:z.color,fillOpacity:0.15,weight:1.5,opacity:0.7}).bindPopup(`<div style='font-family:Share Tech Mono,monospace;font-size:12px'><strong style='color:#ff4444'>${z.name}</strong><br>${z.info}</div>`).addTo(bsgConflictLayer)});bsgConflictLayer.addTo(bsgMapInstance);bsgConflictVisible=true;const baseColors={US:'#4488ff',UK:'#44cc44',FR:'#ffffff'};bsgBasesLayer=L.layerGroup();bsgMilitaryBases.forEach(b=>{const c=baseColors[b.co]||'#4488ff';L.circleMarker([b.lat,b.lng],{radius:6,color:c,fillColor:c,fillOpacity:0.8,weight:1.5}).bindPopup(`<div style='font-family:Share Tech Mono,monospace;font-size:12px'><strong style='color:${c}'>${b.name}</strong><br>${b.info}</div>`).addTo(bsgBasesLayer)});bsgBasesVisible=false;bsgShippingLayer=L.layerGroup();bsgShippingRoutes.forEach(r=>{L.polyline(r.points,{color:'#44ddff',weight:2.5,opacity:0.6,dashArray:'8,6'}).bindPopup(`<div style='font-family:Share Tech Mono,monospace;font-size:12px'><strong style='color:#44ddff'>${r.name}</strong><br>${r.info}</div>`).addTo(bsgShippingLayer)});bsgShippingVisible=false;bsgOilLayer=L.layerGroup();bsgOilGas.forEach(o=>{L.circleMarker([o.lat,o.lng],{radius:5,color:'#ffaa00',fillColor:'#ffaa00',fillOpacity:0.8,weight:1.5}).bindPopup(`<div style='font-family:Share Tech Mono,monospace;font-size:12px'><strong style='color:#ffaa00'>${o.name}</strong><br>${o.info}</div>`).addTo(bsgOilLayer)});bsgOilVisible=false;bsgDisputedLayer=L.layerGroup();bsgDisputedTerritories.forEach(d=>{L.circle([d.lat,d.lng],{radius:d.radius,color:'#cc44ff',fillColor:'#cc44ff',fillOpacity:0.1,weight:1.5,opacity:0.5,dashArray:'6,4'}).bindPopup(`<div style='font-family:Share Tech Mono,monospace;font-size:12px'><strong style='color:#cc44ff'>${d.name}</strong><br>${d.info}</div>`).addTo(bsgDisputedLayer)});bsgDisputedVisible=false}
+function toggleBsgLayer(id){const m={conflict:{layer:'bsgConflictLayer',vis:'bsgConflictVisible'},bases:{layer:'bsgBasesLayer',vis:'bsgBasesVisible'},shipping:{layer:'bsgShippingLayer',vis:'bsgShippingVisible'},oil:{layer:'bsgOilLayer',vis:'bsgOilVisible'},disputed:{layer:'bsgDisputedLayer',vis:'bsgDisputedVisible'}};const cfg=m[id];if(!cfg)return;const lyr=window[cfg.layer];if(window[cfg.vis]){bsgMapInstance.removeLayer(lyr);window[cfg.vis]=false}else{lyr.addTo(bsgMapInstance);window[cfg.vis]=true}if(id==='bases'){const leg=document.getElementById('baseLegend');if(leg)leg.style.display=window[cfg.vis]?'block':'none'}}
 function popoutDiscord(){window.open('https://e.widgetbot.io/channels/1500947025196220536','BSG_Discord','width=900,height=700,menubar=no,toolbar=no,location=no,status=no')}
 function loadDiscord(){active('discordBtn');renderOps(`<button class='command-btn' onclick='loadDiscord()'>REFRESH</button><br><br><button class='command-btn' onclick='popoutDiscord()'>⧉ POP OUT</button><br><br><button class='command-btn' onclick='loadDiscordSplit()'>⊞ SPLIT VIEW</button>`,`<div style='height:100%;display:flex;flex-direction:column;align-items:center;background:#061018;padding:20px'><div style='width:100%;max-width:900px;flex:1;display:flex;flex-direction:column;border:1px solid #00ffee44;border-radius:10px;box-shadow:0 0 24px #00ffee22,inset 0 0 12px #00ffee08;overflow:hidden'><div style='background:linear-gradient(90deg,#081821,#0c2a35);padding:10px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #00ffee33'><div style='display:flex;align-items:center;gap:10px'><span style="font-size:20px">💬</span><span style='color:#00ffee;font-family:Share Tech Mono,monospace;font-size:14px;letter-spacing:3px;text-shadow:0 0 8px #00ffee66'>BSG OSINT — DISCORD</span></div><button onclick='popoutDiscord()' style='background:transparent;border:1px solid #00ffee44;color:#00ffee;font-family:Share Tech Mono,monospace;font-size:12px;letter-spacing:2px;padding:4px 12px;cursor:pointer;border-radius:4px;transition:all 0.2s;text-shadow:0 0 6px #00ffee88' onmouseover="this.style.background='#0c2430';this.style.boxShadow='0 0 12px #00ffee44'" onmouseout="this.style.background='transparent';this.style.boxShadow='none'">⧉ POP OUT</button></div><iframe src="https://e.widgetbot.io/channels/1500947025196220536" allow="clipboard-write; fullscreen" style="flex:1;width:100%;border:none"></iframe></div></div>`)}
 const splitChannels=[...globalFeeds,...africanChannels,...americanChannels,...asianChannels,...chineseChannels,...europeanChannels,...russianChannels].filter((ch,i,arr)=>arr.findIndex(c=>c[1]===ch[1])===i);
