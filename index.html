@@ -126,9 +126,9 @@ a{color:#00ffee;text-decoration:none}
 </div>
 <div class='header-center' style='position:relative'>
 <div id='navBtns'>
+<button id='bsgMapBtn' class='command-btn'>BSG MAP</button>
 <button id='headlinesBtn' class='command-btn'>HEADLINES</button>
 <button id='newsBtn' class='command-btn'>LIVE NEWS</button>
-<button id='bsgMapBtn' class='command-btn'>BSG MAP</button>
 <button id='mapBtn' class='command-btn'>CONFLICT MAP</button>
 <button id='marineBtn' class='command-btn'>MARINE WATCH</button>
 <button id='flightBtn' class='command-btn'>FLIGHT WATCH</button>
@@ -679,7 +679,7 @@ async function exchUpdateTable(){try{const rates=await exchFetchRates('NGN');con
 async function exchConvert(){const amount=parseFloat(document.getElementById('exchAmount').value);const from=document.getElementById('exchFrom').value;const to=document.getElementById('exchTo').value;const res=document.getElementById('exchResult');const err=document.getElementById('exchError');if(isNaN(amount)||amount<=0){err.textContent='Please enter a valid amount.';res.textContent='';return}err.textContent='';res.textContent='';try{const rates=await exchFetchRates(from);const rate=rates[to];if(rate){res.textContent=amount+' '+from+' = '+(amount*rate).toFixed(2)+' '+to}else{res.textContent='Conversion not available.'}}catch(e){res.textContent='';err.textContent='Failed to fetch rates.'}}
 
 newsBtn.onclick=loadNews;mapBtn.onclick=loadConflict;marineBtn.onclick=loadMarine;flightBtn.onclick=loadFlight;marketsBtn.onclick=loadMarkets;headlinesBtn.onclick=loadHeadlines;radioBtn.onclick=loadRadio;aiLaunchpadBtn.onclick=loadAILaunchpad;bsgMapBtn.onclick=loadBsgMap;discordBtn.onclick=loadDiscord;
-let bsgMapInstance=null;let bsgConflictLayer=null;let bsgConflictVisible=true;
+let bsgMapInstance=null;let bsgConflictLayer=null;let bsgConflictVisible=true;let bsgBasesLayer=null;let bsgBasesVisible=false;let bsgShippingLayer=null;let bsgShippingVisible=false;let bsgOilLayer=null;let bsgOilVisible=false;let bsgDisputedLayer=null;let bsgDisputedVisible=false;
 const bsgConflictZones=[
 {name:'Ukraine',lat:48.5,lng:36.0,radius:200000,color:'#ff4444',info:'Russia-Ukraine War — Active front lines'},
 {name:'Sudan',lat:14.5,lng:30.5,radius:180000,color:'#ff6600',info:'Sudanese Civil War — RSF vs SAF'},
@@ -694,6 +694,53 @@ const bsgConflictZones=[
 {name:'Haiti',lat:18.9,lng:-72.3,radius:40000,color:'#ff8800',info:'Haiti — Gang violence crisis'},
 {name:'Mozambique',lat:-14.0,lng:40.0,radius:80000,color:'#ff9900',info:'Cabo Delgado — Islamist insurgency'}
 ];
+const bsgMilitaryBases=[
+{name:'Camp Lemonnier',lat:11.55,lng:43.15,info:'US — Djibouti (AFRICOM hub)'},
+{name:'Tartus Naval Base',lat:34.89,lng:35.89,info:'Russia — Syria (Mediterranean port)'},
+{name:'Hmeimim Air Base',lat:35.41,lng:35.95,info:'Russia — Syria (Air operations)'},
+{name:'Diego Garcia',lat:-7.32,lng:72.42,info:'US/UK — Indian Ocean (Strategic bomber base)'},
+{name:'Al Udeid',lat:25.12,lng:51.31,info:'US — Qatar (CENTCOM air ops)'},
+{name:'Ramstein',lat:49.44,lng:7.60,info:'US — Germany (EUCOM/AFRICOM HQ)'},
+{name:'Incirlik',lat:37.0,lng:35.43,info:'US/NATO — Turkey (Air base)'},
+{name:'Djibouti (China)',lat:11.59,lng:43.14,info:'China — Djibouti (PLA Support Base)'},
+{name:'Sevastopol',lat:44.62,lng:33.53,info:'Russia — Crimea (Black Sea Fleet)'},
+{name:'Agadez',lat:16.97,lng:7.99,info:'US — Niger (Drone base, status uncertain)'},
+{name:'Libreville',lat:0.45,lng:9.41,info:'France — Gabon (Forward base)'},
+{name:'Djibouti (France)',lat:11.60,lng:43.16,info:'France — Djibouti (FFDj)'},
+{name:'Berbera',lat:10.44,lng:45.04,info:'UAE — Somaliland (Naval/air facility)'},
+{name:'Assab',lat:13.07,lng:42.74,info:'UAE — Eritrea (Military port)'}
+];
+const bsgShippingRoutes=[
+{name:'Suez Canal',points:[[31.27,32.31],[30.45,32.35],[29.95,32.56]],info:'Suez Canal — ~12% of global trade'},
+{name:'Bab el-Mandeb',points:[[12.6,43.3],[12.4,43.5],[12.0,43.8]],info:'Bab el-Mandeb Strait — Red Sea chokepoint'},
+{name:'Strait of Hormuz',points:[[26.6,56.2],[26.2,56.5],[25.8,56.8]],info:'Strait of Hormuz — ~21% of global oil'},
+{name:'Strait of Malacca',points:[[4.2,100.0],[2.5,102.0],[1.3,103.8]],info:'Strait of Malacca — Key Asia-Europe route'},
+{name:'Cape of Good Hope',points:[[-34.4,18.5],[-35.0,20.0],[-34.8,22.0]],info:'Cape of Good Hope — Alternative to Suez'},
+{name:'Gulf of Guinea',points:[[4.0,2.0],[3.5,5.0],[4.0,8.0]],info:'Gulf of Guinea — Piracy hotspot'},
+{name:'Turkish Straits',points:[[41.2,29.0],[41.0,29.1],[40.7,29.5]],info:'Bosphorus/Dardanelles — Black Sea access'}
+];
+const bsgOilGas=[
+{name:'Ghawar Field',lat:25.4,lng:49.5,info:'Saudi Arabia — World\'s largest oil field'},
+{name:'Niger Delta',lat:5.0,lng:6.5,info:'Nigeria — Major oil production region'},
+{name:'Hassi Messaoud',lat:31.7,lng:6.1,info:'Algeria — Largest oil field in Africa'},
+{name:'Kirkuk',lat:35.5,lng:44.4,info:'Iraq — Major northern oil field'},
+{name:'Kashagan',lat:46.3,lng:52.0,info:'Kazakhstan — Caspian mega-field'},
+{name:'Mossel Bay',lat:-34.2,lng:22.1,info:'South Africa — PetroSA GTL refinery'},
+{name:'Jubilee Field',lat:4.5,lng:-3.1,info:'Ghana — Offshore deep-water oil'},
+{name:'Brega',lat:30.4,lng:19.6,info:'Libya — Key oil terminal'},
+{name:'Ruwais',lat:24.1,lng:52.7,info:'UAE — ADNOC mega-refinery'},
+{name:'Tema LNG',lat:5.6,lng:0.0,info:'Ghana — LNG import terminal'}
+];
+const bsgDisputedTerritories=[
+{name:'Western Sahara',lat:24.2,lng:-13.0,radius:150000,info:'Western Sahara — Morocco vs Polisario (SADR)'},
+{name:'Crimea',lat:45.3,lng:34.0,radius:80000,info:'Crimea — Annexed by Russia (2014), claimed by Ukraine'},
+{name:'Kashmir',lat:34.5,lng:75.5,radius:100000,info:'Kashmir — Disputed between India, Pakistan & China'},
+{name:'Golan Heights',lat:33.0,lng:35.8,radius:30000,info:'Golan Heights — Occupied by Israel, claimed by Syria'},
+{name:'Somaliland',lat:9.5,lng:46.0,radius:100000,info:'Somaliland — Self-declared republic, unrecognized'},
+{name:'Abyei',lat:9.6,lng:28.4,radius:40000,info:'Abyei — Disputed between Sudan & South Sudan'},
+{name:'Taiwan Strait',lat:24.0,lng:119.5,radius:100000,info:'Taiwan — PRC claims sovereignty'},
+{name:'South China Sea',lat:12.0,lng:114.0,radius:250000,info:'South China Sea — Multiple overlapping claims'}
+];
 function loadBsgMap(){active('bsgMapBtn');renderOps(`
 <button class='command-btn' onclick='loadBsgMap()'>REFRESH</button><br><br>
 <button class='command-btn' onclick='bsgMapInstance&&bsgMapInstance.setView([5,20],3)'>AFRICA</button><br><br>
@@ -701,9 +748,9 @@ function loadBsgMap(){active('bsgMapBtn');renderOps(`
 <button class='command-btn' onclick='bsgMapInstance&&bsgMapInstance.setView([10,45],4)'>EAST AFRICA</button><br><br>
 <button class='command-btn' onclick='bsgMapInstance&&bsgMapInstance.setView([12,5],4)'>WEST AFRICA</button><br><br>
 <button class='command-btn' onclick='bsgMapInstance&&bsgMapInstance.setView([33,44],5)'>MIDDLE EAST</button>
-`,`<div id='bsgMapContainer' style='height:100%;width:100%;position:relative'><div id='bsgLayerPanel' style='position:absolute;top:10px;right:10px;z-index:1000;background:rgba(6,16,24,0.92);border:1px solid #00ffee44;border-radius:6px;padding:10px 14px;font-family:Share Tech Mono,monospace;min-width:180px'><div style='color:#00ffee;font-size:11px;letter-spacing:2px;margin-bottom:8px;text-shadow:0 0 6px #00ffee66'>LAYERS</div><label style='display:flex;align-items:center;gap:8px;cursor:pointer;color:#d7ffff;font-size:12px;padding:4px 0'><input type='checkbox' id='bsgLayerConflict' checked onchange='toggleBsgConflict()' style='accent-color:#ff4444'><span style='color:#ff4444'>⬤</span> Conflict Zones</label></div></div>`);setTimeout(()=>{if(bsgMapInstance){bsgMapInstance.remove();bsgMapInstance=null}bsgMapInstance=L.map('bsgMapContainer',{zoomControl:true,attributionControl:false}).setView([5,20],3);L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:19}).addTo(bsgMapInstance);L.control.attribution({prefix:false,position:'bottomright'}).addAttribution('BSG OSINT').addTo(bsgMapInstance);addBsgConflictLayer()},100)}
-function addBsgConflictLayer(){bsgConflictLayer=L.layerGroup();bsgConflictZones.forEach(z=>{L.circle([z.lat,z.lng],{radius:z.radius,color:z.color,fillColor:z.color,fillOpacity:0.15,weight:1.5,opacity:0.7}).bindPopup(`<div style='font-family:Share Tech Mono,monospace;font-size:12px'><strong style='color:#ff4444'>${z.name}</strong><br>${z.info}</div>`).addTo(bsgConflictLayer)});bsgConflictLayer.addTo(bsgMapInstance);bsgConflictVisible=true}
-function toggleBsgConflict(){if(bsgConflictVisible){bsgMapInstance.removeLayer(bsgConflictLayer);bsgConflictVisible=false}else{bsgConflictLayer.addTo(bsgMapInstance);bsgConflictVisible=true}}
+`,`<div id='bsgMapContainer' style='height:100%;width:100%;position:relative'><div id='bsgLayerPanel' style='position:absolute;top:10px;right:10px;z-index:1000;background:rgba(6,16,24,0.92);border:1px solid #00ffee44;border-radius:6px;padding:10px 14px;font-family:Share Tech Mono,monospace;min-width:200px'><div style='color:#00ffee;font-size:11px;letter-spacing:2px;margin-bottom:8px;text-shadow:0 0 6px #00ffee66'>LAYERS</div><label style='display:flex;align-items:center;gap:8px;cursor:pointer;color:#d7ffff;font-size:12px;padding:4px 0'><input type='checkbox' checked onchange='toggleBsgLayer("conflict")' style='accent-color:#ff4444'><span style='color:#ff4444'>⬤</span> Conflict Zones</label><label style='display:flex;align-items:center;gap:8px;cursor:pointer;color:#d7ffff;font-size:12px;padding:4px 0'><input type='checkbox' onchange='toggleBsgLayer("bases")' style='accent-color:#4488ff'><span style='color:#4488ff'>⬤</span> Military Bases</label><label style='display:flex;align-items:center;gap:8px;cursor:pointer;color:#d7ffff;font-size:12px;padding:4px 0'><input type='checkbox' onchange='toggleBsgLayer("shipping")' style='accent-color:#44ddff'><span style='color:#44ddff'>⬤</span> Shipping Routes</label><label style='display:flex;align-items:center;gap:8px;cursor:pointer;color:#d7ffff;font-size:12px;padding:4px 0'><input type='checkbox' onchange='toggleBsgLayer("oil")' style='accent-color:#ffaa00'><span style='color:#ffaa00'>⬤</span> Oil & Gas</label><label style='display:flex;align-items:center;gap:8px;cursor:pointer;color:#d7ffff;font-size:12px;padding:4px 0'><input type='checkbox' onchange='toggleBsgLayer("disputed")' style='accent-color:#cc44ff'><span style='color:#cc44ff'>⬤</span> Disputed Territories</label></div></div>`);setTimeout(()=>{if(bsgMapInstance){bsgMapInstance.remove();bsgMapInstance=null}bsgMapInstance=L.map('bsgMapContainer',{zoomControl:true,attributionControl:false}).setView([5,20],3);L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:19}).addTo(bsgMapInstance);L.control.attribution({prefix:false,position:'bottomright'}).addAttribution('BSG OSINT').addTo(bsgMapInstance);initBsgLayers()},100)}
+function initBsgLayers(){bsgConflictLayer=L.layerGroup();bsgConflictZones.forEach(z=>{L.circle([z.lat,z.lng],{radius:z.radius,color:z.color,fillColor:z.color,fillOpacity:0.15,weight:1.5,opacity:0.7}).bindPopup(`<div style='font-family:Share Tech Mono,monospace;font-size:12px'><strong style='color:#ff4444'>${z.name}</strong><br>${z.info}</div>`).addTo(bsgConflictLayer)});bsgConflictLayer.addTo(bsgMapInstance);bsgConflictVisible=true;bsgBasesLayer=L.layerGroup();bsgMilitaryBases.forEach(b=>{L.circleMarker([b.lat,b.lng],{radius:6,color:'#4488ff',fillColor:'#4488ff',fillOpacity:0.8,weight:1.5}).bindPopup(`<div style='font-family:Share Tech Mono,monospace;font-size:12px'><strong style='color:#4488ff'>${b.name}</strong><br>${b.info}</div>`).addTo(bsgBasesLayer)});bsgBasesVisible=false;bsgShippingLayer=L.layerGroup();bsgShippingRoutes.forEach(r=>{L.polyline(r.points,{color:'#44ddff',weight:2.5,opacity:0.6,dashArray:'8,6'}).bindPopup(`<div style='font-family:Share Tech Mono,monospace;font-size:12px'><strong style='color:#44ddff'>${r.name}</strong><br>${r.info}</div>`).addTo(bsgShippingLayer)});bsgShippingVisible=false;bsgOilLayer=L.layerGroup();bsgOilGas.forEach(o=>{L.circleMarker([o.lat,o.lng],{radius:5,color:'#ffaa00',fillColor:'#ffaa00',fillOpacity:0.8,weight:1.5}).bindPopup(`<div style='font-family:Share Tech Mono,monospace;font-size:12px'><strong style='color:#ffaa00'>${o.name}</strong><br>${o.info}</div>`).addTo(bsgOilLayer)});bsgOilVisible=false;bsgDisputedLayer=L.layerGroup();bsgDisputedTerritories.forEach(d=>{L.circle([d.lat,d.lng],{radius:d.radius,color:'#cc44ff',fillColor:'#cc44ff',fillOpacity:0.1,weight:1.5,opacity:0.5,dashArray:'6,4'}).bindPopup(`<div style='font-family:Share Tech Mono,monospace;font-size:12px'><strong style='color:#cc44ff'>${d.name}</strong><br>${d.info}</div>`).addTo(bsgDisputedLayer)});bsgDisputedVisible=false}
+function toggleBsgLayer(id){const m={conflict:{layer:'bsgConflictLayer',vis:'bsgConflictVisible'},bases:{layer:'bsgBasesLayer',vis:'bsgBasesVisible'},shipping:{layer:'bsgShippingLayer',vis:'bsgShippingVisible'},oil:{layer:'bsgOilLayer',vis:'bsgOilVisible'},disputed:{layer:'bsgDisputedLayer',vis:'bsgDisputedVisible'}};const cfg=m[id];if(!cfg)return;const lyr=window[cfg.layer];if(window[cfg.vis]){bsgMapInstance.removeLayer(lyr);window[cfg.vis]=false}else{lyr.addTo(bsgMapInstance);window[cfg.vis]=true}}
 function popoutDiscord(){window.open('https://e.widgetbot.io/channels/1500947025196220536','BSG_Discord','width=900,height=700,menubar=no,toolbar=no,location=no,status=no')}
 function loadDiscord(){active('discordBtn');renderOps(`<button class='command-btn' onclick='loadDiscord()'>REFRESH</button><br><br><button class='command-btn' onclick='popoutDiscord()'>⧉ POP OUT</button><br><br><button class='command-btn' onclick='loadDiscordSplit()'>⊞ SPLIT VIEW</button>`,`<div style='height:100%;display:flex;flex-direction:column;align-items:center;background:#061018;padding:20px'><div style='width:100%;max-width:900px;flex:1;display:flex;flex-direction:column;border:1px solid #00ffee44;border-radius:10px;box-shadow:0 0 24px #00ffee22,inset 0 0 12px #00ffee08;overflow:hidden'><div style='background:linear-gradient(90deg,#081821,#0c2a35);padding:10px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #00ffee33'><div style='display:flex;align-items:center;gap:10px'><span style="font-size:20px">💬</span><span style='color:#00ffee;font-family:Share Tech Mono,monospace;font-size:14px;letter-spacing:3px;text-shadow:0 0 8px #00ffee66'>BSG OSINT — DISCORD</span></div><button onclick='popoutDiscord()' style='background:transparent;border:1px solid #00ffee44;color:#00ffee;font-family:Share Tech Mono,monospace;font-size:12px;letter-spacing:2px;padding:4px 12px;cursor:pointer;border-radius:4px;transition:all 0.2s;text-shadow:0 0 6px #00ffee88' onmouseover="this.style.background='#0c2430';this.style.boxShadow='0 0 12px #00ffee44'" onmouseout="this.style.background='transparent';this.style.boxShadow='none'">⧉ POP OUT</button></div><iframe src="https://e.widgetbot.io/channels/1500947025196220536" allow="clipboard-write; fullscreen" style="flex:1;width:100%;border:none"></iframe></div></div>`)}
 const splitChannels=[...globalFeeds,...africanChannels,...americanChannels,...asianChannels,...chineseChannels,...europeanChannels,...russianChannels].filter((ch,i,arr)=>arr.findIndex(c=>c[1]===ch[1])===i);
@@ -819,7 +866,7 @@ function toggleDonatePanel(){document.getElementById('donatePanel').classList.to
 function switchDonateNetwork(net){donateNetwork=net;const w=donateWallets[net];document.getElementById('donateBtcBtn').classList.toggle('active',net==='btc');document.getElementById('donateUsdtBtn').classList.toggle('active',net==='usdt');document.getElementById('donateAddr').textContent=w.addr;document.getElementById('donateQrImg').src=w.qr;document.getElementById('donateCopyBtn').textContent='COPY'}
 function copyDonateAddr(){if(!donateWallets[donateNetwork])return;const addr=donateWallets[donateNetwork].addr;navigator.clipboard.writeText(addr).then(()=>{const btn=document.getElementById('donateCopyBtn');btn.textContent='COPIED';setTimeout(()=>{btn.textContent='COPY'},2000)}).catch(()=>{const t=document.createElement('textarea');t.value=addr;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);const btn=document.getElementById('donateCopyBtn');btn.textContent='COPIED';setTimeout(()=>{btn.textContent='COPY'},2000)})}
 document.addEventListener('click',function(e){const panel=document.getElementById('donatePanel');const btn=document.querySelector('.donate-btn');if(panel.classList.contains('open')&&!panel.contains(e.target)&&!btn.contains(e.target)){panel.classList.remove('open')}});
-loadNews();
+loadBsgMap();
 </script>
 </body>
 </html>
